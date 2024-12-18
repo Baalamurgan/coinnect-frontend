@@ -50,7 +50,32 @@ func SignupHandler(c *fiber.Ctx) error {
 	})
 }
 
+type LoginRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 func LoginHandler(c *fiber.Ctx) error {
-	// Parse signup request, validate, and return response
-	return c.JSON(fiber.Map{"message": "Signup successful"})
+	var req LoginRequest
+	if err := c.BodyParser(&req); err != nil {
+		fmt.Println(c)
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Invalid params",
+		})
+	}
+
+	var user models.User
+	if err := db.Connect().Where("email = ?", req.Email).First(&user).Error; err != nil {
+		return c.Status(fiber.StatusConflict).JSON(fiber.Map{
+			"error": "user doesn't exist",
+		})
+	}
+
+	if user.Password != req.Password {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Invalid password",
+		})
+	}
+
+	return c.JSON(fiber.Map{"message": "Login successful"})
 }
