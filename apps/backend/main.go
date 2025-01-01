@@ -53,12 +53,9 @@ func main() {
 	}
 
 	// Initialize the database connection
-	db.InitServices()
+	db.GetDB()
 
 	routes.SetupRoutes(app)
-
-	// app.Post("/auth/signup", auth.SignupHandler)
-	// app.Post("/auth/login", auth.LoginHandler)
 
 	// Start the server on port 8080
 	log.Println("Server started on http://localhost:8080")
