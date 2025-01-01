@@ -10,5 +10,9 @@ func Migrate() {
 	database.Raw("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";")
 	database.AutoMigrate(
 		&models.User{},
+		&models.Category{},
+		&models.Item{},
+		&models.Detail{},
+		&models.SubCategory{},
 	)
 }
