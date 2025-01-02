@@ -3,9 +3,11 @@ package utils
 import (
 	"fmt"
 	"log"
+	"regexp"
 	"strconv"
 
 	"github.com/Baalamurgan/coin-selling-backend/api/constants"
+	"github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"
 )
 
@@ -37,4 +39,41 @@ func ImportEnv() {
 
 func GetPort() string {
 	return strconv.Itoa(viper.GetInt(("PORT")))
+}
+
+var (
+	validate *validator.Validate
+)
+
+func InitValidators() {
+	validate = validator.New()
+	_ = validate.RegisterValidation("email", func(fl validator.FieldLevel) bool {
+		compile := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+		return compile.MatchString(fl.Field().String())
+	})
+	_ = validate.RegisterValidation("username", func(fl validator.FieldLevel) bool {
+		compile := regexp.MustCompile("^[a-z0-9-_.]+$")
+		return compile.MatchString(fl.Field().String())
+	})
+}
+
+type ErrorResponse struct {
+	FailedField string
+	Tag         string
+	Value       string
+}
+
+func ValidateStruct(request interface{}) []ErrorResponse {
+	var errors []ErrorResponse
+	err := validate.Struct(request)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element ErrorResponse
+			element.FailedField = err.StructNamespace()
+			element.Tag = err.Tag()
+			element.Value = err.Param()
+			errors = append(errors, element)
+		}
+	}
+	return errors
 }

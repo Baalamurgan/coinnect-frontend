@@ -28,6 +28,9 @@ func main() {
 	// Load the configuration
 	config.LoadConfig()
 
+	// Init Validators
+	utils.InitValidators()
+
 	// Init Redis
 	// utils.InitRedis()
 

@@ -10,11 +10,12 @@ func SetupRoutes(app *fiber.App) {
 	authGroup := app.Group("/auth")
 	authGroup.Post("/signup", auth.SignupHandler)
 	authGroup.Post("/login", auth.LoginHandler)
+	authGroup.Get("/users", auth.GetAllUsersHandler)
 
 	categoryGroup := app.Group("/category")
 	categoryGroup.Get("/", category.GetAllCategories)
-	// categoryGroup.Get("/:id", controllers.GetCategoryByID)
-	// categoryGroup.Post("/", controllers.CreateCategory)
-	// categoryGroup.Put("/:id", controllers.UpdateCategory)
-	// categoryGroup.Delete("/:id", controllers.DeleteCategory)
+	categoryGroup.Get("/:id", category.GetCategoryByID)
+	categoryGroup.Post("/", category.CreateCategory)
+	categoryGroup.Put("/:id", category.UpdateCategory)
+	categoryGroup.Delete("/:id", category.DeleteCategory)
 }

@@ -1,11 +1,16 @@
 package models
 
+import "github.com/google/uuid"
+
 type Item struct {
-	ID          uint   `gorm:"primaryKey"`
-	Name        string `gorm:"size:255;not null"`
-	CategoryID  uint   `gorm:"index"`
-	Year        int
-	ImageURL    string   `gorm:"size:512"`
-	Description string   `gorm:"type:text"`
-	Details     []Detail `gorm:"foreignKey:ItemID"`
+	ID          uuid.UUID `gorm:"primaryKey;type:uuid;default:uuid_generate_v4()" json:"id"`
+	Name        string    `gorm:"size:255;not null" json:"name"`
+	CategoryID  uuid.UUID `gorm:"index;type:uuid" json:"category_id"`
+	Year        int       `json:"year"`
+	ImageURL    string    `gorm:"size:512" json:"image_url"`
+	Description string    `gorm:"type:text" json:"description"`
+	Details     []Detail  `gorm:"foreignKey:ItemID;constraint:OnUpdate:CASCADE,onDelete:CASCADE;" json:"details"`
+	Price       float64   `gorm:"not null" json:"price"`
+	CreatedAt   int       `json:"created_at"`
+	UpdatedAt   int       `json:"updated_at"`
 }

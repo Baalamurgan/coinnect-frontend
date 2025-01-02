@@ -4,32 +4,28 @@ import (
 	"fmt"
 
 	"github.com/Baalamurgan/coin-selling-backend/api/db"
+	"github.com/Baalamurgan/coin-selling-backend/api/schemas"
+	"github.com/Baalamurgan/coin-selling-backend/api/utils"
+	"github.com/Baalamurgan/coin-selling-backend/api/views"
 	"github.com/Baalamurgan/coin-selling-backend/pkg/models"
 	"github.com/gofiber/fiber/v2"
 )
 
-type SignupRequest struct {
-	Username string `json:"username"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
-}
-
 func SignupHandler(c *fiber.Ctx) error {
-	var req SignupRequest
+	var req schemas.SignupRequest
 	fmt.Println(c.BodyParser(&req))
 	if err := c.BodyParser(&req); err != nil {
 		fmt.Println(c)
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid params",
-		})
+		return views.InvalidParams(c)
+	}
+	if err := utils.ValidateStruct(req); len(err) > 0 {
+		return views.InvalidParams(c)
 	}
 
 	// check if user already exists in DB
 	var existingUser models.User
 	if err := db.Connect().Where("email = ?", req.Email).First(&existingUser).Error; err == nil {
-		return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-			"error": "User already exists",
-		})
+		return views.BadRequestWithMessage(c, "user already exists")
 	}
 
 	newUser := models.User{
@@ -39,43 +35,37 @@ func SignupHandler(c *fiber.Ctx) error {
 	}
 
 	if err := db.Connect().Create(&newUser).Error; err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "internal server error",
-		})
+		return views.InternalServerError(c, err)
 	}
 
-	return c.JSON(fiber.Map{
-		"message": "Signup successful",
-		"user":    newUser.Email,
-	})
-}
-
-type LoginRequest struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	return views.ObjectCreated(c, newUser)
 }
 
 func LoginHandler(c *fiber.Ctx) error {
-	var req LoginRequest
+	var req schemas.LoginRequest
 	if err := c.BodyParser(&req); err != nil {
 		fmt.Println(c)
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid params",
-		})
+		return views.InvalidParams(c)
 	}
 
 	var user models.User
 	if err := db.Connect().Where("email = ?", req.Email).First(&user).Error; err != nil {
-		return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-			"error": "user doesn't exist",
-		})
+		return views.ConflictWithMessage(c, "user doesn't exist")
 	}
 
 	if user.Password != req.Password {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"error": "Invalid password",
-		})
+		return views.UnAuthorisedViewWithMessage(c, "invalid password")
 	}
 
-	return c.JSON(fiber.Map{"message": "Login successful"})
+	return views.StatusOK(c, "login successful")
+}
+
+func GetAllUsersHandler(c *fiber.Ctx) error {
+	var users []models.User
+
+	if err := db.Connect().Find(&users).Error; err != nil {
+		return views.InternalServerError(c, err)
+	}
+
+	return views.StatusOK(c, users)
 }
