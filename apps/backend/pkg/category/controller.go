@@ -9,12 +9,7 @@ import (
 	"github.com/Baalamurgan/coin-selling-backend/api/views"
 	"github.com/Baalamurgan/coin-selling-backend/pkg/models"
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 )
-
-type CategoryController struct {
-	DB *gorm.DB
-}
 
 func GetAllCategories(c *fiber.Ctx) error {
 	var categories []models.Category
@@ -28,8 +23,8 @@ func GetAllCategories(c *fiber.Ctx) error {
 
 func GetCategoryByID(c *fiber.Ctx) error {
 	var category models.Category
-	categoryID := c.Params("id")
-	if err := db.GetDB().Where("id = ?", categoryID).First(&category).Error; err != nil {
+	id := c.Params("id")
+	if err := db.GetDB().Where("id = ?", id).First(&category).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": "something went wrong",
 		})

@@ -11,7 +11,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func SignupHandler(c *fiber.Ctx) error {
+func Signup(c *fiber.Ctx) error {
 	var req schemas.SignupRequest
 	fmt.Println(c.BodyParser(&req))
 	if err := c.BodyParser(&req); err != nil {
@@ -41,7 +41,7 @@ func SignupHandler(c *fiber.Ctx) error {
 	return views.ObjectCreated(c, newUser)
 }
 
-func LoginHandler(c *fiber.Ctx) error {
+func Login(c *fiber.Ctx) error {
 	var req schemas.LoginRequest
 	if err := c.BodyParser(&req); err != nil {
 		fmt.Println(c)
@@ -60,7 +60,7 @@ func LoginHandler(c *fiber.Ctx) error {
 	return views.StatusOK(c, "login successful")
 }
 
-func GetAllUsersHandler(c *fiber.Ctx) error {
+func GetAllUsers(c *fiber.Ctx) error {
 	var users []models.User
 
 	if err := db.Connect().Find(&users).Error; err != nil {
