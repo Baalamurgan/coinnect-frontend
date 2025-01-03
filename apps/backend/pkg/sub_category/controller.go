@@ -9,6 +9,7 @@ import (
 	"github.com/Baalamurgan/coin-selling-backend/api/views"
 	"github.com/Baalamurgan/coin-selling-backend/pkg/models"
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 )
 
 func GetAllSubCategories(c *fiber.Ctx) error {
@@ -43,6 +44,10 @@ func GetSubCategoryByID(c *fiber.Ctx) error {
 
 func CreateSubCategory(c *fiber.Ctx) error {
 	var req schemas.CreateSubCategoryRequest
+	category_id, err := uuid.Parse(c.Params("category_id"))
+	if err != nil {
+		return views.BadRequest(c)
+	}
 	if err := c.BodyParser(&req); err != nil {
 		fmt.Println(c)
 		return views.InvalidParams(c)
@@ -54,6 +59,7 @@ func CreateSubCategory(c *fiber.Ctx) error {
 	newSubCategory := &models.SubCategory{
 		Name:        req.Name,
 		Description: req.Description,
+		CategoryID:  category_id,
 	}
 
 	if err := db.GetDB().Create(&newSubCategory).Error; err != nil {
@@ -73,7 +79,7 @@ func UpdateSubCategory(c *fiber.Ctx) error {
 		return views.InvalidParams(c)
 	}
 
-	if err := db.GetDB().Where("id = ?", id).Updates(req).Error; err != nil {
+	if err := db.GetDB().Table("sub_categories").Where("id = ?", id).Updates(req).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
 	return views.StatusOK(c, &req)

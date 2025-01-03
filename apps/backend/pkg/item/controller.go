@@ -9,6 +9,7 @@ import (
 	"github.com/Baalamurgan/coin-selling-backend/api/views"
 	"github.com/Baalamurgan/coin-selling-backend/pkg/models"
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 )
 
 func GetAllItems(c *fiber.Ctx) error {
@@ -55,6 +56,14 @@ func GetItemByID(c *fiber.Ctx) error {
 }
 
 func CreateItem(c *fiber.Ctx) error {
+	category_id, err := uuid.Parse(c.Params("category_id"))
+	if err != nil {
+		return views.BadRequest(c)
+	}
+	sub_category_id, err := uuid.Parse(c.Params("sub_category_id"))
+	if err != nil {
+		return views.BadRequest(c)
+	}
 	var req schemas.CreateItemRequest
 	if err := c.BodyParser(&req); err != nil {
 		fmt.Println(c)
@@ -66,10 +75,12 @@ func CreateItem(c *fiber.Ctx) error {
 
 	newItem := new(models.Item)
 	newItem.Name = req.Name
+	newItem.Description = req.Description
 	newItem.Year = req.Year
 	newItem.ImageURL = req.ImageURL
-	newItem.Description = req.Description
 	newItem.Price = req.Price
+	newItem.CategoryID = category_id
+	newItem.SubCategoryID = sub_category_id
 
 	for _, itemReq := range req.Details {
 		newItem.Details = append(newItem.Details, models.Detail{
@@ -96,7 +107,7 @@ func UpdateItem(c *fiber.Ctx) error {
 		return views.InvalidParams(c)
 	}
 
-	if err := db.GetDB().Where("id = ?", id).Updates(req).Error; err != nil {
+	if err := db.GetDB().Table("item").Where("id = ?", id).Updates(req).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
 	return views.StatusOK(c, &req)

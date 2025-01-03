@@ -27,7 +27,7 @@ func SetupRoutes(app *fiber.App) {
 	subCategoryGroup.Get("/", sub_category.GetAllSubCategories)
 	subCategoryGroup.Get("/category/:category_id", sub_category.GetAllSubCategoriesByCategoryID)
 	subCategoryGroup.Get("/:id", sub_category.GetSubCategoryByID)
-	subCategoryGroup.Post("/", sub_category.CreateSubCategory)
+	subCategoryGroup.Post("/:category_id", sub_category.CreateSubCategory)
 	subCategoryGroup.Put("/:id", sub_category.UpdateSubCategory)
 	subCategoryGroup.Delete("/:id", sub_category.DeleteSubCategory)
 
@@ -36,7 +36,7 @@ func SetupRoutes(app *fiber.App) {
 	itemGroup.Get("/category/:category_id", item.GetItemsByCategoryID)            // Get items by category
 	itemGroup.Get("/sub_category/:sub_category_id", item.GetItemsBySubCategoryID) // Get items by sub-category
 	itemGroup.Get("/:id", item.GetItemByID)                                       // Get item by ID
-	itemGroup.Post("/", item.CreateItem)                                          // Create a new item
+	itemGroup.Post("/:category_id/:sub_category_id", item.CreateItem)             // Create a new item
 	itemGroup.Put("/:id", item.UpdateItem)                                        // Update an item
 	itemGroup.Delete("/:id", item.DeleteItem)                                     // Delete an item
 }

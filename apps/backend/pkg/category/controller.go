@@ -77,7 +77,7 @@ func UpdateCategory(c *fiber.Ctx) error {
 		return views.InvalidParams(c)
 	}
 
-	if err := db.GetDB().Where("id = ?", id).Updates(req).Error; err != nil {
+	if err := db.GetDB().Table("category").Where("id = ?", id).Updates(req).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
 	return views.StatusOK(c, &req)
