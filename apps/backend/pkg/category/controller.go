@@ -14,24 +14,18 @@ import (
 func GetAllCategories(c *fiber.Ctx) error {
 	var categories []models.Category
 	if err := db.GetDB().Preload("SubCategories").Preload("Items").Find(&categories).Error; err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": err.Error(),
-		})
+		return views.InternalServerError(c, err)
 	}
-	return c.JSON(fiber.Map{"categories": categories})
+	return views.StatusOK(c, categories)
 }
 
 func GetCategoryByID(c *fiber.Ctx) error {
 	var category models.Category
 	id := c.Params("id")
 	if err := db.GetDB().Where("id = ?", id).First(&category).Error; err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "something went wrong",
-		})
+		return views.InternalServerError(c, err)
 	}
-	return c.JSON(fiber.Map{
-		"category": category,
-	})
+	return views.StatusOK(c, category)
 }
 
 func CreateCategory(c *fiber.Ctx) error {
@@ -69,9 +63,7 @@ func CreateCategory(c *fiber.Ctx) error {
 		return views.InternalServerError(c, err)
 	}
 
-	return c.JSON(fiber.Map{
-		"message": "Category created successfully",
-	})
+	return views.StatusOK(c, "category created successfully")
 }
 
 func UpdateCategory(c *fiber.Ctx) error {

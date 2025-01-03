@@ -14,24 +14,31 @@ import (
 func GetAllSubCategories(c *fiber.Ctx) error {
 	var sub_categories []models.SubCategory
 	if err := db.GetDB().Find(&sub_categories).Error; err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": err.Error(),
-		})
+		return views.InternalServerError(c, err)
 	}
-	return c.JSON(fiber.Map{"sub_categories": sub_categories})
+	return views.StatusOK(c, sub_categories)
+}
+
+func GetAllSubCategoriesByCategoryID(c *fiber.Ctx) error {
+	category_id := c.Params("category_id")
+	if category_id == "" {
+		return views.BadRequestWithMessage(c, "category id required")
+	}
+	var subCategories []models.SubCategory
+
+	if err := db.GetDB().Where("category_id = ?", category_id).Find(&subCategories).Error; err != nil {
+		return views.InternalServerError(c, err)
+	}
+	return views.StatusOK(c, subCategories)
 }
 
 func GetSubCategoryByID(c *fiber.Ctx) error {
 	var sub_category models.SubCategory
 	id := c.Params("id")
 	if err := db.GetDB().Where("id = ?", id).First(&sub_category).Error; err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "something went wrong",
-		})
+		return views.InternalServerError(c, err)
 	}
-	return c.JSON(fiber.Map{
-		"sub_category": sub_category,
-	})
+	return views.StatusOK(c, sub_category)
 }
 
 func CreateSubCategory(c *fiber.Ctx) error {
@@ -52,10 +59,7 @@ func CreateSubCategory(c *fiber.Ctx) error {
 	if err := db.GetDB().Create(&newSubCategory).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
-
-	return c.JSON(fiber.Map{
-		"message": "sub category created successfully",
-	})
+	return views.StatusOK(c, "sub category created successfully")
 }
 
 func UpdateSubCategory(c *fiber.Ctx) error {
