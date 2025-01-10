@@ -1,18 +1,19 @@
 'use client';
-import { Product } from '@/constants/data';
 import { ColumnDef } from '@tanstack/react-table';
 import Image from 'next/image';
 import { CellAction } from './cell-action';
+import { categories } from 'data';
+import { Item } from 'types/api';
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<Item>[] = [
   {
-    accessorKey: 'photo_url',
+    accessorKey: 'image_url',
     header: 'IMAGE',
     cell: ({ row }) => {
       return (
         <div className='relative aspect-square'>
           <Image
-            src={row.getValue('photo_url')}
+            src={row.getValue('image_url')}
             alt={row.getValue('name')}
             fill
             className='rounded-lg'
@@ -26,12 +27,38 @@ export const columns: ColumnDef<Product>[] = [
     header: 'NAME'
   },
   {
+    accessorKey: 'category_id',
+    header: 'CATEGORY ID',
+    enableHiding: true
+  },
+  {
+    accessorKey: 'gst',
+    header: 'GST',
+    enableHiding: true
+  },
+  {
     accessorKey: 'category',
-    header: 'CATEGORY'
+    header: 'CATEGORY',
+    cell: ({ row }) => {
+      return (
+        <div>
+          <p>
+            {categories.find((i) => i.id === row.getValue('category_id'))?.name}
+          </p>
+        </div>
+      );
+    }
   },
   {
     accessorKey: 'price',
-    header: 'PRICE'
+    header: 'PRICE',
+    cell: ({ row }) => {
+      return (
+        <p>
+          ₹{row.getValue('price')} + {row.getValue('gst')}% GST
+        </p>
+      );
+    }
   },
   {
     accessorKey: 'description',

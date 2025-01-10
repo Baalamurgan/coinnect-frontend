@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "prebuild": "node prebuild",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint src --fix && pnpm format",
@@ -53,6 +54,7 @@
     "@types/node": "22.10.2",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
+    "axios": "10.4.20",
     "autoprefixer": "10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

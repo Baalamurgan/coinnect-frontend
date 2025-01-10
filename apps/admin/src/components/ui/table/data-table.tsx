@@ -36,13 +36,15 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   totalItems: number;
   pageSizeOptions?: number[];
+  columnVisibility?: Record<string, boolean>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   totalItems,
-  pageSizeOptions = [10, 20, 30, 40, 50]
+  pageSizeOptions = [10, 20, 30, 40, 50],
+  columnVisibility
 }: DataTableProps<TData, TValue>) {
   const [currentPage, setCurrentPage] = useQueryState(
     'page',
@@ -81,7 +83,8 @@ export function DataTable<TData, TValue>({
     columns,
     pageCount: pageCount,
     state: {
-      pagination: paginationState
+      pagination: paginationState,
+      columnVisibility
     },
     onPaginationChange: handlePaginationChange,
     getCoreRowModel: getCoreRowModel(),
@@ -141,7 +144,6 @@ export function DataTable<TData, TValue>({
         </Table>
         <ScrollBar orientation='horizontal' />
       </ScrollArea>
-
       <div className='flex flex-col items-center justify-end gap-2 space-x-2 py-4 sm:flex-row'>
         <div className='flex w-full items-center justify-between'>
           <div className='flex-1 text-sm text-muted-foreground'>

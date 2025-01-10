@@ -1,0 +1,241 @@
+[
+  {
+    "id": "128efa68-0742-4870-8d07-71ce262e780c",
+    "name": "Republic India Commemorative Coins – Single",
+    "description": "",
+    "parent_category_id": null,
+    "items": [],
+    "created_at": 1736493780,
+    "updated_at": 1736493780
+  },
+  {
+    "id": "cc88b3bc-613b-4a1c-b22c-2208a10c2071",
+    "name": "5 Paise-Commemorative",
+    "description": "",
+    "parent_category_id": "128efa68-0742-4870-8d07-71ce262e780c",
+    "items": [],
+    "created_at": 1736493810,
+    "updated_at": 1736493810
+  },
+  {
+    "id": "12f1d207-8ed8-43ef-affe-400c6abdb0df",
+    "name": "1976-Commemorative coins",
+    "description": "",
+    "parent_category_id": "cc88b3bc-613b-4a1c-b22c-2208a10c2071",
+    "items": [
+      {
+        "id": "d5b17999-7237-4e57-95c9-7eebd0541e08",
+        "category_id": "12f1d207-8ed8-43ef-affe-400c6abdb0df",
+        "name": "5 Paise 1976 Food & Work For All Hyderabad Aluminium",
+        "description": "5 Paise 1976 Food & Work For All Hyderabad",
+        "year": 1976,
+        "sku": "RIC5P1H",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/06/IMG20240911205555_merged.jpg",
+        "stock": 100,
+        "sold": 10,
+        "price": 75,
+        "gst": 5,
+        "details": null,
+        "created_at": 1736494724,
+        "updated_at": 1736494724
+      },
+      {
+        "id": "6fc57d6f-132f-4570-ad6b-3d6b098eeddc",
+        "category_id": "12f1d207-8ed8-43ef-affe-400c6abdb0df",
+        "name": "10 Paise 1974 Planned Families – Food For All Hyderabad Aluminium",
+        "description": "10 Paise 1974 Planned Families – Food For All Hyderabad Aluminium",
+        "year": 1974,
+        "sku": "RIC10P1H",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2021/04/IMG20240909194312_merged.jpg",
+        "stock": 10,
+        "sold": 4,
+        "price": 3500,
+        "gst": 5,
+        "details": null,
+        "created_at": 1736495022,
+        "updated_at": 1736495022
+      }
+    ],
+    "created_at": 1736493844,
+    "updated_at": 1736493844
+  },
+  {
+    "id": "88cddf00-f978-4345-8e56-6a5771700747",
+    "name": "1977-Commemorative coins",
+    "description": "",
+    "parent_category_id": "cc88b3bc-613b-4a1c-b22c-2208a10c2071",
+    "items": [],
+    "created_at": 1736494828,
+    "updated_at": 1736494828
+  },
+  {
+    "id": "2ed51ca8-c0ce-4ac1-b869-80e7805e6a86",
+    "name": "10 Paise-Commemorative",
+    "description": "",
+    "parent_category_id": "128efa68-0742-4870-8d07-71ce262e780c",
+    "items": [],
+    "created_at": 1736494878,
+    "updated_at": 1736494878
+  },
+  {
+    "id": "6db47cd5-3ebf-42cd-8f5c-14e94ec02a15",
+    "name": "1974-Commemorative coins",
+    "description": "",
+    "parent_category_id": "2ed51ca8-c0ce-4ac1-b869-80e7805e6a86",
+    "items": [],
+    "created_at": 1736494929,
+    "updated_at": 1736494929
+  },
+  {
+    "id": "fef133a0-b3d2-4b28-9f11-f32dd63c234e",
+    "name": "1977-Commemorative coins",
+    "description": "",
+    "parent_category_id": "2ed51ca8-c0ce-4ac1-b869-80e7805e6a86",
+    "items": [],
+    "created_at": 1736494950,
+    "updated_at": 1736494950
+  },
+  {
+    "id": "2e830437-3352-4d23-b234-d4430e7f40f9",
+    "name": "Republic India Regular Coins – Single/Year-wise/Mint-wise",
+    "description": "",
+    "parent_category_id": null,
+    "items": [],
+    "created_at": 1736495117,
+    "updated_at": 1736495117
+  },
+  {
+    "id": "66bafcad-d74d-41a4-a4b1-fcda440346f8",
+    "name": "One Pice",
+    "description": "",
+    "parent_category_id": "2e830437-3352-4d23-b234-d4430e7f40f9",
+    "items": [],
+    "created_at": 1736495146,
+    "updated_at": 1736495146
+  },
+  {
+    "id": "7c285395-35de-48bb-9f29-760e2db2cf40",
+    "name": "HALF ANNA",
+    "description": "",
+    "parent_category_id": "2e830437-3352-4d23-b234-d4430e7f40f9",
+    "items": [],
+    "created_at": 1736495164,
+    "updated_at": 1736495164
+  },
+  {
+    "id": "2aa97b45-a4f9-44e0-9838-01787ff1116d",
+    "name": "ONE ANNA",
+    "description": "",
+    "parent_category_id": "2e830437-3352-4d23-b234-d4430e7f40f9",
+    "items": [],
+    "created_at": 1736495168,
+    "updated_at": 1736495168
+  },
+  {
+    "id": "3633c39d-4602-494b-908d-61a84474cfd0",
+    "name": "TWO ANNAS",
+    "description": "",
+    "parent_category_id": "2e830437-3352-4d23-b234-d4430e7f40f9",
+    "items": [],
+    "created_at": 1736495174,
+    "updated_at": 1736495174
+  },
+  {
+    "id": "0564e5ab-2ac0-4ee7-800d-aa2e3eba7df4",
+    "name": "Year-wise",
+    "description": "",
+    "parent_category_id": "66bafcad-d74d-41a4-a4b1-fcda440346f8",
+    "items": [],
+    "created_at": 1736495275,
+    "updated_at": 1736495275
+  },
+  {
+    "id": "5990865e-5eb2-439a-a715-1727ebae3a6b",
+    "name": "Mint-wise",
+    "description": "",
+    "parent_category_id": "66bafcad-d74d-41a4-a4b1-fcda440346f8",
+    "items": [],
+    "created_at": 1736495287,
+    "updated_at": 1736495287
+  },
+  {
+    "id": "48fd89b1-5f9b-4e5a-8833-5dfd51bafffb",
+    "name": "1950",
+    "description": "",
+    "parent_category_id": "66bafcad-d74d-41a4-a4b1-fcda440346f8",
+    "items": [],
+    "created_at": 1736495294,
+    "updated_at": 1736495294
+  },
+  {
+    "id": "f387745b-c9c3-477a-999d-da78d8081491",
+    "name": "1951",
+    "description": "",
+    "parent_category_id": "66bafcad-d74d-41a4-a4b1-fcda440346f8",
+    "items": [],
+    "created_at": 1736495296,
+    "updated_at": 1736495296
+  },
+  {
+    "id": "0a4a48bf-d1ba-404d-ac6d-563fc92c4a76",
+    "name": "1952",
+    "description": "",
+    "parent_category_id": "66bafcad-d74d-41a4-a4b1-fcda440346f8",
+    "items": [],
+    "created_at": 1736495298,
+    "updated_at": 1736495298
+  },
+  {
+    "id": "9d8d6d8a-8374-43bb-9f10-02fd4d843eb6",
+    "name": "1953",
+    "description": "",
+    "parent_category_id": "66bafcad-d74d-41a4-a4b1-fcda440346f8",
+    "items": [],
+    "created_at": 1736495301,
+    "updated_at": 1736495301
+  },
+  {
+    "id": "7f8c5853-83b9-4040-a3f9-75feff1ae661",
+    "name": "1954",
+    "description": "",
+    "parent_category_id": "66bafcad-d74d-41a4-a4b1-fcda440346f8",
+    "items": [],
+    "created_at": 1736495304,
+    "updated_at": 1736495304
+  },
+  {
+    "id": "4f513e05-4d19-404c-b628-4f6aad3587d3",
+    "name": "1955",
+    "description": "",
+    "parent_category_id": "66bafcad-d74d-41a4-a4b1-fcda440346f8",
+    "items": [],
+    "created_at": 1736495306,
+    "updated_at": 1736495306
+  },
+  {
+    "id": "f3f63cff-ae5f-49e7-803c-42b69b9fa428",
+    "name": "One Pice Year-wise",
+    "description": "",
+    "parent_category_id": "0564e5ab-2ac0-4ee7-800d-aa2e3eba7df4",
+    "items": [
+      {
+        "id": "c79e331d-e2e4-4994-857a-17db71116dac",
+        "category_id": "f3f63cff-ae5f-49e7-803c-42b69b9fa428",
+        "name": "One Pice Complete Year-wise Set 1950 to 1955",
+        "description": "10 Paise 1974 Planned Families – Food For All Hyderabad Aluminium",
+        "year": 1974,
+        "sku": "RIOPYW.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/12/IMG20240817205835_merged-768x255.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 1000,
+        "gst": 5,
+        "details": null,
+        "created_at": 1736495409,
+        "updated_at": 1736495409
+      }
+    ],
+    "created_at": 1736495337,
+    "updated_at": 1736495337
+  }
+]
