@@ -38,3 +38,26 @@ export const getAllItems = async ({
     products: data.data.data
   };
 };
+
+export const createItem = async (values: {
+  name: string;
+  category_id: string;
+  description: string;
+  year: number;
+  sku?: string;
+  image_url?: string;
+  stock: number;
+  sold: number;
+  price: number;
+  gst: number;
+  details?: {
+    attribute: string;
+    value: string;
+  };
+}) => {
+  const data = await axios.post<{
+    data: string;
+    status: boolean;
+  }>(`${API_HOST}/item/${values.category_id}`, values);
+  return data.data.data;
+};

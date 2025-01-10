@@ -20,9 +20,14 @@ import {
   SelectValue
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Product } from '@/constants/mock-api';
+import { sentencize } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { categories } from 'data';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { createItem } from 'services/api';
+import { toast } from 'sonner';
+import { Item } from 'types/api';
 import * as z from 'zod';
 
 const MAX_FILE_SIZE = 5000000;
@@ -34,7 +39,7 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 const formSchema = z.object({
-  image: z
+  image_url: z
     .any()
     .refine((files) => files?.length == 1, 'Image is required.')
     .refine(
@@ -48,8 +53,18 @@ const formSchema = z.object({
   name: z.string().min(2, {
     message: 'Product name must be at least 2 characters.'
   }),
-  category: z.string(),
-  price: z.number(),
+  category_id: z.string().min(2, {
+    message: 'Please choose a category'
+  }),
+  price: z.coerce.number().min(0, 'Price must be a positive number'),
+  year: z.coerce
+    .number()
+    .int('Year must be an integer')
+    .gte(1900, 'Year must be 1900 or later')
+    .lte(new Date().getFullYear(), `Year cannot be in the future`),
+  gst: z.coerce.number().min(0, 'GST must be a positive number'),
+  stock: z.coerce.number().min(0, 'Stock should be greater than 0'),
+  sku: z.string(),
   description: z.string().min(10, {
     message: 'Description must be at least 10 characters.'
   })
@@ -59,14 +74,19 @@ export default function ProductForm({
   initialData,
   pageTitle
 }: {
-  initialData: Product | null;
+  initialData: Item | null;
   pageTitle: string;
 }) {
+  const { push } = useRouter();
   const defaultValues = {
     name: initialData?.name || '',
-    category: initialData?.category || '',
+    category_id: initialData?.category_id || '',
     price: initialData?.price || 0,
-    description: initialData?.description || ''
+    description: initialData?.description || '',
+    year: initialData?.year || 0,
+    gst: initialData?.gst || 0,
+    sku: initialData?.sku || '',
+    stock: initialData?.stock || 0
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -75,7 +95,15 @@ export default function ProductForm({
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    createItem({ ...values, image_url: values.image_url[0].preview, sold: 0 })
+      .then(() => {
+        toast.success('Created item successfully');
+        push(`/dashboard/product`);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error('Error creating item');
+      });
   }
 
   return (
@@ -90,16 +118,16 @@ export default function ProductForm({
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
             <FormField
               control={form.control}
-              name='image'
+              name='image_url'
               render={({ field }) => (
                 <div className='space-y-6'>
                   <FormItem className='w-full'>
-                    <FormLabel>Images</FormLabel>
+                    <FormLabel>Image</FormLabel>
                     <FormControl>
                       <FileUploader
                         value={field.value}
                         onValueChange={field.onChange}
-                        maxFiles={4}
+                        maxFiles={1}
                         maxSize={4 * 1024 * 1024}
                         // disabled={loading}
                         // progresses={progresses}
@@ -130,27 +158,25 @@ export default function ProductForm({
               />
               <FormField
                 control={form.control}
-                name='category'
+                name='category_id'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Category</FormLabel>
                     <Select
                       onValueChange={(value) => field.onChange(value)}
-                      value={field.value[field.value.length - 1]}
+                      value={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder='Select categories' />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value='beauty'>Beauty Products</SelectItem>
-                        <SelectItem value='electronics'>Electronics</SelectItem>
-                        <SelectItem value='clothing'>Clothing</SelectItem>
-                        <SelectItem value='home'>Home & Garden</SelectItem>
-                        <SelectItem value='sports'>
-                          Sports & Outdoors
-                        </SelectItem>
+                      <SelectContent className='max-h-[300px]'>
+                        {categories.map((i) => (
+                          <SelectItem value={i.id} key={i.id}>
+                            {sentencize(i.name)}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -170,6 +196,73 @@ export default function ProductForm({
                         placeholder='Enter price'
                         {...field}
                       />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='gst'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>GST</FormLabel>
+                    <FormControl>
+                      <Input
+                        type='number'
+                        step='0.01'
+                        placeholder='Enter GST'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='year'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Year</FormLabel>
+                    <FormControl>
+                      <Input
+                        type='number'
+                        step='1'
+                        placeholder='Enter year'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='stock'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Stock</FormLabel>
+                    <FormControl>
+                      <Input
+                        type='number'
+                        step='1'
+                        placeholder='Enter available stock'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='sku'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>SKU</FormLabel>
+                    <FormControl>
+                      <Input type='text' placeholder='Enter SKU' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
