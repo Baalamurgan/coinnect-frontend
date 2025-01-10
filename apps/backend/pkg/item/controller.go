@@ -60,10 +60,6 @@ func CreateItem(c *fiber.Ctx) error {
 	if err != nil {
 		return views.BadRequest(c)
 	}
-	sub_category_id, err := uuid.Parse(c.Params("sub_category_id"))
-	if err != nil {
-		return views.BadRequest(c)
-	}
 	var req schemas.CreateItemRequest
 	if err := c.BodyParser(&req); err != nil {
 		fmt.Println(c)
@@ -74,13 +70,16 @@ func CreateItem(c *fiber.Ctx) error {
 	}
 
 	newItem := new(models.Item)
+	newItem.CategoryID = category_id
 	newItem.Name = req.Name
 	newItem.Description = req.Description
 	newItem.Year = req.Year
+	newItem.SKU = req.SKU
 	newItem.ImageURL = req.ImageURL
+	newItem.Stock = req.Stock
+	newItem.Sold = req.Sold
 	newItem.Price = req.Price
-	newItem.CategoryID = category_id
-	newItem.SubCategoryID = sub_category_id
+	newItem.GST = req.GST
 
 	for _, itemReq := range req.Details {
 		newItem.Details = append(newItem.Details, models.Detail{

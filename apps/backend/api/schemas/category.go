@@ -1,15 +1,9 @@
 package schemas
 
 type CreateCategoryRequest struct {
-	Name          string        `json:"name"`
-	Description   string        `json:"description"`
-	SubCategories []SubCategory `json:"sub_categories"`
-	Items         []Item
-}
-
-type SubCategory struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
+	Name             string `gorm:"not null" json:"name"`
+	Description      string `json:"description"`
+	ParentCategoryID string `gorm:"uuid; default: null" json:"parent_category_id"`
 }
 
 type Item struct {

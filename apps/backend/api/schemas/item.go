@@ -6,5 +6,9 @@ type CreateItemRequest struct {
 	Year        int      `json:"year"`
 	ImageURL    string   `json:"image_url"`
 	Price       float64  `json:"price"`
+	SKU         string   `json:"sku"`
+	Stock       int      `json:"stock"`
+	Sold        int      `json:"sold"`
+	GST         float64  `json:"gst"`
 	Details     []Detail `json:"details"`
 }
