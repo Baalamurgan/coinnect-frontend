@@ -286,7 +286,7 @@ export default function ProductForm({
                 </FormItem>
               )}
             />
-            <Button type='submit'>Add Product</Button>
+            <Button type='submit'>{pageTitle.split(' ')[0]}</Button>
           </form>
         </Form>
       </CardContent>

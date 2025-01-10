@@ -61,3 +61,11 @@ export const createItem = async (values: {
   }>(`${API_HOST}/item/${values.category_id}`, values);
   return data.data.data;
 };
+
+export const getItemById = async (item_id: string) => {
+  const data = await axios.get<{
+    data: Item;
+    status: boolean;
+  }>(`${API_HOST}/item/${item_id}`);
+  return data.data.data;
+};
