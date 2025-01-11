@@ -11,7 +11,7 @@ import {
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { deleteItemById } from 'services/api';
+import { deleteItem } from 'services/item/services';
 import { toast } from 'sonner';
 import { Item } from 'types/api';
 
@@ -30,17 +30,23 @@ export const CellAction: React.FC<CellActionProps> = ({
 
   const onConfirm = async () => {
     setLoading(true);
-    await deleteItemById(data.id)
-      .then(() => {
-        setOpen(false);
-        refreshTable?.();
-        toast.success('Deleted item successfully');
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error('Error deleting item');
-        setLoading(false);
-      });
+    const response = await deleteItem(
+      {},
+      {},
+      {
+        item_id: data.id
+      }
+    );
+    console.log(response);
+
+    if (response.data) {
+      setOpen(false);
+      refreshTable?.();
+      toast.success('Deleted item successfully');
+    } else if (response.error) {
+      toast.error('Error deleting item');
+      setLoading(false);
+    }
   };
 
   return (

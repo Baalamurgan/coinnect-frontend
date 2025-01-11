@@ -74,6 +74,7 @@ export const columns: ColumnDef<Item>[] = [
           // getAllItems({
           //   page: 1
           // })
+          {}
         }
       />
     )

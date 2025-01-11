@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getItemById } from 'services/api';
+import { fetchItem } from 'services/item/services';
 import ProductForm from './product-form';
 
 type TProductViewPageProps = {
@@ -13,13 +13,26 @@ export default async function ProductViewPage({
   let pageTitle = 'Create New Product';
 
   if (productId !== 'new') {
-    const data = await getItemById(productId);
-    product = data;
-    if (!product) {
+    const response = await fetchItem(
+      {},
+      {},
+      {
+        item_id: productId
+      }
+    );
+    if (response.error) {
       notFound();
+    } else if (response.data) {
+      product = response.data;
     }
     pageTitle = `Edit Product`;
   }
 
-  return <ProductForm initialData={product} pageTitle={pageTitle} />;
+  return (
+    <ProductForm
+      productId={productId}
+      initialData={product}
+      pageTitle={pageTitle}
+    />
+  );
 }

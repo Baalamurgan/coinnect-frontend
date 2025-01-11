@@ -61,3 +61,12 @@ export const sentencize = (
           : capitalised;
     })
     .join(joiner ?? ' ');
+
+export const linkToBlob = async (url: string) => {
+  const response = await fetch(url, {
+    mode: 'no-cors'
+  });
+  const blob = await response.blob();
+  const file = new File([blob], 'image.webp', { type: 'image/webp' });
+  return file;
+};

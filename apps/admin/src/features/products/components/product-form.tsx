@@ -25,7 +25,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { categories } from 'data';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { createItem } from 'services/api';
+import { createItem, updateItem } from 'services/item/services';
 import { toast } from 'sonner';
 import { Item } from 'types/api';
 import * as z from 'zod';
@@ -50,6 +50,7 @@ const formSchema = z.object({
       (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
       '.jpg, .jpeg, .png and .webp files are accepted.'
     ),
+  id: z.string(),
   name: z.string().min(2, {
     message: 'Product name must be at least 2 characters.'
   }),
@@ -64,6 +65,7 @@ const formSchema = z.object({
     .lte(new Date().getFullYear(), `Year cannot be in the future`),
   gst: z.coerce.number().min(0, 'GST must be a positive number'),
   stock: z.coerce.number().min(0, 'Stock should be greater than 0'),
+  sold: z.coerce.number().min(0, 'Sold should be greater than 0'),
   sku: z.string(),
   description: z.string().min(10, {
     message: 'Description must be at least 10 characters.'
@@ -71,14 +73,17 @@ const formSchema = z.object({
 });
 
 export default function ProductForm({
+  productId,
   initialData,
   pageTitle
 }: {
+  productId: string;
   initialData: Item | null;
   pageTitle: string;
 }) {
   const { push } = useRouter();
   const defaultValues = {
+    id: initialData?.id || '',
     name: initialData?.name || '',
     category_id: initialData?.category_id || '',
     price: initialData?.price || 0,
@@ -86,7 +91,8 @@ export default function ProductForm({
     year: initialData?.year || 0,
     gst: initialData?.gst || 0,
     sku: initialData?.sku || '',
-    stock: initialData?.stock || 0
+    stock: initialData?.stock || 0,
+    sold: initialData?.sold || 0
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -94,17 +100,48 @@ export default function ProductForm({
     values: defaultValues
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    createItem({ ...values, image_url: values.image_url[0].preview, sold: 0 })
-      .then(() => {
+  // useEffect(() => {
+  //   if (initialData?.image_url) {
+  //     linkToBlob(initialData?.image_url).then((res) => {
+  //       console.log(res);
+
+  //       form.setValue('image_url', [res]);
+  //     });
+  //   }
+  // }, [initialData?.image_url]);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (productId === 'new') {
+      const response = await createItem(
+        {
+          ...values,
+          image_url: values.image_url[0].preview,
+          sold: 0
+        },
+        {},
+        {
+          category_id: values.category_id
+        }
+      );
+      if (response.data) {
         toast.success('Created item successfully');
         push(`/dashboard/product`);
-      })
-      .catch((err) => {
-        console.error(err);
+      } else if (response.error) {
         toast.error('Error creating item');
+      }
+    } else {
+      const response = await updateItem({
+        ...values,
+        image_url: values.image_url[0].preview
       });
-  }
+      if (response.data) {
+        toast.success('Updated item successfully');
+        push(`/dashboard/product`);
+      } else if (response.error) {
+        toast.error('Error updating item');
+      }
+    }
+  };
 
   return (
     <Card className='mx-auto w-full'>
@@ -255,6 +292,26 @@ export default function ProductForm({
                   </FormItem>
                 )}
               />
+              {productId !== 'new' ? (
+                <FormField
+                  control={form.control}
+                  name='sold'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Sold</FormLabel>
+                      <FormControl>
+                        <Input
+                          type='number'
+                          step='1'
+                          placeholder='Enter no of items sold'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ) : null}
               <FormField
                 control={form.control}
                 name='sku'
@@ -286,10 +343,11 @@ export default function ProductForm({
                 </FormItem>
               )}
             />
-            <Button type='submit'>{pageTitle.split(' ')[0]}</Button>
+            <Button type='submit'>Save</Button>
           </form>
         </Form>
       </CardContent>
+      <pre>{JSON.stringify(form.getValues(), null, 2)}</pre>
     </Card>
   );
 }

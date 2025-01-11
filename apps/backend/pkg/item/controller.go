@@ -97,19 +97,35 @@ func CreateItem(c *fiber.Ctx) error {
 
 func UpdateItem(c *fiber.Ctx) error {
 	id := c.Params("id")
-	var req schemas.CreateItemRequest
+	var req schemas.UpdateItemRequest
 	if err := c.BodyParser(&req); err != nil {
-		fmt.Println(c)
 		return views.InvalidParams(c)
 	}
 	if err := utils.ValidateStruct(req); len(err) > 0 {
 		return views.InvalidParams(c)
 	}
 
-	if err := db.GetDB().Table("item").Where("id = ?", id).Updates(req).Error; err != nil {
+	var item models.Item
+	if err := db.GetDB().Table("items").Where("id = ?", id).First(&item).Error; err != nil {
+		return views.RecordNotFound(c)
+	}
+
+	item.CategoryID = *req.CategoryID
+	item.Name = *req.Name
+	item.Description = *req.Description
+	item.Year = *req.Year
+	item.SKU = *req.SKU
+	item.ImageURL = *req.ImageURL
+	item.Stock = *req.Stock
+	item.Sold = *req.Sold
+	item.Price = *req.Price
+	item.GST = *req.GST
+
+	if err := db.GetDB().Save(&item).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
-	return views.StatusOK(c, &req)
+
+	return views.StatusOK(c, "item updated successfully")
 }
 
 func DeleteItem(c *fiber.Ctx) error {
