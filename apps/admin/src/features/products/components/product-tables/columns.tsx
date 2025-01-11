@@ -1,9 +1,10 @@
 'use client';
 import { ColumnDef } from '@tanstack/react-table';
-import Image from 'next/image';
-import { CellAction } from './cell-action';
 import { categories } from 'data';
+import Image from 'next/image';
+import { getAllItems } from 'services/api';
 import { Item } from 'types/api';
+import { CellAction } from './cell-action';
 
 export const columns: ColumnDef<Item>[] = [
   {
@@ -64,9 +65,17 @@ export const columns: ColumnDef<Item>[] = [
     accessorKey: 'description',
     header: 'DESCRIPTION'
   },
-
   {
     id: 'actions',
-    cell: ({ row }) => <CellAction data={row.original} />
+    cell: ({ row }) => (
+      <CellAction
+        data={row.original}
+        refreshTable={() =>
+          // getAllItems({
+          //   page: 1
+          // })
+        }
+      />
+    )
   }
 ];

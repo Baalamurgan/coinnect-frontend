@@ -8,21 +8,40 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { Item } from 'services/api';
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { deleteItemById } from 'services/api';
+import { toast } from 'sonner';
+import { Item } from 'types/api';
 
 interface CellActionProps {
   data: Item;
+  refreshTable?: () => void;
 }
 
-export const CellAction: React.FC<CellActionProps> = ({ data }) => {
+export const CellAction: React.FC<CellActionProps> = ({
+  data,
+  refreshTable
+}) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const onConfirm = async () => {};
+  const onConfirm = async () => {
+    setLoading(true);
+    await deleteItemById(data.id)
+      .then(() => {
+        setOpen(false);
+        refreshTable?.();
+        toast.success('Deleted item successfully');
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error('Error deleting item');
+        setLoading(false);
+      });
+  };
 
   return (
     <>

@@ -14,15 +14,15 @@ export type ResponseType<T> = {
 };
 
 export const getAllItems = async ({
-  limit = 5,
   page = 1,
+  limit = 5,
   categories,
   search
 }: {
+  page: number;
+  limit?: number;
   categories?: string | undefined;
   search?: string | undefined;
-  page: number;
-  limit: number;
 }) => {
   const data = await axios.get<{
     data: Item[];
@@ -65,6 +65,14 @@ export const createItem = async (values: {
 export const getItemById = async (item_id: string) => {
   const data = await axios.get<{
     data: Item;
+    status: boolean;
+  }>(`${API_HOST}/item/${item_id}`);
+  return data.data.data;
+};
+
+export const deleteItemById = async (item_id: string) => {
+  const data = await axios.delete<{
+    data: string;
     status: boolean;
   }>(`${API_HOST}/item/${item_id}`);
   return data.data.data;
