@@ -15,13 +15,18 @@ export default async function ProductListingPage({}: ProductListingPage) {
   const categories = searchParamsCache.get('categories');
 
   const filters = {
-    page,
+    page: page || 1,
     limit,
     ...(search && { search }),
     ...(categories && { categories: categories })
   };
 
-  const itemResponse = await fetchAllItems(filters);
+  const itemResponse = await fetchAllItems(
+    {},
+    {
+      params: filters
+    }
+  );
   if (itemResponse.error) {
     toast.error('Error fetching items');
   }
@@ -30,10 +35,10 @@ export default async function ProductListingPage({}: ProductListingPage) {
     success: true,
     time: new Date().getTime(),
     message: 'Sample data for testing and learning purposes',
-    total_products: itemResponse.data?.length || 0,
+    total_products: itemResponse.data?.pagination.total_records || 0,
     offset: (page - 1) * limit,
     limit,
-    products: itemResponse.data || []
+    products: itemResponse.data?.items || []
   };
 
   return (

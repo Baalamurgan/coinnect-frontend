@@ -1,28 +1,11 @@
-import axios from 'axios';
 import { createFetcher, ROUTES } from 'services/api';
+import { WithPagination } from 'services/types';
 import { CreateItemPayload, Item, UpdateItemPayload } from './types';
 
-const API_HOST = `${process.env.NEXT_PUBLIC_API}/v1`;
-
-// export type ResponseType<T> = {
-//   success: boolean;
-//   time: number;
-//   message: string;
-//   total_products: number;
-//   offset: number;
-//   limit: number;
-//   products: T;
-// };
-
 export const fetchAllItems = createFetcher<
-  Item[],
-  any,
-  {
-    page: number;
-    limit?: number;
-    categories?: string | undefined;
-    search?: string | undefined;
-  }
+  WithPagination<{ items: Item[] }>,
+  {},
+  {}
 >({
   url: ROUTES.ITEM.GETALL,
   method: 'GET'
