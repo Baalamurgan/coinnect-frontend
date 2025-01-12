@@ -189,21 +189,21 @@ export default function AppSidebar() {
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
                     <BadgeCheck />
-                    Account
+                    <p className='ml-1'>Account</p>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  {/* <DropdownMenuItem>
                     <CreditCard />
                     Billing
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <Bell />
                     Notifications
-                  </DropdownMenuItem>
+                  </DropdownMenuItem> */}
                 </DropdownMenuGroup>
-                <DropdownMenuSeparator />
+                {/* <DropdownMenuSeparator /> */}
                 <DropdownMenuItem onClick={logout}>
                   <LogOut />
-                  Log out
+                  <p className='ml-1'>Log out</p>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

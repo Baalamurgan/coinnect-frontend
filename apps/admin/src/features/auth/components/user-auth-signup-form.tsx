@@ -37,9 +37,9 @@ export default function UserAuthSignupForm() {
   const { fetchProfile } = useAuth();
 
   const defaultValues = {
-    username: 'demo',
-    email: 'demo@gmail.com',
-    password: 'password'
+    username: '',
+    email: '',
+    password: ''
   };
 
   const form = useForm<UserFormValue>({
@@ -101,7 +101,7 @@ export default function UserAuthSignupForm() {
                 <FormControl>
                   <Input
                     type='email'
-                    placeholder='Enter your email...'
+                    placeholder='Enter your email'
                     disabled={loading}
                     {...field}
                   />
@@ -119,7 +119,7 @@ export default function UserAuthSignupForm() {
                 <FormControl>
                   <Input
                     type='password'
-                    placeholder='Enter your password'
+                    placeholder='********'
                     disabled={loading}
                     {...field}
                   />
