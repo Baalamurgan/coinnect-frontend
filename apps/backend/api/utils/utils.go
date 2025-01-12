@@ -3,11 +3,13 @@ package utils
 import (
 	"fmt"
 	"log"
+	"math"
 	"regexp"
 	"strconv"
 
 	"github.com/Baalamurgan/coin-selling-backend/api/constants"
 	"github.com/go-playground/validator/v10"
+	"github.com/google/uuid"
 	"github.com/spf13/viper"
 	"gorm.io/gorm"
 )
@@ -77,6 +79,21 @@ func ValidateStruct(request interface{}) []ErrorResponse {
 		}
 	}
 	return errors
+}
+
+func ParseUUID(id string) (*uuid.UUID, error) {
+	if id == "" {
+		return nil, nil
+	}
+	parsedID, err := uuid.Parse(id)
+	if err != nil {
+		return nil, err
+	}
+	return &parsedID, nil
+}
+
+func CalculateTotalPages(total int64, limit int) int {
+	return int(math.Ceil(float64(total) / float64(limit)))
 }
 
 func Paginate(page, limit int) func(db *gorm.DB) *gorm.DB {

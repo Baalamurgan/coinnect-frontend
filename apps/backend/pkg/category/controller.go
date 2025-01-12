@@ -2,7 +2,6 @@ package category
 
 import (
 	"fmt"
-	"math"
 	"strconv"
 
 	"github.com/Baalamurgan/coin-selling-backend/api/db"
@@ -25,14 +24,21 @@ func GetAllCategories(c *fiber.Ctx) error {
 		return views.BadRequest(c)
 	}
 
+	searchQuery := c.Query("search", "")
+
 	var categories []models.Category
 	var total int64
+	dbQuery := db.GetDB().Model(&models.Category{}).Preload("Items")
 
-	if err := db.GetDB().Table("categories").Count(&total).Error; err != nil {
+	if searchQuery != "" {
+		dbQuery = dbQuery.Where("name ILIKE ? OR description ILIKE ?", "%"+searchQuery+"%", "%"+searchQuery+"%")
+	}
+
+	if err := dbQuery.Count(&total).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
 
-	if err := db.GetDB().Table("categories").Order("updated_at DESC").Scopes(utils.Paginate(page, limit)).Preload("Items").Find(&categories).Error; err != nil {
+	if err := dbQuery.Order("updated_at DESC").Scopes(utils.Paginate(page, limit)).Find(&categories).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
 	return views.StatusOK(c, fiber.Map{
@@ -41,7 +47,7 @@ func GetAllCategories(c *fiber.Ctx) error {
 			"page":          page,
 			"limit":         limit,
 			"total_records": total,
-			"total_pages":   int(math.Ceil(float64(total) / float64(limit))),
+			"total_pages":   utils.CalculateTotalPages(total, limit),
 		},
 	})
 }
