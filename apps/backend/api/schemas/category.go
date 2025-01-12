@@ -1,5 +1,9 @@
 package schemas
 
+type GetUserRequest struct {
+	Email string `json:"email"`
+}
+
 type CreateCategoryRequest struct {
 	Name             string `gorm:"not null" json:"name"`
 	Description      string `json:"description"`

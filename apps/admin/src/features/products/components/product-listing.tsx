@@ -1,6 +1,6 @@
 import { DataTable as ProductTable } from '@/components/ui/table/data-table';
 import { searchParamsCache } from '@/lib/searchparams';
-import { fetchAllItems } from 'services/item/services';
+import { itemService } from 'services/item/services';
 import { toast } from 'sonner';
 import { Item } from 'types/api';
 import { columns } from './product-tables/columns';
@@ -21,7 +21,7 @@ export default async function ProductListingPage({}: ProductListingPage) {
     ...(category_ids && { category_ids: category_ids.join(',') })
   };
 
-  const itemResponse = await fetchAllItems(
+  const itemResponse = await itemService.fetchAllItems(
     {},
     {
       params: filters

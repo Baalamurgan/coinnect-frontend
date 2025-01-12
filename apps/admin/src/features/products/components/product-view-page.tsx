@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { fetchItem } from 'services/item/services';
+import { itemService } from 'services/item/services';
 import ProductForm from './product-form';
 
 type TProductViewPageProps = {
@@ -13,7 +13,7 @@ export default async function ProductViewPage({
   let pageTitle = 'Create New Product';
 
   if (productId !== 'new') {
-    const response = await fetchItem(
+    const response = await itemService.fetchItem(
       {},
       {},
       {

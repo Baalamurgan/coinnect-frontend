@@ -25,7 +25,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { categories } from 'data';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { createItem, updateItem } from 'services/item/services';
+import { itemService } from 'services/item/services';
 import { toast } from 'sonner';
 import { Item } from 'types/api';
 import * as z from 'zod';
@@ -112,7 +112,7 @@ export default function ProductForm({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (productId === 'new') {
-      const response = await createItem(
+      const response = await itemService.createItem(
         {
           ...values,
           image_url: values.image_url[0].preview,
@@ -130,7 +130,7 @@ export default function ProductForm({
         toast.error('Error creating item');
       }
     } else {
-      const response = await updateItem({
+      const response = await itemService.updateItem({
         ...values,
         image_url: values.image_url[0].preview
       });

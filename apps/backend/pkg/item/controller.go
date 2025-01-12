@@ -142,7 +142,7 @@ func CreateItem(c *fiber.Ctx) error {
 		return views.InternalServerError(c, err)
 	}
 
-	return views.StatusOK(c, "item created successfully")
+	return views.ObjectCreated(c, newItem)
 }
 
 func UpdateItem(c *fiber.Ctx) error {

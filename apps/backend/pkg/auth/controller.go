@@ -24,7 +24,7 @@ func Signup(c *fiber.Ctx) error {
 
 	// check if user already exists in DB
 	var existingUser models.User
-	if err := db.Connect().Where("email = ?", req.Email).First(&existingUser).Error; err == nil {
+	if err := db.GetDB().Where("email = ?", req.Email).First(&existingUser).Error; err == nil {
 		return views.BadRequestWithMessage(c, "user already exists")
 	}
 
@@ -34,7 +34,7 @@ func Signup(c *fiber.Ctx) error {
 		Username: req.Username,
 	}
 
-	if err := db.Connect().Create(&newUser).Error; err != nil {
+	if err := db.GetDB().Model(&models.User{}).Create(&newUser).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
 
@@ -58,6 +58,19 @@ func Login(c *fiber.Ctx) error {
 	}
 
 	return views.StatusOK(c, "login successful")
+}
+
+func GetUser(c *fiber.Ctx) error {
+	var req schemas.GetUserRequest
+	if err := c.BodyParser(&req); err != nil {
+		fmt.Println(c)
+		return views.InvalidParams(c)
+	}
+	var user *models.User
+	if err := db.GetDB().Model(&models.User{}).Where("email = ?", req.Email).First(&user).Error; err != nil {
+		return views.InternalServerError(c, err)
+	}
+	return views.StatusOK(c, user)
 }
 
 func GetAllUsers(c *fiber.Ctx) error {

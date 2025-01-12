@@ -10,39 +10,55 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
+import { useAuth } from 'context/AuthContext';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
+import { authService } from 'services/auth/service';
 import { toast } from 'sonner';
 import * as z from 'zod';
-import GithubSignInButton from './github-auth-button';
 
 const formSchema = z.object({
-  email: z.string().email({ message: 'Enter a valid email address' })
+  email: z.string().email({ message: 'Enter a valid email address' }),
+  password: z.string().min(1, { message: 'Enter a valid password' })
 });
 
 type UserFormValue = z.infer<typeof formSchema>;
 
-export default function UserAuthForm() {
+export default function UserAuthLoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl');
   const [loading, startTransition] = useTransition();
+  const { push } = useRouter();
+  const { fetchProfile } = useAuth();
+
   const defaultValues = {
-    email: 'demo@gmail.com'
+    email: '',
+    password: ''
   };
+
   const form = useForm<UserFormValue>({
     resolver: zodResolver(formSchema),
     defaultValues
   });
 
   const onSubmit = async (data: UserFormValue) => {
-    startTransition(() => {
-      signIn('credentials', {
-        email: data.email,
-        callbackUrl: callbackUrl ?? '/dashboard'
-      });
-      toast.success('Signed In Successfully!');
+    startTransition(async () => {
+      const response = await authService.login(
+        {
+          email: data.email,
+          password: data.password
+        },
+        {}
+      );
+      if (response.error) toast.error('Error logging in');
+      else if (response.data) {
+        localStorage.setItem('email', data.email);
+        fetchProfile();
+        push(callbackUrl ?? '/dashboard');
+        toast.success(`Logged in ${data.email} successfully`);
+      }
     });
   };
 
@@ -71,9 +87,26 @@ export default function UserAuthForm() {
               </FormItem>
             )}
           />
-
+          <FormField
+            control={form.control}
+            name='password'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    type='password'
+                    placeholder='Enter your password'
+                    disabled={loading}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <Button disabled={loading} className='ml-auto w-full' type='submit'>
-            Continue With Email
+            Login
           </Button>
         </form>
       </Form>
@@ -82,12 +115,19 @@ export default function UserAuthForm() {
           <span className='w-full border-t' />
         </div>
         <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-background px-2 text-muted-foreground'>
-            Or continue with
-          </span>
+          <span className='bg-background px-2 text-muted-foreground'>Or</span>
         </div>
       </div>
-      <GithubSignInButton />
+      <Link href='/'>
+        <Button
+          disabled={loading}
+          className='ml-auto w-full'
+          type='submit'
+          variant={'secondary'}
+        >
+          Signup
+        </Button>
+      </Link>
     </>
   );
 }

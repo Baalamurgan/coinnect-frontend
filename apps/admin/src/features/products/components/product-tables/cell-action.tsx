@@ -11,7 +11,7 @@ import {
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { deleteItem } from 'services/item/services';
+import { itemService } from 'services/item/services';
 import { toast } from 'sonner';
 import { Item } from 'types/api';
 
@@ -30,7 +30,7 @@ export const CellAction: React.FC<CellActionProps> = ({
 
   const onConfirm = async () => {
     setLoading(true);
-    const response = await deleteItem(
+    const response = await itemService.deleteItem(
       {},
       {},
       {

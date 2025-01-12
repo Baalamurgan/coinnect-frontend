@@ -106,7 +106,7 @@ func CreateCategory(c *fiber.Ctx) error {
 		return views.InternalServerError(c, err)
 	}
 
-	return views.StatusOK(c, "category created successfully")
+	return views.ObjectCreated(c, newCategory)
 }
 
 func UpdateCategory(c *fiber.Ctx) error {

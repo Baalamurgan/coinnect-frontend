@@ -2,16 +2,12 @@ import { createFetcher, ROUTES } from 'services/api';
 import { WithPagination } from 'services/types';
 import { CreateItemPayload, Item, UpdateItemPayload } from './types';
 
-export const fetchAllItems = createFetcher<
-  WithPagination<{ items: Item[] }>,
-  {},
-  {}
->({
+const fetchAllItems = createFetcher<WithPagination<{ items: Item[] }>, {}, {}>({
   url: ROUTES.ITEM.GETALL,
   method: 'GET'
 });
 
-export const createItem = createFetcher<
+const createItem = createFetcher<
   string,
   CreateItemPayload,
   {
@@ -22,7 +18,7 @@ export const createItem = createFetcher<
   method: 'POST'
 });
 
-export const updateItem = createFetcher<
+const updateItem = createFetcher<
   string,
   UpdateItemPayload,
   {
@@ -33,7 +29,7 @@ export const updateItem = createFetcher<
   method: 'PUT'
 });
 
-export const fetchItem = createFetcher<
+const fetchItem = createFetcher<
   Item,
   {},
   {
@@ -44,7 +40,7 @@ export const fetchItem = createFetcher<
   method: 'GET'
 });
 
-export const deleteItem = createFetcher<
+const deleteItem = createFetcher<
   string,
   {},
   {
@@ -54,3 +50,11 @@ export const deleteItem = createFetcher<
   url: ({ item_id }) => ROUTES.ITEM.DELETE({ item_id }),
   method: 'DELETE'
 });
+
+export const itemService = {
+  fetchAllItems,
+  createItem,
+  updateItem,
+  fetchItem,
+  deleteItem
+};

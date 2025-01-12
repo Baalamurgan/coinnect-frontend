@@ -13,6 +13,7 @@ func SetupRoutes(app *fiber.App) {
 	authGroup := v1.Group("/auth")
 	authGroup.Post("/signup", auth.Signup)
 	authGroup.Post("/login", auth.Login)
+	authGroup.Post("/profile", auth.GetUser)
 	authGroup.Get("/users", auth.GetAllUsers)
 
 	categoryGroup := v1.Group("/category")
