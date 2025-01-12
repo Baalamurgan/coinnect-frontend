@@ -9,6 +9,7 @@ import (
 	"github.com/Baalamurgan/coin-selling-backend/api/constants"
 	"github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"
+	"gorm.io/gorm"
 )
 
 func ImportEnv() {
@@ -76,4 +77,18 @@ func ValidateStruct(request interface{}) []ErrorResponse {
 		}
 	}
 	return errors
+}
+
+func Paginate(page, limit int) func(db *gorm.DB) *gorm.DB {
+	return func(db *gorm.DB) *gorm.DB {
+		if page < 1 {
+			page = 1
+		}
+		if limit <= 0 {
+			limit = 10
+		}
+
+		offset := (page - 1) * limit
+		return db.Offset(offset).Limit(limit)
+	}
 }

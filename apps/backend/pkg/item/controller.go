@@ -2,6 +2,8 @@ package item
 
 import (
 	"fmt"
+	"math"
+	"strconv"
 
 	"github.com/Baalamurgan/coin-selling-backend/api/db"
 	"github.com/Baalamurgan/coin-selling-backend/api/schemas"
@@ -13,11 +15,35 @@ import (
 )
 
 func GetAllItems(c *fiber.Ctx) error {
+	page, err := strconv.Atoi(c.Query("page", "1")) // Default to page 1
+	if err != nil || page < 1 {
+		return views.BadRequest(c)
+	}
+
+	limit, err := strconv.Atoi(c.Query("limit", "10")) // Default to 10 items per page
+	if err != nil || limit < 1 {
+		return views.BadRequest(c)
+	}
+
 	var items []models.Item
-	if err := db.GetDB().Preload("Details").Find(&items).Error; err != nil {
+	var total int64
+
+	if err := db.GetDB().Table("items").Count(&total).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
-	return views.StatusOK(c, items)
+
+	if err := db.GetDB().Table("items").Order("updated_at DESC").Preload("Details").Scopes(utils.Paginate(page, limit)).Find(&items).Error; err != nil {
+		return views.InternalServerError(c, err)
+	}
+	return views.StatusOK(c, fiber.Map{
+		"items": items,
+		"pagination": fiber.Map{
+			"page":          page,
+			"limit":         limit,
+			"total_records": total,
+			"total_pages":   int(math.Ceil(float64(total) / float64(limit))),
+		},
+	})
 }
 
 func GetItemsByCategoryID(c *fiber.Ctx) error {

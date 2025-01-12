@@ -2,6 +2,8 @@ package category
 
 import (
 	"fmt"
+	"math"
+	"strconv"
 
 	"github.com/Baalamurgan/coin-selling-backend/api/db"
 	"github.com/Baalamurgan/coin-selling-backend/api/schemas"
@@ -13,11 +15,35 @@ import (
 )
 
 func GetAllCategories(c *fiber.Ctx) error {
+	page, err := strconv.Atoi(c.Query("page", "1"))
+	if err != nil || page < 1 {
+		return views.BadRequest(c)
+	}
+
+	limit, err := strconv.Atoi(c.Query("limit", "10"))
+	if err != nil || limit < 1 {
+		return views.BadRequest(c)
+	}
+
 	var categories []models.Category
-	if err := db.GetDB().Preload("Items").Find(&categories).Error; err != nil {
+	var total int64
+
+	if err := db.GetDB().Table("categories").Count(&total).Error; err != nil {
 		return views.InternalServerError(c, err)
 	}
-	return views.StatusOK(c, categories)
+
+	if err := db.GetDB().Table("categories").Order("updated_at DESC").Scopes(utils.Paginate(page, limit)).Preload("Items").Find(&categories).Error; err != nil {
+		return views.InternalServerError(c, err)
+	}
+	return views.StatusOK(c, fiber.Map{
+		"categories": categories,
+		"pagination": fiber.Map{
+			"page":          page,
+			"limit":         limit,
+			"total_records": total,
+			"total_pages":   int(math.Ceil(float64(total) / float64(limit))),
+		},
+	})
 }
 
 func GetCategoryByID(c *fiber.Ctx) error {
