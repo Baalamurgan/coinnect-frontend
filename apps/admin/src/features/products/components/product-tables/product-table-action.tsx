@@ -10,7 +10,7 @@ import {
 
 export default function ProductTableAction() {
   const {
-    categoriesFilter,
+    categoryIDsFilter,
     setCategoriesFilter,
     isAnyFilterActive,
     resetFilters,
@@ -31,7 +31,7 @@ export default function ProductTableAction() {
         title='Categories'
         options={CATEGORY_OPTIONS}
         setFilterValue={setCategoriesFilter}
-        filterValue={categoriesFilter}
+        filterValue={categoryIDsFilter}
       />
       <DataTableResetFilter
         isFilterActive={isAnyFilterActive}

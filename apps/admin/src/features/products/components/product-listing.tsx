@@ -12,13 +12,13 @@ export default async function ProductListingPage({}: ProductListingPage) {
   const page = searchParamsCache.get('page');
   const search = searchParamsCache.get('q');
   const limit = searchParamsCache.get('limit');
-  const categories = searchParamsCache.get('categories');
+  const category_ids = searchParamsCache.get('category_ids');
 
   const filters = {
     page: page || 1,
     limit,
     ...(search && { search }),
-    ...(categories && { categories: categories })
+    ...(category_ids && { category_ids: category_ids.join(',') })
   };
 
   const itemResponse = await fetchAllItems(

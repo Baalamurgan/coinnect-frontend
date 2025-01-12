@@ -34,10 +34,10 @@ interface FilterBoxProps {
   title: string;
   options: FilterOption[];
   setFilterValue: (
-    value: string | ((old: string) => string | null) | null,
+    value: string[] | ((old: string[]) => string[] | null) | null,
     options?: Options | undefined
   ) => Promise<URLSearchParams>;
-  filterValue: string;
+  filterValue: string[];
 }
 
 export function DataTableFilterBox({
@@ -49,8 +49,7 @@ export function DataTableFilterBox({
 }: FilterBoxProps) {
   const selectedValuesSet = React.useMemo(() => {
     if (!filterValue) return new Set<string>();
-    const values = filterValue.split('.');
-    return new Set(values.filter((value) => value !== ''));
+    return new Set(filterValue);
   }, [filterValue]);
 
   const handleSelect = (value: string) => {
@@ -60,7 +59,7 @@ export function DataTableFilterBox({
     } else {
       newSet.add(value);
     }
-    setFilterValue(Array.from(newSet).join('.') || null);
+    setFilterValue(Array.from(newSet) || null);
   };
 
   const resetFilter = () => setFilterValue(null);

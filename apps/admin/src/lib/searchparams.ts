@@ -1,6 +1,7 @@
 import {
   createSearchParamsCache,
   createSerializer,
+  parseAsArrayOf,
   parseAsInteger,
   parseAsString
 } from 'nuqs/server';
@@ -10,7 +11,7 @@ export const searchParams = {
   limit: parseAsInteger.withDefault(10),
   q: parseAsString,
   gender: parseAsString,
-  categories: parseAsString
+  category_ids: parseAsArrayOf(parseAsString)
 };
 
 export const searchParamsCache = createSearchParamsCache(searchParams);

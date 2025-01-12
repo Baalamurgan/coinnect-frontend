@@ -3,6 +3,7 @@ package item
 import (
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/Baalamurgan/coin-selling-backend/api/db"
 	"github.com/Baalamurgan/coin-selling-backend/api/schemas"
@@ -25,11 +26,18 @@ func GetAllItems(c *fiber.Ctx) error {
 	}
 
 	searchQuery := c.Query("search", "")
-	categoryID := c.Query("category_id", "")
+	categoryIDs := c.Query("category_ids", "") // asdasdasd,asdsadsa,sadsda
 
-	parsedCategoryID, err := utils.ParseUUID(categoryID)
-	if err != nil {
-		return views.BadRequest(c)
+	var parsedCategoryIDs []*uuid.UUID
+	if categoryIDs != "" {
+		categoryIDList := strings.Split(categoryIDs, ",")
+
+		for _, categoryID := range categoryIDList {
+			parsedCategoryID, err := utils.ParseUUID(categoryID)
+			if err == nil {
+				parsedCategoryIDs = append(parsedCategoryIDs, parsedCategoryID)
+			}
+		}
 	}
 
 	var items []models.Item
@@ -40,8 +48,8 @@ func GetAllItems(c *fiber.Ctx) error {
 		dbQuery = dbQuery.Where("name ILIKE ? OR description ILIKE ?", "%"+searchQuery+"%", "%"+searchQuery+"%")
 	}
 
-	if parsedCategoryID != nil {
-		dbQuery = dbQuery.Where("category_id = ?", parsedCategoryID)
+	if parsedCategoryIDs != nil {
+		dbQuery = dbQuery.Where("category_id IN ?", parsedCategoryIDs)
 	}
 
 	if err := dbQuery.Count(&total).Error; err != nil {
