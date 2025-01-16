@@ -9,7 +9,7 @@ const getCategoriesJson = async () => {
     const { data } = await axios.get(`${API_HOST}/category`);
     const { saved, error } = await saveFile(
       __dirname + '/../data/categories.json',
-      data.data
+      data.data.categories
     );
     if (saved) {
       console.log('Categories Written successfully');

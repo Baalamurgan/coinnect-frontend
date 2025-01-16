@@ -130,10 +130,17 @@ export default function ProductForm({
         toast.error('Error creating item');
       }
     } else {
-      const response = await itemService.updateItem({
-        ...values,
-        image_url: values.image_url[0].preview
-      });
+      const response = await itemService.updateItem(
+        {
+          ...values,
+          id: productId,
+          image_url: values.image_url[0].preview
+        },
+        {},
+        {
+          item_id: productId
+        }
+      );
       if (response.data) {
         toast.success('Updated item successfully');
         push(`/dashboard/product`);

@@ -85,11 +85,15 @@ func CreateCategory(c *fiber.Ctx) error {
 	if req.ParentCategoryID == "" {
 		newCategory.ParentCategoryID = nil
 	} else {
-		parentID, err := uuid.Parse(req.ParentCategoryID)
+		parsedParentCategoryID, err := uuid.Parse(req.ParentCategoryID)
 		if err != nil {
 			return views.InvalidParams(c)
 		}
-		newCategory.ParentCategoryID = &parentID
+		var parentCategory models.Category
+		if err := db.GetDB().Model(&models.Category{}).Where("id = ?", parsedParentCategoryID).First(&parentCategory).Error; err != nil {
+			return views.BadRequest(c)
+		}
+		newCategory.ParentCategoryID = &parsedParentCategoryID
 	}
 
 	// for _, itemReq := range req.Items {

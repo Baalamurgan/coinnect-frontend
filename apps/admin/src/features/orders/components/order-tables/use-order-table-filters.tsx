@@ -11,17 +11,19 @@ export const CATEGORY_OPTIONS =
     label: c.name
   })) || [];
 
-export function useProductTableFilters() {
-  const [searchQuery, setSearchQuery] = useQueryState(
-    'q',
+export function useOrderTableFilters() {
+  const [nameQuery, setNameQuery] = useQueryState(
+    'name',
     searchParams.q
       .withOptions({ shallow: false, throttleMs: 1000 })
       .withDefault('')
   );
 
-  const [categoryIDsFilter, setCategoriesFilter] = useQueryState(
-    'category_ids',
-    searchParams.category_ids.withOptions({ shallow: false }).withDefault([])
+  const [emailQuery, setEmailQuery] = useQueryState(
+    'email',
+    searchParams.q
+      .withOptions({ shallow: false, throttleMs: 1000 })
+      .withDefault('')
   );
 
   const [page, setPage] = useQueryState(
@@ -30,24 +32,23 @@ export function useProductTableFilters() {
   );
 
   const resetFilters = useCallback(() => {
-    setSearchQuery(null);
-    setCategoriesFilter(null);
-
+    setNameQuery(null);
+    setEmailQuery(null);
     setPage(1);
-  }, [setSearchQuery, setCategoriesFilter, setPage]);
+  }, [setNameQuery, setEmailQuery, setPage]);
 
   const isAnyFilterActive = useMemo(() => {
-    return !!searchQuery || !!categoryIDsFilter;
-  }, [searchQuery, categoryIDsFilter]);
+    return !!nameQuery || !!emailQuery;
+  }, [nameQuery, emailQuery]);
 
   return {
-    searchQuery,
-    setSearchQuery,
+    nameQuery,
+    setNameQuery,
+    emailQuery,
+    setEmailQuery,
     page,
     setPage,
     resetFilters,
-    isAnyFilterActive,
-    categoryIDsFilter,
-    setCategoriesFilter
+    isAnyFilterActive
   };
 }
