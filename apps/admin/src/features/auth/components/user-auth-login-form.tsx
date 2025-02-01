@@ -52,7 +52,8 @@ export default function UserAuthLoginForm() {
         },
         {}
       );
-      if (response.error) toast.error('Error logging in');
+      if (response.error)
+        toast.error(response?.error.response?.data.err || 'Error logging in');
       else if (response.data) {
         localStorage.setItem('email', data.email);
         fetchProfile();
