@@ -51,6 +51,7 @@ func SetupRoutes(app *fiber.App) {
 	orderGroup := v1.Group("/order")
 	orderGroup.Get("/:id", orders.GetOrderByID)
 	orderGroup.Post("/", orders.CreateOrder)
+	orderGroup.Post("/item/add", orders.AddItemToOrder)
 	orderGroup.Delete("/:id", orders.DeleteOrder)
 
 	// coinGroup := itemGroup.Group("/coin")
