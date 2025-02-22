@@ -1,6 +1,5 @@
 'use client';
 
-import { DataTableFilterBox } from '@/components/ui/table/data-table-filter-box';
 import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-filter';
 import { DataTableSearch } from '@/components/ui/table/data-table-search';
 import { useOrderTableFilters } from './use-order-table-filters';

@@ -5,10 +5,10 @@ import { PHASE_PRODUCTION_BUILD } from 'next/constants';
 
 export const API_HOST = envs.NEXT_PUBLIC_API;
 
-const userAgentHeaders = () => ({
-  'user-agent':
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-});
+// const userAgentHeaders = () => ({
+//   'user-agent':
+//     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+// });
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 

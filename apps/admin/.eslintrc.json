@@ -6,5 +6,20 @@
     "import/no-unresolved": "error",
     "import/named": "off",
     "no-console": "warn"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+   },
+   "import/resolver": {
+      "node": {
+         "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {
+         "alwaysTryTypes": true,
+         "project": ["**/tsconfig.json"]
+      }
+   }
+   
   }
 }

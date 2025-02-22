@@ -1,18 +1,16 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React, {
   createContext,
-  useContext,
-  useState,
-  useEffect,
   ReactNode,
-  Dispatch,
-  SetStateAction
+  useContext,
+  useEffect,
+  useState
 } from 'react';
-import { useRouter } from 'next/navigation';
 import { authService } from 'services/auth/service';
-import { toast } from 'sonner';
 import { Profile } from 'services/auth/types';
+import { toast } from 'sonner';
 
 interface AuthContextType {
   user: Profile | null | undefined;
