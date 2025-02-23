@@ -39,7 +39,7 @@ export interface ErrorResponse {
   status: 400 | 409 | 500 | 502;
   response?: {
     data: {
-      err: string;
+      message: string;
       status: 'fail';
     };
     status: number;

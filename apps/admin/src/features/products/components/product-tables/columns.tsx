@@ -1,6 +1,6 @@
 'use client';
 import { ColumnDef } from '@tanstack/react-table';
-import { categories } from 'data';
+import { categories } from '@/data';
 import Image from 'next/image';
 import { getAllItems } from '@/services/api';
 import { Item } from 'types/api';

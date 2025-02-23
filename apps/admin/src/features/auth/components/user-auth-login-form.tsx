@@ -18,6 +18,7 @@ import { authService } from '@/services/auth/service';
 import { toast } from 'sonner';
 import * as z from 'zod';
 import { Input } from '@/src/components/ui/input';
+import { sentencize } from '@/src/lib/utils';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter a valid email address' }),
@@ -53,10 +54,12 @@ export default function UserAuthLoginForm() {
         {}
       );
       if (response.error)
-        toast.error(response?.error.response?.data.err || 'Error logging in');
+        toast.error(
+          sentencize(response?.error.response?.data.message) ||
+            'Error logging in'
+        );
       else if (response.data) {
-        localStorage.setItem('email', data.email);
-        fetchProfile();
+        await fetchProfile(response.data.id);
         push(callbackUrl ?? '/dashboard');
         toast.success(`Logged in ${data.email} successfully`);
       }

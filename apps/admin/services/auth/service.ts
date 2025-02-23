@@ -6,7 +6,7 @@ import {
   SignupPayload
 } from './types';
 
-const login = createFetcher<string, LoginPayload>({
+const login = createFetcher<Profile, LoginPayload>({
   url: ROUTES.AUTH.LOGIN,
   method: 'POST'
 });

@@ -9,8 +9,8 @@ import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import { SearchParams } from 'nuqs/server';
 import { Suspense } from 'react';
-import ProductListingPage from '@/features/products/components/product-listing';
-import ProductTableAction from '@/features/products/components/product-tables/product-table-action';
+import ProductListingPage from '@/src/features/products/components/product-listing';
+import ProductTableAction from '@/src/features/products/components/product-tables/product-table-action';
 import OrderTableAction from '@/features/orders/components/order-tables/order-table-action';
 import OrderListingPage from '@/features/orders/components/order-listing';
 

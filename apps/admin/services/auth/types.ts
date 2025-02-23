@@ -18,5 +18,5 @@ export type SignupPayload = {
 };
 
 export type FetchProfilePayload = {
-  email: string;
+  user_id: string;
 };

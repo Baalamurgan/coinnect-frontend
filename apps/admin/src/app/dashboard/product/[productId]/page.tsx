@@ -1,7 +1,7 @@
 import FormCardSkeleton from '@/src/components/form-card-skeleton';
 import PageContainer from '@/src/components/layout/page-container';
 import { Suspense } from 'react';
-import ProductViewPage from '@/features/products/components/product-view-page';
+import ProductViewPage from '@/src/features/products/components/product-view-page';
 
 export const metadata = {
   title: 'Dashboard : Product View'
