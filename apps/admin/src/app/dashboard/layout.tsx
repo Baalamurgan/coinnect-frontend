@@ -13,9 +13,9 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
 
-  if (loading || user === undefined)
+  if (user === undefined)
     return (
       <div className='flex h-screen items-center justify-center'>
         <Loader />
