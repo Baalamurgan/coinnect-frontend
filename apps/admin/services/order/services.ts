@@ -1,5 +1,5 @@
-import { createFetcher, ROUTES } from 'services/api';
-import { WithPagination } from 'services/types';
+import { createFetcher, ROUTES } from '@/services/api';
+import { WithPagination } from '@/services/types';
 import { Order } from './types';
 
 const fetchAllItems = createFetcher<

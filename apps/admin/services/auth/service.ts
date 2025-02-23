@@ -1,4 +1,4 @@
-import { createFetcher, ROUTES } from 'services/api';
+import { createFetcher, ROUTES } from '@/services/api';
 import {
   FetchProfilePayload,
   LoginPayload,

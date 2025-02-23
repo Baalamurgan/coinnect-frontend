@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/src/components/ui/button';
 import {
   Form,
   FormControl,
@@ -7,15 +7,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/src/components/ui/form';
+import { Input } from '@/src/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAuth } from 'context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
-import { authService } from 'services/auth/service';
+import { authService } from '@/services/auth/service';
 import { toast } from 'sonner';
 import * as z from 'zod';
 

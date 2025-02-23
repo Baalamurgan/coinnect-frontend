@@ -1,6 +1,6 @@
-import { DataTable as ProductTable } from '@/components/ui/table/data-table';
-import { searchParamsCache } from '@/lib/searchparams';
-import { itemService } from 'services/item/services';
+import { DataTable as ProductTable } from '@/src/components/ui/table/data-table';
+import { searchParamsCache } from '@/src/lib/searchparams';
+import { itemService } from '@/services/item/services';
 import { toast } from 'sonner';
 import { Item } from 'types/api';
 import { columns } from './product-tables/columns';

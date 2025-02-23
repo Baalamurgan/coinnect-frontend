@@ -1,7 +1,7 @@
 'use client';
 
-import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
+import { Input } from '@/src/components/ui/input';
+import { cn } from '@/src/lib/utils';
 import { Options } from 'nuqs';
 import { useTransition } from 'react';
 

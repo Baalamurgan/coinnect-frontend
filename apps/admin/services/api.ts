@@ -1,6 +1,6 @@
-import { ifSpreadObject } from '@/lib/ifSpread';
+import { ifSpreadObject } from '@/src/lib/ifSpread';
 import axios, { AxiosRequestConfig } from 'axios';
-import { envs } from 'config/env';
+import { envs } from '@/config/env';
 import { PHASE_PRODUCTION_BUILD } from 'next/constants';
 
 export const API_HOST = envs.NEXT_PUBLIC_API;

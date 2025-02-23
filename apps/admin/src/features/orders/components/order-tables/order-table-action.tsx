@@ -1,7 +1,7 @@
 'use client';
 
-import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-filter';
-import { DataTableSearch } from '@/components/ui/table/data-table-search';
+import { DataTableResetFilter } from '@/src/components/ui/table/data-table-reset-filter';
+import { DataTableSearch } from '@/src/components/ui/table/data-table-search';
 import { useOrderTableFilters } from './use-order-table-filters';
 
 export default function OrderTableAction() {

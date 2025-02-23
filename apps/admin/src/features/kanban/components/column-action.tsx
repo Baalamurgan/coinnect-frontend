@@ -10,18 +10,18 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle
-} from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
+} from '@/src/components/ui/alert-dialog';
+import { Button } from '@/src/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
+} from '@/src/components/ui/dropdown-menu';
 import { useTaskStore } from '../utils/store';
 import { UniqueIdentifier } from '@dnd-kit/core';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/src/components/ui/input';
 import { toast } from 'sonner';
 
 export function ColumnActions({

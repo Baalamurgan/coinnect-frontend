@@ -1,4 +1,4 @@
-import { Logo } from '@/components/logo';
+import { Logo } from '@/src/components/logo';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import UserAuthLoginForm from './user-auth-login-form';

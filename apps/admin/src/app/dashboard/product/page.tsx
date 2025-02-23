@@ -1,10 +1,10 @@
-import PageContainer from '@/components/layout/page-container';
-import { buttonVariants } from '@/components/ui/button';
-import { Heading } from '@/components/ui/heading';
-import { Separator } from '@/components/ui/separator';
-import { DataTableSkeleton } from '@/components/ui/table/data-table-skeleton';
-import { searchParamsCache, serialize } from '@/lib/searchparams';
-import { cn } from '@/lib/utils';
+import PageContainer from '@/src/components/layout/page-container';
+import { buttonVariants } from '@/src/components/ui/button';
+import { Heading } from '@/src/components/ui/heading';
+import { Separator } from '@/src/components/ui/separator';
+import { DataTableSkeleton } from '@/src/components/ui/table/data-table-skeleton';
+import { searchParamsCache, serialize } from '@/src/lib/searchparams';
+import { cn } from '@/src/lib/utils';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import { SearchParams } from 'nuqs/server';

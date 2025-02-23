@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { itemService } from 'services/item/services';
+import { itemService } from '@/services/item/services';
 import ProductForm from './product-form';
 
 type TProductViewPageProps = {

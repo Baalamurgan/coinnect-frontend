@@ -1,13 +1,18 @@
-import PageContainer from '@/components/layout/page-container';
-import { Button } from '@/components/ui/button';
+import PageContainer from '@/src/components/layout/page-container';
+import { Button } from '@/src/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle
-} from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+} from '@/src/components/ui/card';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger
+} from '@/src/components/ui/tabs';
 import { AreaGraph } from './area-graph';
 import { BarGraph } from './bar-graph';
 import { PieGraph } from './pie-graph';

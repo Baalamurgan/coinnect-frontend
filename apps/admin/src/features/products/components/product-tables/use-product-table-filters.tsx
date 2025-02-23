@@ -1,6 +1,6 @@
 'use client';
 
-import { searchParams } from '@/lib/searchparams';
+import { searchParams } from '@/src/lib/searchparams';
 import { categories } from 'data';
 import { useQueryState } from 'nuqs';
 import { useCallback, useMemo } from 'react';

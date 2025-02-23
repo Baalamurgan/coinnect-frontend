@@ -1,5 +1,5 @@
 'use client';
-import { AuthProvider } from 'context/AuthContext';
+import { AuthProvider } from '@/context/AuthContext';
 import React from 'react';
 import ThemeProvider from './ThemeToggle/theme-provider';
 

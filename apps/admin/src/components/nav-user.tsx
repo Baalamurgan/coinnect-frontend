@@ -9,7 +9,11 @@ import {
   Sparkles
 } from 'lucide-react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage
+} from '@/src/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,14 +22,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
+} from '@/src/components/ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar
-} from '@/components/ui/sidebar';
-import { useAuth } from 'context/AuthContext';
+} from '@/src/components/ui/sidebar';
+import { useAuth } from '@/context/AuthContext';
 
 export function NavUser({
   user

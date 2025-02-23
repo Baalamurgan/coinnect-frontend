@@ -1,82 +1,878 @@
 [
   {
-    "id": "393774d5-d025-4f60-a7d7-cdc84f5df57e",
-    "name": "1977-Commemorative coins",
+    "id": "a3b4a1fa-232d-4265-9fff-0a9ecf3fc6b3",
+    "name": "UNC/Proof Sets",
     "description": "",
-    "parent_category_id": "1555a128-a608-4cbe-ac98-df7e5ae0bb41",
+    "parent_category_id": null,
+    "items": [],
+    "created_at": 1740193632,
+    "updated_at": 1740193632
+  },
+  {
+    "id": "f37ead83-17a7-4c00-bb11-4ed9e576f4ba",
+    "name": "Die Errors",
+    "description": "",
+    "parent_category_id": "03a20786-7b31-4a8f-8af9-a0eeaeeb89ba",
     "items": [
       {
-        "id": "c23d1263-a68f-4da7-9509-3235b7c0a665",
-        "category_id": "393774d5-d025-4f60-a7d7-cdc84f5df57e",
-        "name": "5 Paise 1977 Save For Development Hyderabad Aluminium",
-        "description": "10 5 Paise 1977 Save For Development Hyderabad Aluminium",
-        "year": 1977,
-        "sku": "RIC5P2H.1",
-        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/12/IMG20240817205835_merged-768x255.jpg",
-        "stock": 1,
+        "id": "0239f921-4cbd-4d21-a899-b0417aacb8d5",
+        "category_id": "f37ead83-17a7-4c00-bb11-4ed9e576f4ba",
+        "name": "1 Rupee 2023 75th Year of Independence Kolkata 3’0 Clock Rotation Error Steel",
+        "description": "1 Rupee 2023 75th Year of Independence Kolkata 3’0 Clock Rotation Error Steel",
+        "year": 2023,
+        "sku": "RIC1R27KRE",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2024/08/IMG20240901160949_merged.jpg",
+        "stock": 0,
         "sold": 4,
         "price": 300,
         "gst": 5,
         "details": null,
-        "created_at": 1736823583,
-        "updated_at": 1736823583
+        "slug": "1-rupee-2023-75th-year-of-independence-kolkata-3’0-clock-rotation-error-steel",
+        "created_at": 1740193440,
+        "updated_at": 1740193440
       }
     ],
-    "created_at": 1736823448,
-    "updated_at": 1736823448
+    "created_at": 1740193372,
+    "updated_at": 1740193372
   },
   {
-    "id": "2a747088-648f-4981-8a7e-fab87f0da21e",
+    "id": "29276d7e-3957-4371-af13-dc14442a8a25",
+    "name": "British India Errors",
+    "description": "",
+    "parent_category_id": "03a20786-7b31-4a8f-8af9-a0eeaeeb89ba",
+    "items": [
+      {
+        "id": "19852a13-d0fb-44cd-a6ca-66394b5b6e70",
+        "category_id": "29276d7e-3957-4371-af13-dc14442a8a25",
+        "name": "1/2 Pice 1910 Kolkata Bronze (Ghost Error)",
+        "description": "1/2 Pice 1910 Kolkata Bronze (Ghost Error)",
+        "year": 1910,
+        "sku": "BIHP27K.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2023/04/IMG_20231220_190109_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 400,
+        "gst": 5,
+        "details": null,
+        "slug": "1/2-pice-1910-kolkata-bronze-(ghost-error)",
+        "created_at": 1740193354,
+        "updated_at": 1740193354
+      }
+    ],
+    "created_at": 1740193300,
+    "updated_at": 1740193300
+  },
+  {
+    "id": "94ca01fa-7d1a-40ae-b365-5d5a498336b4",
+    "name": "Edge Variety",
+    "description": "",
+    "parent_category_id": "da316b54-3292-4d39-83bd-3085b88c150c",
+    "items": [],
+    "created_at": 1740193271,
+    "updated_at": 1740193271
+  },
+  {
+    "id": "dee0dac2-cca9-4ba3-852e-29124b3b2d52",
+    "name": "Mule Coins",
+    "description": "",
+    "parent_category_id": "da316b54-3292-4d39-83bd-3085b88c150c",
+    "items": [],
+    "created_at": 1740193266,
+    "updated_at": 1740193266
+  },
+  {
+    "id": "51b365cc-7fe1-48bb-bec4-f62240e8445f",
+    "name": "Lion Variety Definitive",
+    "description": "",
+    "parent_category_id": "da316b54-3292-4d39-83bd-3085b88c150c",
+    "items": [],
+    "created_at": 1740193262,
+    "updated_at": 1740193262
+  },
+  {
+    "id": "d6435d42-bf22-4882-9344-3a7c5978ff06",
+    "name": "Lion Variety Commemorative",
+    "description": "",
+    "parent_category_id": "da316b54-3292-4d39-83bd-3085b88c150c",
+    "items": [
+      {
+        "id": "3ff95c95-6ee5-4d57-9ce6-1ab8dadc1479",
+        "category_id": "d6435d42-bf22-4882-9344-3a7c5978ff06",
+        "name": "10 Rupees 2015 Dr.S.Radhakrishnan Mumbai Lion Variety Nickel Bronze",
+        "description": "10 Rupees 2015 Dr.S.Radhakrishnan Mumbai Lion Variety Nickel Bronze",
+        "year": 2015,
+        "sku": "RIC10R13M.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/02/IMG_20231222_184441-1.jpg",
+        "stock": 5,
+        "sold": 0,
+        "price": 150,
+        "gst": 5,
+        "details": null,
+        "slug": "10-rupees-2015-dr.s.radhakrishnan-mumbai-lion-variety-nickel-bronze",
+        "created_at": 1740193644,
+        "updated_at": 1740193644
+      }
+    ],
+    "created_at": 1740193257,
+    "updated_at": 1740193257
+  },
+  {
+    "id": "03a20786-7b31-4a8f-8af9-a0eeaeeb89ba",
+    "name": "Error Coins",
+    "description": "",
+    "parent_category_id": "da316b54-3292-4d39-83bd-3085b88c150c",
+    "items": [],
+    "created_at": 1740193242,
+    "updated_at": 1740193242
+  },
+  {
+    "id": "da316b54-3292-4d39-83bd-3085b88c150c",
+    "name": "Republic India – Error/Lion Variety/Mule/Edge Variety Coins",
+    "description": "",
+    "parent_category_id": null,
+    "items": [],
+    "created_at": 1740193217,
+    "updated_at": 1740193217
+  },
+  {
+    "id": "d3a42712-1375-4b32-9565-ac01894d370f",
+    "name": "Republic India Comm. Coins Variety-wise",
+    "description": "",
+    "parent_category_id": null,
+    "items": [],
+    "created_at": 1740193205,
+    "updated_at": 1740193205
+  },
+  {
+    "id": "533794b2-c1a2-4513-be05-aae2a44121de",
+    "name": "One Pice-1950",
+    "description": "",
+    "parent_category_id": "ca7cd449-6afe-4d04-9338-e4c0e11cf96c",
+    "items": [
+      {
+        "id": "57e67a3f-d4fb-4a72-97e7-9a8ce121c268",
+        "category_id": "533794b2-c1a2-4513-be05-aae2a44121de",
+        "name": "One Pice 1950 Mumbai Bronze",
+        "description": "One Pice 1950 Mumbai Bronze",
+        "year": 1950,
+        "sku": "RIOP1M",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/11/IMG20241002184554_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 50,
+        "gst": 5,
+        "details": null,
+        "slug": "one-pice-1950-mumbai-bronze",
+        "created_at": 1740193181,
+        "updated_at": 1740193181
+      }
+    ],
+    "created_at": 1740192937,
+    "updated_at": 1740192937
+  },
+  {
+    "id": "230585c6-e2de-477a-b910-435d7de54922",
+    "name": "One Pice Mint-wise",
+    "description": "",
+    "parent_category_id": "ca7cd449-6afe-4d04-9338-e4c0e11cf96c",
+    "items": [
+      {
+        "id": "3d4da0c7-1806-4772-bbc4-8ccc761351f3",
+        "category_id": "230585c6-e2de-477a-b910-435d7de54922",
+        "name": "One Pice Mint-wise Complete Set (Except 1953,1954 & 1955 Hyderabad) Bronze",
+        "description": "One Pice Mint-wise Complete Set (Except 1953,1954 & 1955 Hyderabad) Bronze",
+        "year": 0,
+        "sku": "RIOPMW.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/10/IMG_20240118_111514.jpg",
+        "stock": 0,
+        "sold": 4,
+        "price": 800,
+        "gst": 5,
+        "details": null,
+        "slug": "one-pice-mint-wise-complete-set-(except-1953,1954-&-1955-hyderabad)-bronze",
+        "created_at": 1740193115,
+        "updated_at": 1740193115
+      }
+    ],
+    "created_at": 1740192932,
+    "updated_at": 1740192932
+  },
+  {
+    "id": "3e787825-3d1f-4f79-9aab-22f5d3b17b41",
+    "name": "One Pice Year-wise",
+    "description": "",
+    "parent_category_id": "ca7cd449-6afe-4d04-9338-e4c0e11cf96c",
+    "items": [
+      {
+        "id": "c3347f02-d13c-4262-83c6-85e6b31d8493",
+        "category_id": "3e787825-3d1f-4f79-9aab-22f5d3b17b41",
+        "name": "One Pice Complete Year-wise Set 1950 to 1955",
+        "description": "One Pice Complete Year-wise Set 1950 to 1955",
+        "year": 0,
+        "sku": "RIOPYW.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/12/IMG20240817205835_merged-768x255.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 1000,
+        "gst": 5,
+        "details": null,
+        "slug": "one-pice-complete-year-wise-set-1950-to-1955",
+        "created_at": 1740193017,
+        "updated_at": 1740193017
+      }
+    ],
+    "created_at": 1740192930,
+    "updated_at": 1740192930
+  },
+  {
+    "id": "63407e8f-300a-49ad-b758-0184db294b91",
+    "name": "Foreign Mints",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192861,
+    "updated_at": 1740192861
+  },
+  {
+    "id": "dc23d3bb-59a4-4f64-af0f-30d53190ebc8",
+    "name": "20 Rupees",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192853,
+    "updated_at": 1740192853
+  },
+  {
+    "id": "0a4e4be9-8c9b-428b-bec4-d649af28a6a1",
+    "name": "10 Rupees",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192850,
+    "updated_at": 1740192850
+  },
+  {
+    "id": "8aae94c6-6aa8-49f3-a7ac-929dfb362cf5",
+    "name": "5 Rupees",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192848,
+    "updated_at": 1740192848
+  },
+  {
+    "id": "11648503-300c-4bf8-afad-9df076f9f95c",
+    "name": "2 Rupees",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192846,
+    "updated_at": 1740192846
+  },
+  {
+    "id": "13039d00-4fb6-4b9b-9783-be1a8fc717a6",
+    "name": "1 Rupee",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192842,
+    "updated_at": 1740192842
+  },
+  {
+    "id": "365d7c5a-5ab8-41a9-81bd-3ef2fb94ca75",
+    "name": "50 Paise",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192839,
+    "updated_at": 1740192839
+  },
+  {
+    "id": "a65736d7-d7e8-435d-9804-d16f87ad0ba6",
+    "name": "25 Paise",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192835,
+    "updated_at": 1740192835
+  },
+  {
+    "id": "ed027e55-575d-4063-8ca1-daf1d912ee51",
+    "name": "20 Paise",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192834,
+    "updated_at": 1740192834
+  },
+  {
+    "id": "ce43b3a1-99a6-4328-a183-829e4a941e7a",
+    "name": "10 Paise",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192830,
+    "updated_at": 1740192830
+  },
+  {
+    "id": "a4a4708e-9ba9-4f96-806f-4b7c4a0e96c8",
+    "name": "5 Paise",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192827,
+    "updated_at": 1740192827
+  },
+  {
+    "id": "46bd6de4-54e6-40c9-b3f4-c97e53208159",
+    "name": "3 Paise",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192826,
+    "updated_at": 1740192826
+  },
+  {
+    "id": "4f2f3699-acb6-4e34-be6d-fbeb1eb67175",
+    "name": "2 Paise",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192824,
+    "updated_at": 1740192824
+  },
+  {
+    "id": "c1189f81-cde6-4e6d-bd74-0015dbe18c1a",
+    "name": "1 Paisa",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192822,
+    "updated_at": 1740192822
+  },
+  {
+    "id": "7ea00be5-3cb5-416a-843a-008b895a8e68",
+    "name": "1/2 Rupee",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192813,
+    "updated_at": 1740192813
+  },
+  {
+    "id": "9d429ac0-048e-4f49-bef3-c18ba05d281b",
+    "name": "1/4 Rupee",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192811,
+    "updated_at": 1740192811
+  },
+  {
+    "id": "53a978cd-5632-4357-9a9a-0eba22b2cf45",
+    "name": "Two Annas",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192800,
+    "updated_at": 1740192800
+  },
+  {
+    "id": "0de52978-b1be-42aa-80fa-529eda2d45a0",
+    "name": "One Anna",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192795,
+    "updated_at": 1740192795
+  },
+  {
+    "id": "2c544903-2fda-45a6-a74c-bbe83fb39cf3",
+    "name": "Half Anna",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192793,
+    "updated_at": 1740192793
+  },
+  {
+    "id": "ca7cd449-6afe-4d04-9338-e4c0e11cf96c",
+    "name": "One Pice",
+    "description": "",
+    "parent_category_id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "items": [],
+    "created_at": 1740192783,
+    "updated_at": 1740192783
+  },
+  {
+    "id": "fb329889-dabb-45eb-befd-9d1341a4f254",
+    "name": "Republic India Regular Coins – Single/Year-wise/Mint-wise",
+    "description": "",
+    "parent_category_id": null,
+    "items": [],
+    "created_at": 1740192712,
+    "updated_at": 1740192712
+  },
+  {
+    "id": "b5a7708a-c676-41b7-bf8b-6025319ae641",
+    "name": "10 Rupees-Commemorative",
+    "description": "",
+    "parent_category_id": "0663b79f-50a2-43d4-998d-987af2dc497f",
+    "items": [],
+    "created_at": 1740192695,
+    "updated_at": 1740192695
+  },
+  {
+    "id": "7d168ad1-5583-4cd0-ab55-60b48cffec6a",
+    "name": "5 Rupees-Commemorative",
+    "description": "",
+    "parent_category_id": "0663b79f-50a2-43d4-998d-987af2dc497f",
+    "items": [],
+    "created_at": 1740192693,
+    "updated_at": 1740192693
+  },
+  {
+    "id": "980f7d59-cf5f-4f16-94f5-ab5f0a1f0331",
+    "name": "2 Rupees-Commemorative",
+    "description": "",
+    "parent_category_id": "0663b79f-50a2-43d4-998d-987af2dc497f",
+    "items": [],
+    "created_at": 1740192692,
+    "updated_at": 1740192692
+  },
+  {
+    "id": "62b45172-3629-4e38-a140-224ace302dfd",
+    "name": "1 Rupee-Commemorative",
+    "description": "",
+    "parent_category_id": "0663b79f-50a2-43d4-998d-987af2dc497f",
+    "items": [],
+    "created_at": 1740192686,
+    "updated_at": 1740192686
+  },
+  {
+    "id": "f18b26c7-9a2d-48af-97f1-266af6fc1f0e",
+    "name": "50 Paise-Commemorative",
+    "description": "",
+    "parent_category_id": "0663b79f-50a2-43d4-998d-987af2dc497f",
+    "items": [],
+    "created_at": 1740192671,
+    "updated_at": 1740192671
+  },
+  {
+    "id": "d18a4180-d51d-4eb2-9fc9-3eac10dd7dc9",
+    "name": "25 Paise-Commemorative",
+    "description": "",
+    "parent_category_id": "0663b79f-50a2-43d4-998d-987af2dc497f",
+    "items": [],
+    "created_at": 1740192667,
+    "updated_at": 1740192667
+  },
+  {
+    "id": "f3d56b31-3a4e-4a9b-bd24-54e2f974f00b",
+    "name": "1983-Commemorative coins",
+    "description": "",
+    "parent_category_id": "c3f668df-ddc8-4dbd-aa46-2bf23d309bce",
+    "items": [],
+    "created_at": 1740192640,
+    "updated_at": 1740192640
+  },
+  {
+    "id": "acb611c7-6088-4837-a2ce-facad0c8b796",
+    "name": "1982-Commemorative coins",
+    "description": "",
+    "parent_category_id": "c3f668df-ddc8-4dbd-aa46-2bf23d309bce",
+    "items": [],
+    "created_at": 1740192639,
+    "updated_at": 1740192639
+  },
+  {
+    "id": "3b82b9b6-5367-423c-9889-ad82ab4a0d6d",
+    "name": "1971-Commemorative coins",
+    "description": "",
+    "parent_category_id": "c3f668df-ddc8-4dbd-aa46-2bf23d309bce",
+    "items": [
+      {
+        "id": "d6364294-0980-4264-a075-0f2a73639a78",
+        "category_id": "3b82b9b6-5367-423c-9889-ad82ab4a0d6d",
+        "name": "20 Paise 1971 Food For All Mumbai Bronze",
+        "description": "20 Paise 1971 Food For All Mumbai Bronze",
+        "year": 1971,
+        "sku": "RIC20P3M",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/10/IMG20241231125217_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 3500,
+        "gst": 5,
+        "details": null,
+        "slug": "20-paise-1971-food-for-all-mumbai-bronze",
+        "created_at": 1740192632,
+        "updated_at": 1740192632
+      }
+    ],
+    "created_at": 1740192580,
+    "updated_at": 1740192580
+  },
+  {
+    "id": "6a816d29-eb9a-4568-9f0c-6c866f6f9fa6",
+    "name": "1970-Commemorative coins",
+    "description": "",
+    "parent_category_id": "c3f668df-ddc8-4dbd-aa46-2bf23d309bce",
+    "items": [],
+    "created_at": 1740192579,
+    "updated_at": 1740192579
+  },
+  {
+    "id": "47f722ce-9ffd-425f-886a-56fbe09d74f0",
+    "name": "1969-Commemorative coins",
+    "description": "",
+    "parent_category_id": "c3f668df-ddc8-4dbd-aa46-2bf23d309bce",
+    "items": [
+      {
+        "id": "7142b56b-bbca-4a4d-a3ef-245e7a0edaf7",
+        "category_id": "47f722ce-9ffd-425f-886a-56fbe09d74f0",
+        "name": "20 Paise 1969 Mahatma Gandhi Hyderabad Bronze",
+        "description": "Planned Families – Food For All – Mumbai Mint",
+        "year": 1969,
+        "sku": "RIC20P1H",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/06/IMG_20240614_134920_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 75,
+        "gst": 5,
+        "details": null,
+        "slug": "20-paise-1969-mahatma-gandhi-hyderabad-bronze",
+        "created_at": 1740192489,
+        "updated_at": 1740192489
+      },
+      {
+        "id": "f9b6e018-49c2-4295-9037-760d67eb5780",
+        "category_id": "47f722ce-9ffd-425f-886a-56fbe09d74f0",
+        "name": "20 Paise 1969 Mahatma Gandhi Mumbai Bronze",
+        "description": "20 Paise 1969 Mahatma Gandhi Mumbai Bronze",
+        "year": 1969,
+        "sku": "RIC20P1M",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/06/IMG20240727164723_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 50,
+        "gst": 5,
+        "details": null,
+        "slug": "20-paise-1969-mahatma-gandhi-mumbai-bronze",
+        "created_at": 1740192556,
+        "updated_at": 1740192556
+      }
+    ],
+    "created_at": 1740192323,
+    "updated_at": 1740192323
+  },
+  {
+    "id": "e3fecde2-35ad-4480-b3b4-fe52a714ca11",
+    "name": "1982-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
+    "items": [],
+    "created_at": 1740192264,
+    "updated_at": 1740192264
+  },
+  {
+    "id": "bc67b836-78ad-440c-9114-e89b19a1a1e4",
+    "name": "1981-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
+    "items": [],
+    "created_at": 1740192262,
+    "updated_at": 1740192262
+  },
+  {
+    "id": "890bfe48-45cd-47b3-b9a7-76a0e467b9d8",
+    "name": "1980-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
+    "items": [],
+    "created_at": 1740192259,
+    "updated_at": 1740192259
+  },
+  {
+    "id": "c5fc55a1-a94e-4a5b-b253-30b29792ad89",
+    "name": "1979-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
+    "items": [],
+    "created_at": 1740192256,
+    "updated_at": 1740192256
+  },
+  {
+    "id": "ad6caecc-b04a-42fc-aba5-67d6aa5547fd",
+    "name": "1978-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
+    "items": [],
+    "created_at": 1740192254,
+    "updated_at": 1740192254
+  },
+  {
+    "id": "b88b3f02-0957-4758-8f6f-98a7fdc62b4c",
+    "name": "1977-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
+    "items": [],
+    "created_at": 1740192253,
+    "updated_at": 1740192253
+  },
+  {
+    "id": "1771de34-336e-49b0-88df-64c98aa7ced7",
     "name": "1976-Commemorative coins",
     "description": "",
-    "parent_category_id": "1555a128-a608-4cbe-ac98-df7e5ae0bb41",
+    "parent_category_id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
     "items": [],
-    "created_at": 1736823436,
-    "updated_at": 1736823436
+    "created_at": 1740192250,
+    "updated_at": 1740192250
   },
   {
-    "id": "1555a128-a608-4cbe-ac98-df7e5ae0bb41",
+    "id": "86a3f1fd-f701-4b4a-bd54-751c3de507a9",
+    "name": "1975-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
+    "items": [],
+    "created_at": 1740192248,
+    "updated_at": 1740192248
+  },
+  {
+    "id": "9f67fd26-4097-461c-9676-17e5bef15e37",
+    "name": "1974-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
+    "items": [
+      {
+        "id": "d142206c-6f2e-4d38-bbf8-68a49834f4b8",
+        "category_id": "9f67fd26-4097-461c-9676-17e5bef15e37",
+        "name": "10 Paise 1974 Planned Families – Food For All Hyderabad Aluminium",
+        "description": "10 Paise 1974 Planned Families – Food For All Hyderabad Aluminium",
+        "year": 1974,
+        "sku": "RIC10P1H",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2021/04/IMG20240909194312_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 3500,
+        "gst": 5,
+        "details": null,
+        "slug": "10-paise-1974-planned-families-–-food-for-all-hyderabad-aluminium",
+        "created_at": 1740192153,
+        "updated_at": 1740192153
+      },
+      {
+        "id": "e9a9cbd9-c814-457c-b1f0-6f0f191de83a",
+        "category_id": "9f67fd26-4097-461c-9676-17e5bef15e37",
+        "name": "10 Paise 1974 Planned Families – Food For All Mumbai Aluminium",
+        "description": "Planned Families – Food For All – Mumbai Mint",
+        "year": 1974,
+        "sku": "RIC10P1M.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2023/07/IMG_20240411_142117_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 150,
+        "gst": 5,
+        "details": null,
+        "slug": "10-paise-1974-planned-families-–-food-for-all-mumbai-aluminium",
+        "created_at": 1740192214,
+        "updated_at": 1740192214
+      }
+    ],
+    "created_at": 1740192089,
+    "updated_at": 1740192089
+  },
+  {
+    "id": "0535d337-e228-437b-8c8c-34f2a35e41bf",
+    "name": "1979-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d572151a-9616-4c84-91c2-a1c3d044c844",
+    "items": [],
+    "created_at": 1740192020,
+    "updated_at": 1740192020
+  },
+  {
+    "id": "8df708fb-c5aa-4760-9434-10c24e45fd3e",
+    "name": "1978-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d572151a-9616-4c84-91c2-a1c3d044c844",
+    "items": [
+      {
+        "id": "436ff59f-400d-4df3-87cd-2331ebe04918",
+        "category_id": "8df708fb-c5aa-4760-9434-10c24e45fd3e",
+        "name": "5 Paise 1978 Food & Shelter For All Kolkata Aluminium",
+        "description": "5 Paise 1978 Food & Shelter For All Kolkata Aluminium",
+        "year": 1978,
+        "sku": "RIC5P3K.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/01/IMG20250207155621_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 125,
+        "gst": 5,
+        "details": null,
+        "slug": "5-paise-1978-food-&-shelter-for-all-kolkata-aluminium",
+        "created_at": 1740191922,
+        "updated_at": 1740191922
+      },
+      {
+        "id": "29a2e8e2-553b-434e-9c29-d7a1c9328301",
+        "category_id": "8df708fb-c5aa-4760-9434-10c24e45fd3e",
+        "name": "5 Paise 1978 Food & Shelter For All Mumbai Aluminium",
+        "description": "5 Paise 1978 Food & Shelter For All Mumbai Aluminium",
+        "year": 1978,
+        "sku": "RIC5P3M.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/07/IMG_20240516_182721_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 75,
+        "gst": 5,
+        "details": null,
+        "slug": "5-paise-1978-food-&-shelter-for-all-mumbai-aluminium",
+        "created_at": 1740191967,
+        "updated_at": 1740191967
+      }
+    ],
+    "created_at": 1740191503,
+    "updated_at": 1740191503
+  },
+  {
+    "id": "5d565f85-6653-4426-9bf9-2f6a04f7cd4c",
+    "name": "1977-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d572151a-9616-4c84-91c2-a1c3d044c844",
+    "items": [
+      {
+        "id": "cb824941-5a0d-46c3-9b88-3874d948d782",
+        "category_id": "5d565f85-6653-4426-9bf9-2f6a04f7cd4c",
+        "name": "5 Paise 1977 Save For Development Hyderabad Aluminium",
+        "description": "5 Paise 1977 Save For Development Hyderabad Aluminium",
+        "year": 1977,
+        "sku": "RIC5P2H.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/06/IMG20250213132409_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 200,
+        "gst": 5,
+        "details": null,
+        "slug": "5-paise-1977-save-for-development-hyderabad-aluminium",
+        "created_at": 1740191816,
+        "updated_at": 1740191816
+      },
+      {
+        "id": "0651162e-a5b4-4c7f-807b-5460167e8a0a",
+        "category_id": "5d565f85-6653-4426-9bf9-2f6a04f7cd4c",
+        "name": "5 Paise 1977 Save For Development Kolkata Aluminium",
+        "description": "5 Paise 1977 Save For Development Kolkata Aluminium",
+        "year": 1977,
+        "sku": "RIC5P2K",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/06/IMG20240911205441_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 50,
+        "gst": 5,
+        "details": null,
+        "slug": "5-paise-1977-save-for-development-kolkata-aluminium",
+        "created_at": 1740191850,
+        "updated_at": 1740191850
+      }
+    ],
+    "created_at": 1740191499,
+    "updated_at": 1740191499
+  },
+  {
+    "id": "6fabbf0b-c81a-4022-972f-fd60296357ee",
+    "name": "1976-Commemorative coins",
+    "description": "",
+    "parent_category_id": "d572151a-9616-4c84-91c2-a1c3d044c844",
+    "items": [
+      {
+        "id": "5c00362b-8dc9-4ca0-a9df-a725c1fa5a8c",
+        "category_id": "6fabbf0b-c81a-4022-972f-fd60296357ee",
+        "name": "5 Paise 1976 Food & Work For All Hyderabad Aluminium",
+        "description": "5 Paise 1976 Food & Work For All Hyderabad Aluminium",
+        "year": 1976,
+        "sku": "RIC5P1H",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/06/IMG20250129213458_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 75,
+        "gst": 5,
+        "details": null,
+        "slug": "5-paise-1976-food-&-work-for-all-hyderabad-aluminium",
+        "created_at": 1740191601,
+        "updated_at": 1740191601
+      },
+      {
+        "id": "3f84d7c6-be08-4fdf-93be-baa78ebc4af4",
+        "category_id": "6fabbf0b-c81a-4022-972f-fd60296357ee",
+        "name": "5 Paise 1976 Food & Work For All Kolkata Aluminium",
+        "description": "5 Paise 1976 Food & Work For All Kolkata Aluminium",
+        "year": 1976,
+        "sku": "RIC5P1K.1",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/01/IMG20250129213525_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 100,
+        "gst": 5,
+        "details": null,
+        "slug": "5-paise-1976-food-&-work-for-all-kolkata-aluminium",
+        "created_at": 1740191673,
+        "updated_at": 1740191673
+      },
+      {
+        "id": "9ed054c2-2965-47d1-a89d-9811df88cb21",
+        "category_id": "6fabbf0b-c81a-4022-972f-fd60296357ee",
+        "name": "5 Paise 1976 Food & Work For All Mumbai Aluminium",
+        "description": "5 Paise 1976 Food & Work For All Mumbai Aluminium",
+        "year": 1976,
+        "sku": "RIC5P1M",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/03/IMG20250129213303_merged.jpg",
+        "stock": 1,
+        "sold": 4,
+        "price": 30,
+        "gst": 5,
+        "details": null,
+        "slug": "5-paise-1976-food-&-work-for-all-mumbai-aluminium",
+        "created_at": 1740191708,
+        "updated_at": 1740191708
+      }
+    ],
+    "created_at": 1740191493,
+    "updated_at": 1740191493
+  },
+  {
+    "id": "c3f668df-ddc8-4dbd-aa46-2bf23d309bce",
+    "name": "20 Paise-Commemorative",
+    "description": "",
+    "parent_category_id": "0663b79f-50a2-43d4-998d-987af2dc497f",
+    "items": [],
+    "created_at": 1740191461,
+    "updated_at": 1740191461
+  },
+  {
+    "id": "d0be60c3-26c6-49e5-863c-d0af2331db8b",
+    "name": "10 Paise-Commemorative",
+    "description": "",
+    "parent_category_id": "0663b79f-50a2-43d4-998d-987af2dc497f",
+    "items": [],
+    "created_at": 1740191455,
+    "updated_at": 1740191455
+  },
+  {
+    "id": "d572151a-9616-4c84-91c2-a1c3d044c844",
     "name": "5 Paise-Commemorative",
     "description": "",
-    "parent_category_id": "2c39146e-a127-4d93-a39d-336f43564c85",
+    "parent_category_id": "0663b79f-50a2-43d4-998d-987af2dc497f",
     "items": [],
-    "created_at": 1736823388,
-    "updated_at": 1736823388
+    "created_at": 1740191447,
+    "updated_at": 1740191447
   },
   {
-    "id": "2c39146e-a127-4d93-a39d-336f43564c85",
+    "id": "0663b79f-50a2-43d4-998d-987af2dc497f",
     "name": "Republic India Commemorative Coins – Single",
-    "description": "",
+    "description": "Republic India Commemorative Coins – Single",
     "parent_category_id": null,
     "items": [],
-    "created_at": 1736823369,
-    "updated_at": 1736823369
-  },
-  {
-    "id": "de83d038-756a-4069-be09-99dcba610cfe",
-    "name": "One Pice Year-wise 1950",
-    "description": "",
-    "parent_category_id": "3378bd02-0e23-4000-b76e-8aa6f05728d8",
-    "items": [],
-    "created_at": 1736692264,
-    "updated_at": 1736692264
-  },
-  {
-    "id": "3378bd02-0e23-4000-b76e-8aa6f05728d8",
-    "name": "One Pice Year-wise",
-    "description": "",
-    "parent_category_id": null,
-    "items": [],
-    "created_at": 1736692252,
-    "updated_at": 1736692252
-  },
-  {
-    "id": "4c67fb80-0868-4905-bc89-794e52e252c0",
-    "name": "One Pice Year-wise",
-    "description": "",
-    "parent_category_id": "0564e5ab-2ac0-4ee7-800d-aa2e3eba7df4",
-    "items": [],
-    "created_at": 1736692022,
-    "updated_at": 1736692022
+    "created_at": 1740191395,
+    "updated_at": 1740191395
   }
 ]

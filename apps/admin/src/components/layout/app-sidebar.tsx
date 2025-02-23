@@ -1,10 +1,10 @@
 'use client';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/src/components/ui/avatar';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger
-} from '@/components/ui/collapsible';
+} from '@/src/components/ui/collapsible';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +13,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
+} from '@/src/components/ui/dropdown-menu';
 import {
   Sidebar,
   SidebarContent,
@@ -28,9 +28,9 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail
-} from '@/components/ui/sidebar';
-import { navItems } from '@/constants/data';
-import { useAuth } from 'context/AuthContext';
+} from '@/src/components/ui/sidebar';
+import { navItems } from '@/src/constants/data';
+import { useAuth } from '@/context/AuthContext';
 import {
   BadgeCheck,
   Bell,

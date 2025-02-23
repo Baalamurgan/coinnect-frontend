@@ -1,11 +1,11 @@
 'use client';
 
-import KBar from '@/components/kbar';
-import AppSidebar from '@/components/layout/app-sidebar';
-import Header from '@/components/layout/header';
-import Loader from '@/components/Loader';
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
-import { useAuth } from 'context/AuthContext';
+import KBar from '@/src/components/kbar';
+import AppSidebar from '@/src/components/layout/app-sidebar';
+import Header from '@/src/components/layout/header';
+import Loader from '@/src/components/Loader';
+import { SidebarInset, SidebarProvider } from '@/src/components/ui/sidebar';
+import { useAuth } from '@/context/AuthContext';
 import { redirect } from 'next/navigation';
 
 export default function DashboardLayout({

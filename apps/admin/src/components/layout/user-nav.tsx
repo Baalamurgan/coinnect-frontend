@@ -1,6 +1,6 @@
 'use client';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback } from '@/src/components/ui/avatar';
+import { Button } from '@/src/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,8 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
-import { useAuth } from 'context/AuthContext';
+} from '@/src/components/ui/dropdown-menu';
+import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
 export function UserNav() {
