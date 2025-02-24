@@ -1,15 +1,23 @@
 'use client';
 
 import { searchParams } from '@/src/lib/searchparams';
-import { categories } from '@/data';
 import { useQueryState } from 'nuqs';
 import { useCallback, useMemo } from 'react';
 
-export const CATEGORY_OPTIONS =
-  categories?.map((c) => ({
-    value: c.id,
-    label: c.name
-  })) || [];
+export const STATUS_OPTIONS = [
+  {
+    value: 'pending',
+    label: 'Pending'
+  },
+  {
+    value: 'booked',
+    label: 'Booked'
+  },
+  {
+    value: 'cancelled',
+    label: 'Cancelled'
+  }
+];
 
 export function useOrderTableFilters() {
   const [nameQuery, setNameQuery] = useQueryState(
@@ -26,6 +34,11 @@ export function useOrderTableFilters() {
       .withDefault('')
   );
 
+  const [statusFilter, setStatusFilter] = useQueryState(
+    'status',
+    searchParams.status.withOptions({ shallow: false }).withDefault([])
+  );
+
   const [page, setPage] = useQueryState(
     'page',
     searchParams.page.withDefault(1)
@@ -35,15 +48,18 @@ export function useOrderTableFilters() {
     setNameQuery(null);
     setEmailQuery(null);
     setPage(1);
-  }, [setNameQuery, setEmailQuery, setPage]);
+    setStatusFilter(null);
+  }, [setNameQuery, setEmailQuery, setPage, setStatusFilter]);
 
   const isAnyFilterActive = useMemo(() => {
-    return !!nameQuery || !!emailQuery;
+    return !!nameQuery || !!emailQuery || !!statusFilter;
   }, [nameQuery, emailQuery]);
 
   return {
     nameQuery,
     setNameQuery,
+    statusFilter,
+    setStatusFilter,
     emailQuery,
     setEmailQuery,
     page,

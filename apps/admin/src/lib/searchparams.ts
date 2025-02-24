@@ -13,6 +13,7 @@ export const searchParams = {
   name: parseAsString,
   email: parseAsString,
   gender: parseAsString,
+  status: parseAsArrayOf(parseAsString),
   category_ids: parseAsArrayOf(parseAsString)
 };
 

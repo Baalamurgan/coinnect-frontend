@@ -1,18 +1,12 @@
 import PageContainer from '@/src/components/layout/page-container';
-import { buttonVariants } from '@/src/components/ui/button';
 import { Heading } from '@/src/components/ui/heading';
 import { Separator } from '@/src/components/ui/separator';
 import { DataTableSkeleton } from '@/src/components/ui/table/data-table-skeleton';
-import { searchParamsCache, serialize } from '@/src/lib/searchparams';
-import { cn } from '@/src/lib/utils';
-import { Plus } from 'lucide-react';
-import Link from 'next/link';
+import OrderListingPage from '@/src/features/orders/components/order-listing';
+import OrderTableAction from '@/src/features/orders/components/order-tables/order-table-action';
+import { searchParamsCache } from '@/src/lib/searchparams';
 import { SearchParams } from 'nuqs/server';
 import { Suspense } from 'react';
-import ProductListingPage from '@/src/features/products/components/product-listing';
-import ProductTableAction from '@/src/features/products/components/product-tables/product-table-action';
-import OrderTableAction from '@/features/orders/components/order-tables/order-table-action';
-import OrderListingPage from '@/features/orders/components/order-listing';
 
 export const metadata = {
   title: 'Dashboard: Orders'

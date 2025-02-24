@@ -1,9 +1,8 @@
 'use client';
-import { ColumnDef } from '@tanstack/react-table';
 import { categories } from '@/data';
+import { Item } from '@/services/item/types';
+import { ColumnDef } from '@tanstack/react-table';
 import Image from 'next/image';
-import { getAllItems } from '@/services/api';
-import { Item } from 'types/api';
 import { CellAction } from './cell-action';
 
 export const columns: ColumnDef<Item>[] = [

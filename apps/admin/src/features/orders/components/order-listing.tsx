@@ -1,9 +1,9 @@
+import { orderService } from '@/services/order/services';
+import { Order } from '@/services/order/types';
+import NotFound from '@/src/app/not-found';
 import { DataTable as ProductTable } from '@/src/components/ui/table/data-table';
 import { searchParamsCache } from '@/src/lib/searchparams';
-import { itemService } from '@/services/item/services';
-import { toast } from 'sonner';
-import { Item } from 'types/api';
-import { columns } from './product-tables/columns';
+import { columns } from './order-tables/columns';
 
 type OrderListingPage = {};
 
@@ -13,43 +13,46 @@ export default async function OrderListingPage({}: OrderListingPage) {
   const name = searchParamsCache.get('name');
   const email = searchParamsCache.get('email');
   const limit = searchParamsCache.get('limit');
-  const category_ids = searchParamsCache.get('category_ids');
+  const status = searchParamsCache.get('status');
 
   const filters = {
     page: page || 1,
     limit,
     name,
-    email
+    email,
+    ...(status && { status: status.join(',') })
   };
 
-  const orderResponse = await orderService.fetchAllOrders(
+  const orderResponse = await orderService.getAll(
     {},
     {
       params: filters
     }
   );
   if (orderResponse.error) {
-    toast.error('Error fetching orders');
+    // toast.error('Error fetching orders');
+    return <NotFound />;
   }
 
   const data = {
     success: true,
     time: new Date().getTime(),
     message: 'Sample data for testing and learning purposes',
-    total_products: itemResponse.data?.pagination.total_records || 0,
+    total_products: orderResponse.data?.pagination.total_records || 0,
     offset: (page - 1) * limit,
     limit,
-    products: itemResponse.data?.items || []
+    products: orderResponse.data?.orders || []
   };
 
   return (
-    <ProductTable<Item, {}>
+    <ProductTable<Order, {}>
       columns={columns}
       data={data.products}
       totalItems={data.total_products}
       columnVisibility={{
-        category_id: false,
-        gst: false
+        billable_amount_paid: false,
+        user_id: false,
+        updated_at: false
       }}
     />
   );

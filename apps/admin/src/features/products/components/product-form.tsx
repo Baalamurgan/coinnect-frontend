@@ -1,5 +1,8 @@
 'use client';
 
+import { categories } from '@/data';
+import { itemService } from '@/services/item/services';
+import { Item } from '@/services/item/types';
 import { FileUploader } from '@/src/components/file-uploader';
 import { Button } from '@/src/components/ui/button';
 import {
@@ -27,12 +30,9 @@ import {
 import { Textarea } from '@/src/components/ui/textarea';
 import { sentencize } from '@/src/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { categories } from '@/data';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { itemService } from '@/services/item/services';
 import { toast } from 'sonner';
-import { Item } from 'types/api';
 import * as z from 'zod';
 
 const MAX_FILE_SIZE = 5000000;
@@ -117,7 +117,7 @@ export default function ProductForm({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (productId === 'new') {
-      const response = await itemService.createItem(
+      const response = await itemService.create(
         {
           ...values,
           image_url: values.image_url[0].preview,
@@ -135,7 +135,7 @@ export default function ProductForm({
         toast.error('Error creating item');
       }
     } else {
-      const response = await itemService.updateItem(
+      const response = await itemService.update(
         {
           ...values,
           id: productId,

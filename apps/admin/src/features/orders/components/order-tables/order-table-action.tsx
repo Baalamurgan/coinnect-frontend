@@ -2,7 +2,11 @@
 
 import { DataTableResetFilter } from '@/src/components/ui/table/data-table-reset-filter';
 import { DataTableSearch } from '@/src/components/ui/table/data-table-search';
-import { useOrderTableFilters } from './use-order-table-filters';
+import {
+  STATUS_OPTIONS,
+  useOrderTableFilters
+} from './use-order-table-filters';
+import { DataTableFilterBox } from '@/src/components/ui/table/data-table-filter-box';
 
 export default function OrderTableAction() {
   const {
@@ -12,7 +16,9 @@ export default function OrderTableAction() {
     nameQuery,
     setNameQuery,
     emailQuery,
-    setEmailQuery
+    setEmailQuery,
+    statusFilter,
+    setStatusFilter
   } = useOrderTableFilters();
   return (
     <div className='flex flex-wrap items-center gap-4'>
@@ -28,13 +34,13 @@ export default function OrderTableAction() {
         setSearchQuery={setEmailQuery}
         setPage={setPage}
       />
-      {/* <DataTableFilterBox
-        filterKey='categories'
-        title='Categories'
-        options={CATEGORY_OPTIONS}
-        setFilterValue={setCategoriesFilter}
-        filterValue={categoryIDsFilter}
-      /> */}
+      <DataTableFilterBox
+        filterKey='status'
+        title='Status'
+        options={STATUS_OPTIONS}
+        setFilterValue={setStatusFilter}
+        filterValue={statusFilter}
+      />
       <DataTableResetFilter
         isFilterActive={isAnyFilterActive}
         onReset={resetFilters}

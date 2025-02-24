@@ -135,11 +135,16 @@ export const ROUTES = {
     DELETE: (p: { item_id: string }) => apiRoute(`/item/${p.item_id}`)
   },
   ORDER: {
-    GETALL: apiRoute('/order')
-    // GET: (p: { item_id: string }) => apiRoute(`/item/${p.item_id}`),
-    // CREATE: (p: { category_id: string }) => apiRoute(`/item/${p.category_id}`),
-    // UPDATE: (p: { item_id: string }) => apiRoute(`/item/${p.item_id}`),
-    // DELETE: (p: { item_id: string }) => apiRoute(`/item/${p.item_id}`)
+    CREATE: apiRoute(`/order`),
+    GETALL: apiRoute(`/order`),
+    GETBYID: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}`),
+    CONFIRM: (p: { order_id: string }) =>
+      apiRoute(`/order/${p.order_id}/confirm`),
+    ITEM: {
+      ADD: apiRoute(`/order/item/add`),
+      REMOVE: (p: { order_id: string; order_item_id: string }) =>
+        apiRoute(`/order/item/${p.order_id}/${p.order_item_id}`)
+    }
   },
   AUTH: {
     LOGIN: apiRoute('/auth/login'),
