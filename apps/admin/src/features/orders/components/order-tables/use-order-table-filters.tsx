@@ -7,11 +7,28 @@ import { useCallback, useMemo } from 'react';
 export const STATUS_OPTIONS = [
   {
     value: 'pending',
-    label: 'Pending'
+    label: 'Pending',
+    color: 'yellow'
   },
   {
     value: 'booked',
-    label: 'Booked'
+    label: 'Booked',
+    color: 'green'
+  },
+  {
+    value: 'paid',
+    label: 'Paid',
+    color: 'blue'
+  },
+  {
+    value: 'shipped',
+    label: 'Shipped',
+    color: 'blue'
+  },
+  {
+    value: 'delivered',
+    label: 'Delivered',
+    color: 'green'
   },
   {
     value: 'cancelled',

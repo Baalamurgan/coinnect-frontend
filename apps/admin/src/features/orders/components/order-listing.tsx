@@ -29,6 +29,7 @@ export default async function OrderListingPage({}: OrderListingPage) {
       params: filters
     }
   );
+
   if (orderResponse.error) {
     // toast.error('Error fetching orders');
     return <NotFound />;

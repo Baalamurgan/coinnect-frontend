@@ -31,9 +31,21 @@ const confirm = createFetcher<
   method: 'POST'
 });
 
+const deleteOrder = createFetcher<
+  string,
+  {},
+  {
+    order_id: string;
+  }
+>({
+  url: ({ order_id }) => ROUTES.ORDER.DELETE({ order_id }),
+  method: 'DELETE'
+});
+
 export const orderService = {
   getAll,
   getById,
+  delete: deleteOrder,
   confirm
 };
 

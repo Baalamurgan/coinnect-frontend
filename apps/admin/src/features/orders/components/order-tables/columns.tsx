@@ -7,6 +7,7 @@ import { CellAction } from './cell-action';
 import displayPrice from '@/src/lib/price';
 import { sentencize } from '@/src/lib/utils';
 import Tag from '@/src/components/ui/tag';
+import { STATUS_OPTIONS } from './use-order-table-filters';
 
 export const columns: ColumnDef<Order>[] = [
   // {
@@ -63,13 +64,14 @@ export const columns: ColumnDef<Order>[] = [
     accessorKey: 'status',
     header: 'STATUS',
     cell: ({ row }) => {
-      const statusColor: Record<string, 'yellow' | 'green' | 'red'> = {
-        pending: 'yellow',
-        booked: 'green',
-        cancelled: 'red'
-      };
       return (
-        <Tag color={statusColor[row.getValue('status') as string]}>
+        <Tag
+          color={
+            STATUS_OPTIONS.find(
+              (s) => s.value === (row.getValue('status') as string)
+            )?.color
+          }
+        >
           {sentencize(row.getValue('status'))}
         </Tag>
       );
@@ -94,6 +96,15 @@ export const columns: ColumnDef<Order>[] = [
           )}
         </p>
       </div>
+    )
+  },
+  {
+    id: 'actions',
+    cell: ({ row, table }) => (
+      <CellAction
+        data={row.original}
+        // refreshTable={table.refreshTable}
+      />
     )
   }
 ];
