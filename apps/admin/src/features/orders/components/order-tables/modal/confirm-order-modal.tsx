@@ -85,15 +85,34 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
         username: data.username
       });
       if (response.error) {
-        return toast.error(
-          response.error.response?.data.message === 'user already exists'
-            ? 'User already exists'
-            : 'Error siging up'
-        );
+        if (response.error.response?.data.message === 'user already exists') {
+          const response = await authService.fetchProfileByEmail({
+            email: data.email
+          });
+          if (response.error) {
+            return toast.error('Error siging up');
+          } else if (response.data) {
+            setUser(response.data);
+            user_id = response.data.id;
+          }
+        }
       } else if (response.data) {
         setUser(response.data);
         user_id = response.data.id;
       }
+    } else if (
+      user.email !== data.email ||
+      (user.phone && user.phone !== data.phone) ||
+      user.username !== data.username
+    ) {
+      await authService
+        .updateProfile({
+          email: data.email,
+          username: data.username,
+          phone: data.phone
+        })
+        .then(() => toast.success('Updated user profile'))
+        .catch(() => toast.success('Error updating profile'));
     }
     const response = await orderService.confirm(
       {
@@ -104,8 +123,13 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
         order_id: order.id
       }
     );
-    if (response.error) toast.error('Something went wrong. Please try again');
-    else if (response.data) {
+    if (response.error) {
+      toast.error(
+        response.error.response?.data.message === 'order invalid'
+          ? 'This order has no items. Please check and try again'
+          : 'Something went wrong. Please try again'
+      );
+    } else if (response.data) {
       toast.success('Order confirmed');
       onClose();
       refreshTable();
@@ -166,7 +190,8 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
                     className='w-[80%]'
                     type='email'
                     placeholder="Enter user's email"
-                    disabled={loading}
+                    disabled={!!user || loading}
+                    title={!!user ? 'Email cannot be edited' : 'Email'}
                     {...field}
                   />
                 </FormControl>

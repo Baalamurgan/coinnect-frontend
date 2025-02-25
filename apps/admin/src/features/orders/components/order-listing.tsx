@@ -45,9 +45,19 @@ export default async function OrderListingPage({}: OrderListingPage) {
     products: orderResponse.data?.orders || []
   };
 
+  const refreshTable = async () => {
+    await orderService.getAll(
+      {},
+      {
+        params: filters
+      }
+    );
+  };
+
   return (
     <ProductTable<Order, {}>
       columns={columns}
+      // columns={columns({ refreshTable })}
       data={data.products}
       totalItems={data.total_products}
       columnVisibility={{

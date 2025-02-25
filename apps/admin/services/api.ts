@@ -150,6 +150,11 @@ export const ROUTES = {
   AUTH: {
     LOGIN: apiRoute('/auth/login'),
     SIGNUP: apiRoute('/auth/signup'),
-    FETCHPROFILE: apiRoute('/auth/profile')
+    PROFILE: {
+      FETCH: apiRoute('/auth/profile'),
+      FETCHBYEMAIL: apiRoute('/auth/profile/email'),
+      UPDATE: (p: { user_id: string }) =>
+        apiRoute(`/auth/profile/update/${p.user_id}`)
+    }
   }
 };

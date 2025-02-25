@@ -43,13 +43,15 @@ import { MarkAsPaidModal } from './modal/mark-as-paid-modal';
 import { MarkAsShippedModal } from './modal/mark-as-shipped-modal';
 import { RestoreOrderModal } from './modal/restore-order-modal';
 import { authService } from '@/services/auth/service';
+import { searchParams } from '@/src/lib/searchparams';
+import { useQueryState } from 'nuqs';
 
 interface CellActionProps {
   data: Order;
   refreshTable?: () => void;
 }
 
-type ModalTypes =
+export type ModalTypes =
   | 'confirm'
   | 'mark_as_paid'
   | 'mark_as_shipped'
@@ -67,6 +69,15 @@ export const CellAction: React.FC<CellActionProps> = ({
   const [user, setUser] = useState<Profile | undefined | null>();
   const [modalOpen, setModalOpen] = useState<ModalTypes | null>(null);
   const router = useRouter();
+  const [modalQuery] = useQueryState(
+    'modal',
+    searchParams.modalQuery.withOptions({ shallow: false, throttleMs: 1000 })
+  );
+  const [orderIDQuery] = useQueryState(
+    'order_id',
+    searchParams.order_id.withOptions({ shallow: false, throttleMs: 1000 })
+  );
+  console.log(modalQuery);
 
   const onDelete = async () => {
     setLoading(true);
@@ -136,14 +147,23 @@ export const CellAction: React.FC<CellActionProps> = ({
     } else setUser(null);
   }, [order]);
 
+  useEffect(() => {
+    if (modalQuery) {
+      if (orderIDQuery) setModalOpen(modalQuery);
+    }
+  }, [modalQuery]);
+
   return (
     <>
-      {modalOpen && (
+      {modalOpen && orderIDQuery === order.id && (
         <ModalComponent
           key={1}
           isOpen={true}
           loading={loading}
-          onClose={() => setModalOpen(null)}
+          onClose={() => {
+            router.push(`/dashboard/order`);
+            setModalOpen(null);
+          }}
           onConfirm={(order) => onConfirm(order)}
           refreshTable={() => refreshTable?.()}
           order={order}
@@ -188,7 +208,10 @@ export const CellAction: React.FC<CellActionProps> = ({
             <DropdownMenuItem
               className='text-green-500'
               onClick={() => {
-                setModalOpen('confirm');
+                router.push(
+                  `/dashboard/order?modal=confirm&order_id=${order.id}`
+                );
+                // setModalOpen('confirm');
                 console.log('Marking order as Paid', order.id);
               }}
             >
@@ -201,7 +224,10 @@ export const CellAction: React.FC<CellActionProps> = ({
             <DropdownMenuItem
               className='text-green-500'
               onClick={() => {
-                setModalOpen('mark_as_paid');
+                router.push(
+                  `/dashboard/order?modal=mark_as_paid&order_id=${order.id}`
+                );
+                // setModalOpen('mark_as_paid');
                 console.log('Marking order as Paid', order.id);
               }}
             >
@@ -214,7 +240,10 @@ export const CellAction: React.FC<CellActionProps> = ({
             <DropdownMenuItem
               className='text-blue-500'
               onClick={() => {
-                setModalOpen('mark_as_shipped');
+                router.push(
+                  `/dashboard/order?modal=mark_as_shipped&order_id=${order.id}`
+                );
+                // setModalOpen('mark_as_shipped');
                 console.log('Marking order as Shipped', order.id);
               }}
             >
@@ -227,7 +256,10 @@ export const CellAction: React.FC<CellActionProps> = ({
             <DropdownMenuItem
               className='text-purple-500'
               onClick={() => {
-                setModalOpen('mark_as_delivered');
+                router.push(
+                  `/dashboard/order?modal=mark_as_delivered&order_id=${order.id}`
+                );
+                // setModalOpen('mark_as_delivered');
                 console.log('Marking order as Delivered', order.id);
               }}
             >
@@ -240,7 +272,10 @@ export const CellAction: React.FC<CellActionProps> = ({
             <DropdownMenuItem
               className='text-red-500'
               onClick={() => {
-                setModalOpen('cancel');
+                router.push(
+                  `/dashboard/order?modal=cancel&order_id=${order.id}`
+                );
+                // setModalOpen('cancel');
                 console.log('Cancelling order', order.id);
               }}
             >
@@ -253,7 +288,10 @@ export const CellAction: React.FC<CellActionProps> = ({
             <DropdownMenuItem
               className='text-yellow-500'
               onClick={() => {
-                setModalOpen('restore');
+                router.push(
+                  `/dashboard/order?modal=restore&order_id=${order.id}`
+                );
+                // setModalOpen('restore');
                 console.log('Restoring order', order.id);
               }}
             >
@@ -265,7 +303,8 @@ export const CellAction: React.FC<CellActionProps> = ({
           <DropdownMenuItem
             className='text-red-800'
             onClick={() => {
-              setModalOpen('delete');
+              router.push(`/dashboard/order?modal=delete&order_id=${order.id}`);
+              // setModalOpen('delete');
               console.log('Delleting order', order.id);
             }}
           >

@@ -8,7 +8,11 @@ import displayPrice from '@/src/lib/price';
 import { sentencize } from '@/src/lib/utils';
 import Tag from '@/src/components/ui/tag';
 import { STATUS_OPTIONS } from './use-order-table-filters';
+import { isOrderRecent } from '@/src/lib/order';
 
+// export const columns: (p: {
+//   refreshTable?: () => Promise<void>;
+// }) => ColumnDef<Order>[] = ({ refreshTable }) => [
 export const columns: ColumnDef<Order>[] = [
   // {
   //   accessorKey: 'image_url',
@@ -27,8 +31,22 @@ export const columns: ColumnDef<Order>[] = [
   //   }
   // },
   {
+    accessorKey: 'updated_at',
+    header: 'UPDATED AT'
+  },
+  {
     accessorKey: 'id',
-    header: 'ID'
+    header: 'ID',
+    cell: ({ row }) => {
+      return (
+        <div className='flex items-center gap-x-2'>
+          <p>{row.getValue('id')}</p>
+          {isOrderRecent(row.getValue('updated_at')) && (
+            <div className='h-3 w-3 animate-pulse rounded-full bg-[#e3753e]' />
+          )}
+        </div>
+      );
+    }
   },
   {
     accessorKey: 'user_id',
@@ -103,7 +121,7 @@ export const columns: ColumnDef<Order>[] = [
     cell: ({ row, table }) => (
       <CellAction
         data={row.original}
-        // refreshTable={table.refreshTable}
+        // refreshTable={refreshTable}
       />
     )
   }

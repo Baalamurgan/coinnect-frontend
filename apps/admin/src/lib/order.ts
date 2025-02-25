@@ -10,3 +10,11 @@ export const isOrderEligibleForMarkingPaid = (status: string) =>
 export const isOrderShippable = (status: string) => status === 'paid';
 export const isOrderDeliverable = (status: string) => status === 'shipped';
 export const isOrderRestorable = (status: string) => status === 'cancelled';
+
+export const isOrderRecent = (updatedAt: string): boolean => {
+  const updatedTime = new Date(Number(updatedAt) * 1000).getTime();
+  const currentTime = new Date().getTime();
+  const threshold = 10 * 60 * 1000;
+
+  return currentTime - updatedTime <= threshold;
+};

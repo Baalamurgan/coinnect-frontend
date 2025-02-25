@@ -71,6 +71,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return null;
       } else if (response.data) {
         localStorage.setItem('user_id', response.data.id);
+        push('/dashboard');
         setUser(response.data);
         return response.data;
       }
