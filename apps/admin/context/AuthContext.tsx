@@ -2,6 +2,7 @@
 
 import { authService } from '@/services/auth/service';
 import { Profile } from '@/services/auth/types';
+import { getLocal } from '@/src/lib/localStorage';
 import { useRouter } from 'next/navigation';
 import React, {
   createContext,
@@ -52,8 +53,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const fetchProfile = async (user_id_prop?: string) => {
     setUser(undefined);
     setLoading(true);
-    const user_id =
-      user_id_prop || (localStorage.getItem('user_id') as string | undefined);
+    const local_user_id = getLocal('user_id');
+    const user_id = user_id_prop || local_user_id;
     if (user_id) {
       const response = await authService.fetchProfile(
         {
@@ -70,9 +71,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
         return null;
       } else if (response.data) {
-        localStorage.setItem('user_id', response.data.id);
-        push('/dashboard');
         setUser(response.data);
+        if (!local_user_id) {
+          localStorage.setItem('user_id', response.data.id);
+        }
         return response.data;
       }
     } else {

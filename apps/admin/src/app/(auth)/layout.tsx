@@ -1,41 +1,30 @@
 'use client';
 
-import KBar from '@/src/components/kbar';
-import AppSidebar from '@/src/components/layout/app-sidebar';
-import Header from '@/src/components/layout/header';
-import Loader from '@/src/components/Loader';
-import { SidebarInset, SidebarProvider } from '@/src/components/ui/sidebar';
 import { useAuth } from '@/context/AuthContext';
-import { redirect } from 'next/navigation';
+import KBar from '@/src/components/kbar';
+import Loader from '@/src/components/Loader';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-export default function DashboardLayout({
+export default function AuthLayout({
   children
 }: {
   children: React.ReactNode;
 }) {
   const { user } = useAuth();
+  const { replace } = useRouter();
   console.log(user);
 
-  if (user === undefined)
+  useEffect(() => {
+    if (user) replace('/dashboard');
+  }, [user]);
+
+  if (user === undefined || user)
     return (
       <div className='flex h-screen items-center justify-center'>
         <Loader />
       </div>
     );
 
-  if (!user) {
-    return redirect('/');
-  }
-
-  return (
-    <KBar>
-      <SidebarProvider defaultOpen={true}>
-        <AppSidebar />
-        <SidebarInset>
-          <Header />
-          {children}
-        </SidebarInset>
-      </SidebarProvider>
-    </KBar>
-  );
+  return <KBar>{children}</KBar>;
 }
