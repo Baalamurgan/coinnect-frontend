@@ -35,7 +35,8 @@ const updateProfile = createFetcher<
     user_id: string;
   }
 >({
-  url: ROUTES.AUTH.PROFILE.UPDATE,
+  url: ({ user_id }: { user_id: string }) =>
+    ROUTES.AUTH.PROFILE.UPDATE({ user_id }),
   method: 'PUT'
 });
 

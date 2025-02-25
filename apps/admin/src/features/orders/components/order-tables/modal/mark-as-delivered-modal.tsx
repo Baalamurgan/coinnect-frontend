@@ -14,7 +14,7 @@ import { Input } from '@/src/components/ui/input';
 import { Modal } from '@/src/components/ui/modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 const deliverySchema = z.object({
@@ -28,14 +28,12 @@ type DeliveryFormValues = z.infer<typeof deliverySchema>;
 interface MarkAsDeliveredModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (data: DeliveryFormValues) => void;
   loading: boolean;
 }
 
 export const MarkAsDeliveredModal: React.FC<MarkAsDeliveredModalProps> = ({
   isOpen,
   onClose,
-  onConfirm,
   loading
 }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -48,6 +46,10 @@ export const MarkAsDeliveredModal: React.FC<MarkAsDeliveredModalProps> = ({
     }
   });
 
+  const onSubmit: SubmitHandler<DeliveryFormValues> = async (data) => {
+    console.log(data);
+  };
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -59,7 +61,7 @@ export const MarkAsDeliveredModal: React.FC<MarkAsDeliveredModalProps> = ({
   return (
     <Modal title='Mark as Delivered ✅' isOpen={isOpen} onClose={onClose}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onConfirm)} className='space-y-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
             name='delivery_name'

@@ -1,5 +1,7 @@
 'use client';
 
+import { orderService } from '@/services/order/services';
+import { Order } from '@/services/order/types';
 import { Button } from '@/src/components/ui/button';
 import {
   Form,
@@ -13,7 +15,8 @@ import { Input } from '@/src/components/ui/input';
 import { Modal } from '@/src/components/ui/modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 const deleteOrderSchema = z.object({
@@ -25,21 +28,39 @@ type DeleteOrderFormValues = z.infer<typeof deleteOrderSchema>;
 interface DeleteOrderModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (data: DeleteOrderFormValues) => void;
   loading: boolean;
+  order: Order;
 }
 
 export const DeleteOrderModal: React.FC<DeleteOrderModalProps> = ({
   isOpen,
   onClose,
-  onConfirm,
-  loading
+  loading,
+  order
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const form = useForm<DeleteOrderFormValues>({
     resolver: zodResolver(deleteOrderSchema),
     defaultValues: { confirmation: '' }
   });
+
+  const onSubmit: SubmitHandler<DeleteOrderFormValues> = async (data) => {
+    if (data.confirmation.trim() !== 'DELETE')
+      return toast.error("Confirmation required. Please type 'DELETE'.");
+    const response = await orderService.delete(
+      {},
+      {},
+      {
+        order_id: order.id
+      }
+    );
+    if (response.error) {
+      toast.error('Something went wrong. Please try again');
+    } else if (response.data) {
+      toast.success('Order confirmed');
+      onClose();
+    }
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -52,7 +73,7 @@ export const DeleteOrderModal: React.FC<DeleteOrderModalProps> = ({
   return (
     <Modal title='Delete Order' isOpen={isOpen} onClose={onClose}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onConfirm)} className='space-y-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
             name='confirmation'

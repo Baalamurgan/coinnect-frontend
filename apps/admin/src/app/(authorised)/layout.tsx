@@ -18,7 +18,10 @@ export default function DashboardLayout({
       </div>
     );
 
-  if (!user) return redirect('/login');
+  if (!user) {
+    localStorage.removeItem('user_id');
+    return redirect('/login');
+  }
 
   if (user) return <>{children}</>;
 }

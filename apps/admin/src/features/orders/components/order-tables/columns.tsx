@@ -10,9 +10,6 @@ import Tag from '@/src/components/ui/tag';
 import { STATUS_OPTIONS } from './use-order-table-filters';
 import { isOrderRecent } from '@/src/lib/order';
 
-// export const columns: (p: {
-//   refreshTable?: () => Promise<void>;
-// }) => ColumnDef<Order>[] = ({ refreshTable }) => [
 export const columns: ColumnDef<Order>[] = [
   // {
   //   accessorKey: 'image_url',
@@ -118,11 +115,6 @@ export const columns: ColumnDef<Order>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row, table }) => (
-      <CellAction
-        data={row.original}
-        // refreshTable={refreshTable}
-      />
-    )
+    cell: ({ row }) => <CellAction data={row.original} />
   }
 ];

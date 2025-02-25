@@ -25,14 +25,12 @@ type RestoreOrderFormValues = z.infer<typeof restoreOrderSchema>;
 interface RestoreOrderModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (data: RestoreOrderFormValues) => void;
   loading: boolean;
 }
 
 export const RestoreOrderModal: React.FC<RestoreOrderModalProps> = ({
   isOpen,
   onClose,
-  onConfirm,
   loading
 }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -40,6 +38,10 @@ export const RestoreOrderModal: React.FC<RestoreOrderModalProps> = ({
     resolver: zodResolver(restoreOrderSchema),
     defaultValues: { confirmation: '' }
   });
+
+  const onSubmit: SubmitHandler<RestoreOrderFormValues> = async (data) => {
+    console.log(data);
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -52,7 +54,7 @@ export const RestoreOrderModal: React.FC<RestoreOrderModalProps> = ({
   return (
     <Modal title='Restore Order' isOpen={isOpen} onClose={onClose}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onConfirm)} className='space-y-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
             name='confirmation'

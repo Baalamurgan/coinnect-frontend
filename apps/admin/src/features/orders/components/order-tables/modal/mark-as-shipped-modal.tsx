@@ -14,7 +14,7 @@ import { Input } from '@/src/components/ui/input';
 import { Modal } from '@/src/components/ui/modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 const shippingSchema = z.object({
@@ -28,14 +28,12 @@ type ShippingFormValues = z.infer<typeof shippingSchema>;
 interface MarkAsShippedModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (data: ShippingFormValues) => void;
   loading: boolean;
 }
 
 export const MarkAsShippedModal: React.FC<MarkAsShippedModalProps> = ({
   isOpen,
   onClose,
-  onConfirm,
   loading
 }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -48,6 +46,10 @@ export const MarkAsShippedModal: React.FC<MarkAsShippedModalProps> = ({
     }
   });
 
+  const onSubmit: SubmitHandler<ShippingFormValues> = async (data) => {
+    console.log(data);
+  };
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -59,7 +61,7 @@ export const MarkAsShippedModal: React.FC<MarkAsShippedModalProps> = ({
   return (
     <Modal title='Mark as Shipped' isOpen={isOpen} onClose={onClose}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onConfirm)} className='space-y-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
             name='shipping_name'

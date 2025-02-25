@@ -13,7 +13,7 @@ import { Modal } from '@/src/components/ui/modal';
 import { Textarea } from '@/src/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 const cancelOrderSchema = z.object({
@@ -25,14 +25,12 @@ type CancelOrderFormValues = z.infer<typeof cancelOrderSchema>;
 interface CancelOrderModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (data: CancelOrderFormValues) => void;
   loading: boolean;
 }
 
 export const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
   isOpen,
   onClose,
-  onConfirm,
   loading
 }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -40,6 +38,10 @@ export const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
     resolver: zodResolver(cancelOrderSchema),
     defaultValues: { cancel_reason: '' }
   });
+
+  const onSubmit: SubmitHandler<CancelOrderFormValues> = async (data) => {
+    console.log(data);
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -52,7 +54,7 @@ export const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
   return (
     <Modal title='Cancel Order' isOpen={isOpen} onClose={onClose}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onConfirm)} className='space-y-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
             name='cancel_reason'

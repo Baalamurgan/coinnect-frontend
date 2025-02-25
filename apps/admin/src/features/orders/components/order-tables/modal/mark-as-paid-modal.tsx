@@ -15,7 +15,7 @@ import { Modal } from '@/src/components/ui/modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 const markAsPaidSchema = z.object({
@@ -27,7 +27,6 @@ type MarkAsPaidFormValues = z.infer<typeof markAsPaidSchema>;
 interface MarkAsPaidModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (data: MarkAsPaidFormValues) => void;
   loading: boolean;
   order: Order;
 }
@@ -35,7 +34,6 @@ interface MarkAsPaidModalProps {
 export const MarkAsPaidModal: React.FC<MarkAsPaidModalProps> = ({
   isOpen,
   onClose,
-  onConfirm,
   loading,
   order
 }) => {
@@ -45,6 +43,10 @@ export const MarkAsPaidModal: React.FC<MarkAsPaidModalProps> = ({
     resolver: zodResolver(markAsPaidSchema),
     defaultValues: { amountPaid: order.billable_amount }
   });
+
+  const onSubmit: SubmitHandler<MarkAsPaidFormValues> = async (data) => {
+    console.log(data);
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -57,7 +59,7 @@ export const MarkAsPaidModal: React.FC<MarkAsPaidModalProps> = ({
   return (
     <Modal title='Mark as Paid' isOpen={isOpen} onClose={onClose}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onConfirm)} className='space-y-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
             name='amountPaid'

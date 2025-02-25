@@ -41,8 +41,6 @@ type ConfirmOrderFormValues = z.infer<typeof confirmOrderSchema>;
 interface ConfirmOrderModalProps {
   isOpen: boolean;
   onClose: () => void;
-  refreshTable: () => void;
-  onConfirm: (data: ConfirmOrderFormValues) => void;
   loading: boolean;
   order: Order;
   user: Profile | null | undefined;
@@ -52,8 +50,6 @@ interface ConfirmOrderModalProps {
 export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
   isOpen,
   onClose,
-  refreshTable,
-  // onConfirm,
   loading,
   order,
   user,
@@ -90,7 +86,7 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
             email: data.email
           });
           if (response.error) {
-            return toast.error('Error siging up');
+            return toast.error('Error signing up');
           } else if (response.data) {
             setUser(response.data);
             user_id = response.data.id;
@@ -102,7 +98,7 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
       }
     } else if (
       user.email !== data.email ||
-      (user.phone && user.phone !== data.phone) ||
+      user.phone !== data.phone ||
       user.username !== data.username
     ) {
       await authService
@@ -132,7 +128,6 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
     } else if (response.data) {
       toast.success('Order confirmed');
       onClose();
-      refreshTable();
     }
   };
 

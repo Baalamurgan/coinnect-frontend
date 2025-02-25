@@ -48,7 +48,6 @@ import { useQueryState } from 'nuqs';
 
 interface CellActionProps {
   data: Order;
-  refreshTable?: () => void;
 }
 
 export type ModalTypes =
@@ -60,10 +59,7 @@ export type ModalTypes =
   | 'restore'
   | 'delete';
 
-export const CellAction: React.FC<CellActionProps> = ({
-  data: order,
-  refreshTable
-}) => {
+export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState<Profile | undefined | null>();
@@ -92,7 +88,6 @@ export const CellAction: React.FC<CellActionProps> = ({
 
     if (response.data) {
       setOpen(false);
-      refreshTable?.();
       toast.success('Deleted order successfully');
     } else if (response.error) {
       toast.error('Error deleting order');
@@ -105,8 +100,6 @@ export const CellAction: React.FC<CellActionProps> = ({
     React.FC<{
       isOpen: boolean;
       onClose: () => void;
-      refreshTable: () => void;
-      onConfirm: (order: any) => void;
       loading: boolean;
       order: Order;
       user: Profile | null | undefined;
@@ -124,10 +117,6 @@ export const CellAction: React.FC<CellActionProps> = ({
 
   const ModalComponent = modalOpen ? ModalComponentMap[modalOpen] : Fragment;
 
-  const onConfirm = (order: any) => {
-    console.log(order);
-  };
-
   useEffect(() => {
     const getUser = async (user_id: string) => {
       const response = await authService.fetchProfile(
@@ -142,16 +131,16 @@ export const CellAction: React.FC<CellActionProps> = ({
         setUser(null);
       } else if (response.data) setUser(response.data);
     };
-    if (order.user_id && !order.user_id.startsWith('0000')) {
+
+    if (modalQuery && orderIDQuery) setModalOpen(modalQuery);
+    if (
+      orderIDQuery === order.id &&
+      order.user_id &&
+      !order.user_id.startsWith('0000')
+    ) {
       getUser(order.user_id);
     } else setUser(null);
-  }, [order]);
-
-  useEffect(() => {
-    if (modalQuery) {
-      if (orderIDQuery) setModalOpen(modalQuery);
-    }
-  }, [modalQuery]);
+  }, [order, modalQuery]);
 
   return (
     <>
@@ -164,8 +153,6 @@ export const CellAction: React.FC<CellActionProps> = ({
             router.push(`/dashboard/order`);
             setModalOpen(null);
           }}
-          onConfirm={(order) => onConfirm(order)}
-          refreshTable={() => refreshTable?.()}
           order={order}
           user={user}
           setUser={setUser}
