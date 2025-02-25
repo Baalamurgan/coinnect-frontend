@@ -73,7 +73,7 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
     console.log(data);
     if (data.confirmation.trim() !== 'CONFIRM')
       return toast.error("Confirmation required. Please type 'confirm'.");
-    let user_id = user?.id || '';
+    let user_id = user?.id || null;
     if (!user) {
       const response = await authService.signup({
         email: data.email,
@@ -97,37 +97,60 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
         user_id = response.data.id;
       }
     } else if (
-      user.email !== data.email ||
-      user.phone !== data.phone ||
-      user.username !== data.username
+      user_id &&
+      (user.email !== data.email ||
+        user.phone !== data.phone ||
+        user.username !== data.username)
     ) {
       await authService
-        .updateProfile({
-          email: data.email,
-          username: data.username,
-          phone: data.phone
+        .updateProfile(
+          {
+            email: data.email,
+            username: data.username,
+            phone: data.phone
+          },
+          {},
+          {
+            user_id
+          }
+        )
+        .then(() => {
+          setUser((p) =>
+            p
+              ? {
+                  ...p,
+                  username: data.username,
+                  email: data.email,
+                  phone: data.phone
+                }
+              : null
+          );
+          toast.success('Updated user profile');
         })
-        .then(() => toast.success('Updated user profile'))
         .catch(() => toast.success('Error updating profile'));
     }
-    const response = await orderService.confirm(
-      {
-        user_id
-      },
-      {},
-      {
-        order_id: order.id
-      }
-    );
-    if (response.error) {
-      toast.error(
-        response.error.response?.data.message === 'order invalid'
-          ? 'This order has no items. Please check and try again'
-          : 'Something went wrong. Please try again'
+    if (!user_id || !order)
+      toast.error('Something went wrong. Please try again');
+    else {
+      const response = await orderService.confirm(
+        {
+          user_id
+        },
+        {},
+        {
+          order_id: order.id
+        }
       );
-    } else if (response.data) {
-      toast.success('Order confirmed');
-      onClose();
+      if (response.error) {
+        toast.error(
+          response.error.response?.data.message === 'order invalid'
+            ? 'This order has no items. Please check and try again'
+            : 'Something went wrong. Please try again'
+        );
+      } else if (response.data) {
+        toast.success('Order confirmed');
+        onClose();
+      }
     }
   };
 
@@ -185,8 +208,7 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
                     className='w-[80%]'
                     type='email'
                     placeholder="Enter user's email"
-                    disabled={!!user || loading}
-                    title={!!user ? 'Email cannot be edited' : 'Email'}
+                    disabled={loading}
                     {...field}
                   />
                 </FormControl>
