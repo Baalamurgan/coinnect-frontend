@@ -1,5 +1,7 @@
 'use client';
 
+import { Profile } from '@/services/auth/types';
+import { orderService } from '@/services/order/services';
 import { Order } from '@/services/order/types';
 import { Button } from '@/src/components/ui/button';
 import {
@@ -16,6 +18,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 const markAsPaidSchema = z.object({
@@ -29,13 +32,15 @@ interface MarkAsPaidModalProps {
   onClose: () => void;
   loading: boolean;
   order: Order;
+  user: Profile | null | undefined;
 }
 
 export const MarkAsPaidModal: React.FC<MarkAsPaidModalProps> = ({
   isOpen,
   onClose,
   loading,
-  order
+  order,
+  user
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
@@ -45,7 +50,23 @@ export const MarkAsPaidModal: React.FC<MarkAsPaidModalProps> = ({
   });
 
   const onSubmit: SubmitHandler<MarkAsPaidFormValues> = async (data) => {
-    console.log(data);
+    if (!user) return toast.error('Please refresh and try again');
+    const response = await orderService.markAsPaid(
+      {
+        user_id: user.id,
+        billable_amount_paid: data.amountPaid
+      },
+      {},
+      {
+        order_id: order.id
+      }
+    );
+    if (response.error) {
+      return toast.error('Something went wrong. Please refresh and try again');
+    } else if (response.data) {
+      toast.success('Order confirmed');
+      onClose();
+    }
   };
 
   useEffect(() => {

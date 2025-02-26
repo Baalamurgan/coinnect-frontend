@@ -150,7 +150,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
           isOpen={true}
           loading={loading}
           onClose={() => {
-            router.push(`/dashboard/order`);
+            router.push(`/dashboard/orders`);
             setModalOpen(null);
           }}
           order={order}
@@ -172,7 +172,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
           <DropdownMenuItem
             className='hidden text-blue-500'
             onClick={() =>
-              router.push(`/dashboard/order/${order.id}?edit=false`)
+              router.push(`/dashboard/orders/${order.id}?edit=false`)
             }
           >
             <View className='mr-2 h-4 w-4' /> View
@@ -183,7 +183,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
             <DropdownMenuItem
               className='hidden text-yellow-500'
               onClick={() =>
-                router.push(`/dashboard/order/${order.id}?edit=true`)
+                router.push(`/dashboard/orders/${order.id}?edit=true`)
               }
             >
               <Edit className='mr-2 h-4 w-4' /> Update
@@ -196,7 +196,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
               className='text-green-500'
               onClick={() => {
                 router.push(
-                  `/dashboard/order?modal=confirm&order_id=${order.id}`
+                  `/dashboard/orders?modal=confirm&order_id=${order.id}`
                 );
                 // setModalOpen('confirm');
                 console.log('Marking order as Paid', order.id);
@@ -212,7 +212,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
               className='text-green-500'
               onClick={() => {
                 router.push(
-                  `/dashboard/order?modal=mark_as_paid&order_id=${order.id}`
+                  `/dashboard/orders?modal=mark_as_paid&order_id=${order.id}`
                 );
                 // setModalOpen('mark_as_paid');
                 console.log('Marking order as Paid', order.id);
@@ -228,7 +228,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
               className='text-blue-500'
               onClick={() => {
                 router.push(
-                  `/dashboard/order?modal=mark_as_shipped&order_id=${order.id}`
+                  `/dashboard/orders?modal=mark_as_shipped&order_id=${order.id}`
                 );
                 // setModalOpen('mark_as_shipped');
                 console.log('Marking order as Shipped', order.id);
@@ -244,7 +244,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
               className='text-purple-500'
               onClick={() => {
                 router.push(
-                  `/dashboard/order?modal=mark_as_delivered&order_id=${order.id}`
+                  `/dashboard/orders?modal=mark_as_delivered&order_id=${order.id}`
                 );
                 // setModalOpen('mark_as_delivered');
                 console.log('Marking order as Delivered', order.id);
@@ -260,7 +260,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
               className='text-red-500'
               onClick={() => {
                 router.push(
-                  `/dashboard/order?modal=cancel&order_id=${order.id}`
+                  `/dashboard/orders?modal=cancel&order_id=${order.id}`
                 );
                 // setModalOpen('cancel');
                 console.log('Cancelling order', order.id);
@@ -276,7 +276,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
               className='text-yellow-500'
               onClick={() => {
                 router.push(
-                  `/dashboard/order?modal=restore&order_id=${order.id}`
+                  `/dashboard/orders?modal=restore&order_id=${order.id}`
                 );
                 // setModalOpen('restore');
                 console.log('Restoring order', order.id);
@@ -290,7 +290,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
           <DropdownMenuItem
             className='text-red-800'
             onClick={() => {
-              router.push(`/dashboard/order?modal=delete&order_id=${order.id}`);
+              router.push(
+                `/dashboard/orders?modal=delete&order_id=${order.id}`
+              );
               // setModalOpen('delete');
               console.log('Delleting order', order.id);
             }}

@@ -130,7 +130,7 @@ export default function ProductForm({
       );
       if (response.data) {
         toast.success('Created item successfully');
-        push(`/dashboard/product`);
+        push(`/dashboard/products`);
       } else if (response.error) {
         toast.error('Error creating item');
       }
@@ -148,7 +148,7 @@ export default function ProductForm({
       );
       if (response.data) {
         toast.success('Updated item successfully');
-        push(`/dashboard/product`);
+        push(`/dashboard/products`);
       } else if (response.error) {
         toast.error('Error updating item');
       }

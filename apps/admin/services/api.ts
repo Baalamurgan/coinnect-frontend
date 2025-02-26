@@ -140,6 +140,7 @@ export const ROUTES = {
     GETBYID: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}`),
     CONFIRM: (p: { order_id: string }) =>
       apiRoute(`/order/${p.order_id}/confirm`),
+    PAY: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/pay`),
     DELETE: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}`),
     ITEM: {
       ADD: apiRoute(`/order/item/add`),

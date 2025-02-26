@@ -18,6 +18,17 @@ const getById = createFetcher<
   method: 'GET'
 });
 
+const deleteOrder = createFetcher<
+  string,
+  {},
+  {
+    order_id: string;
+  }
+>({
+  url: ({ order_id }) => ROUTES.ORDER.DELETE({ order_id }),
+  method: 'DELETE'
+});
+
 const confirm = createFetcher<
   string,
   {
@@ -31,22 +42,26 @@ const confirm = createFetcher<
   method: 'POST'
 });
 
-const deleteOrder = createFetcher<
+const markAsPaid = createFetcher<
   string,
-  {},
+  {
+    user_id: string;
+    billable_amount_paid: number;
+  },
   {
     order_id: string;
   }
 >({
-  url: ({ order_id }) => ROUTES.ORDER.DELETE({ order_id }),
-  method: 'DELETE'
+  url: ({ order_id }) => ROUTES.ORDER.PAY({ order_id }),
+  method: 'PATCH'
 });
 
 export const orderService = {
   getAll,
   getById,
   delete: deleteOrder,
-  confirm
+  confirm,
+  markAsPaid
 };
 
 // import { createFetcher, ROUTES } from '@/services/api';
