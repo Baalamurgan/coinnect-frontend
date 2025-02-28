@@ -1,5 +1,8 @@
 'use client';
 
+import { Profile } from '@/services/auth/types';
+import { orderService } from '@/services/order/services';
+import { Order } from '@/services/order/types';
 import { Button } from '@/src/components/ui/button';
 import { DatePicker } from '@/src/components/ui/date-picker';
 import {
@@ -12,14 +15,16 @@ import {
 } from '@/src/components/ui/form';
 import { Input } from '@/src/components/ui/input';
 import { Modal } from '@/src/components/ui/modal';
+import { toEpoch } from '@/src/lib/epoch';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 const deliverySchema = z.object({
-  delivery_name: z.string().min(1, 'Delivery person name is required'),
-  delivery_ID: z.string().min(1, 'Delivery ID is required'),
+  delivery_person_name: z.string(),
+  delivery_id: z.string(),
   delivery_date: z.date()
 });
 
@@ -29,25 +34,47 @@ interface MarkAsDeliveredModalProps {
   isOpen: boolean;
   onClose: () => void;
   loading: boolean;
+  order: Order;
+  user: Profile | null | undefined;
 }
 
 export const MarkAsDeliveredModal: React.FC<MarkAsDeliveredModalProps> = ({
   isOpen,
   onClose,
-  loading
+  loading,
+  order,
+  user
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const form = useForm<DeliveryFormValues>({
     resolver: zodResolver(deliverySchema),
     defaultValues: {
-      delivery_name: '',
-      delivery_ID: '',
+      delivery_person_name: '',
+      delivery_id: '',
       delivery_date: new Date()
     }
   });
 
   const onSubmit: SubmitHandler<DeliveryFormValues> = async (data) => {
-    console.log(data);
+    if (!user) return toast.error('Please refresh and try again');
+    const response = await orderService.markAsDelivered(
+      {
+        user_id: user.id,
+        delivery_date: toEpoch(data.delivery_date),
+        delivery_id: data.delivery_id,
+        delivery_person_name: data.delivery_person_name
+      },
+      {},
+      {
+        order_id: order.id
+      }
+    );
+    if (response.error) {
+      return toast.error('Something went wrong. Please refresh and try again');
+    } else if (response.data) {
+      toast.success('Order marked as shipped');
+      onClose();
+    }
   };
 
   useEffect(() => {
@@ -64,7 +91,7 @@ export const MarkAsDeliveredModal: React.FC<MarkAsDeliveredModalProps> = ({
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
-            name='delivery_name'
+            name='delivery_person_name'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Delivery Person</FormLabel>
@@ -81,7 +108,7 @@ export const MarkAsDeliveredModal: React.FC<MarkAsDeliveredModalProps> = ({
           />
           <FormField
             control={form.control}
-            name='delivery_ID'
+            name='delivery_id'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Delivery ID</FormLabel>

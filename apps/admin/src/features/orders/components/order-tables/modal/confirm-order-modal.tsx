@@ -70,7 +70,6 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
   });
 
   const onSubmit: SubmitHandler<ConfirmOrderFormValues> = async (data) => {
-    console.log(data);
     if (data.confirmation.trim() !== 'CONFIRM')
       return toast.error("Confirmation required. Please type 'confirm'.");
     let user_id = user?.id || null;

@@ -23,8 +23,8 @@ import { toast } from 'sonner';
 import * as z from 'zod';
 
 const shippingSchema = z.object({
-  shipping_name: z.string().min(1, 'Shipping name is required'),
-  shipping_id: z.string().min(1, 'Shipping ID is required'),
+  shipping_name: z.string(),
+  shipping_id: z.string(),
   shipping_date: z.date()
 });
 

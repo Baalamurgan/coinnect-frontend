@@ -1,5 +1,8 @@
 'use client';
 
+import { Profile } from '@/services/auth/types';
+import { orderService } from '@/services/order/services';
+import { Order } from '@/services/order/types';
 import { Button } from '@/src/components/ui/button';
 import {
   Form,
@@ -13,7 +16,8 @@ import { Input } from '@/src/components/ui/input';
 import { Modal } from '@/src/components/ui/modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 const restoreOrderSchema = z.object({
@@ -26,12 +30,16 @@ interface RestoreOrderModalProps {
   isOpen: boolean;
   onClose: () => void;
   loading: boolean;
+  order: Order;
+  user: Profile | null | undefined;
 }
 
 export const RestoreOrderModal: React.FC<RestoreOrderModalProps> = ({
   isOpen,
   onClose,
-  loading
+  loading,
+  order,
+  user
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const form = useForm<RestoreOrderFormValues>({
@@ -40,7 +48,24 @@ export const RestoreOrderModal: React.FC<RestoreOrderModalProps> = ({
   });
 
   const onSubmit: SubmitHandler<RestoreOrderFormValues> = async (data) => {
-    console.log(data);
+    if (!user) return toast.error('Please refresh and try again');
+    if (data.confirmation.trim() !== 'RESTORE')
+      return toast.error("Confirmation required. Please type 'restore'.");
+    const response = await orderService.restore(
+      {
+        user_id: user.id
+      },
+      {},
+      {
+        order_id: order.id
+      }
+    );
+    if (response.error) {
+      toast.error('Something went wrong. Please try again');
+    } else if (response.data) {
+      toast.success('Order restored');
+      onClose();
+    }
   };
 
   useEffect(() => {

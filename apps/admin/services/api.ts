@@ -148,8 +148,12 @@ export const ROUTES = {
       apiRoute(`/order/${p.order_id}/confirm`),
     CANCEL: (p: { order_id: string }) =>
       apiRoute(`/order/${p.order_id}/cancel`),
+    RESTORE: (p: { order_id: string }) =>
+      apiRoute(`/order/${p.order_id}/restore`),
     PAY: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/pay`),
-    SHIP: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/ship`)
+    SHIP: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/ship`),
+    DELIVER: (p: { order_id: string }) =>
+      apiRoute(`/order/${p.order_id}/deliver`)
   },
   AUTH: {
     LOGIN: apiRoute('/auth/login'),

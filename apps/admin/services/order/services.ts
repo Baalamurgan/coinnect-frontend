@@ -56,6 +56,19 @@ const cancel = createFetcher<
   method: 'PATCH'
 });
 
+const restore = createFetcher<
+  string,
+  {
+    user_id: string;
+  },
+  {
+    order_id: string;
+  }
+>({
+  url: ({ order_id }) => ROUTES.ORDER.RESTORE({ order_id }),
+  method: 'PATCH'
+});
+
 const markAsPaid = createFetcher<
   string,
   {
@@ -86,14 +99,32 @@ const markAsShipped = createFetcher<
   method: 'PATCH'
 });
 
+const markAsDelivered = createFetcher<
+  string,
+  {
+    user_id: string;
+    delivery_person_name: string;
+    delivery_id: string;
+    delivery_date: number;
+  },
+  {
+    order_id: string;
+  }
+>({
+  url: ({ order_id }) => ROUTES.ORDER.DELIVER({ order_id }),
+  method: 'PATCH'
+});
+
 export const orderService = {
   getAll,
   getById,
   delete: deleteOrder,
   confirm,
   cancel,
+  restore,
   markAsPaid,
-  markAsShipped
+  markAsShipped,
+  markAsDelivered
 };
 
 // import { createFetcher, ROUTES } from '@/services/api';
