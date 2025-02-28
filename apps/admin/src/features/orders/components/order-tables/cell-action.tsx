@@ -73,7 +73,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data: order }) => {
     'order_id',
     searchParams.order_id.withOptions({ shallow: false, throttleMs: 1000 })
   );
-  console.log(modalQuery);
 
   const onDelete = async () => {
     setLoading(true);

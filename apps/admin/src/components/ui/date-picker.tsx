@@ -1,19 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { DayPicker } from 'react-day-picker';
+import { DayPicker, DayPickerProps } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
-interface DatePickerProps {
+interface CustomDatePickerProps {
   date: Date;
   onDateChange: (date: Date) => void;
   disabled?: boolean;
 }
 
-export const DatePicker: React.FC<DatePickerProps> = ({
+export const DatePicker: React.FC<CustomDatePickerProps & DayPickerProps> = ({
   date,
   onDateChange,
-  disabled
+  disabled,
+  ...props
 }) => {
   const [selected, setSelected] = useState<Date>(date);
 
@@ -26,12 +27,16 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
   return (
     <div className='rounded-md border p-2'>
-      <DayPicker
-        mode='single'
-        selected={selected}
-        onSelect={handleSelect}
-        disabled={disabled}
-      />
+      {props.mode === 'single' ? (
+        <DayPicker
+          {...props}
+          selected={selected}
+          onSelect={handleSelect}
+          disabled={disabled}
+        />
+      ) : (
+        <DayPicker mode='range' disabled={disabled} />
+      )}
     </div>
   );
 };

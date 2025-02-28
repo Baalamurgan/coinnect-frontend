@@ -138,15 +138,18 @@ export const ROUTES = {
     CREATE: apiRoute(`/order`),
     GETALL: apiRoute(`/order`),
     GETBYID: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}`),
-    CONFIRM: (p: { order_id: string }) =>
-      apiRoute(`/order/${p.order_id}/confirm`),
-    PAY: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/pay`),
     DELETE: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}`),
     ITEM: {
       ADD: apiRoute(`/order/item/add`),
       REMOVE: (p: { order_id: string; order_item_id: string }) =>
         apiRoute(`/order/item/${p.order_id}/${p.order_item_id}`)
-    }
+    },
+    CONFIRM: (p: { order_id: string }) =>
+      apiRoute(`/order/${p.order_id}/confirm`),
+    CANCEL: (p: { order_id: string }) =>
+      apiRoute(`/order/${p.order_id}/cancel`),
+    PAY: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/pay`),
+    SHIP: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/ship`)
   },
   AUTH: {
     LOGIN: apiRoute('/auth/login'),

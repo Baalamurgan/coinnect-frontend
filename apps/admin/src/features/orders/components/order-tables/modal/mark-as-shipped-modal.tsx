@@ -1,5 +1,8 @@
 'use client';
 
+import { Profile } from '@/services/auth/types';
+import { orderService } from '@/services/order/services';
+import { Order } from '@/services/order/types';
 import { Button } from '@/src/components/ui/button';
 import { DatePicker } from '@/src/components/ui/date-picker';
 import {
@@ -12,14 +15,16 @@ import {
 } from '@/src/components/ui/form';
 import { Input } from '@/src/components/ui/input';
 import { Modal } from '@/src/components/ui/modal';
+import { toEpoch } from '@/src/lib/epoch';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 const shippingSchema = z.object({
   shipping_name: z.string().min(1, 'Shipping name is required'),
-  shipping_ID: z.string().min(1, 'Shipping ID is required'),
+  shipping_id: z.string().min(1, 'Shipping ID is required'),
   shipping_date: z.date()
 });
 
@@ -29,25 +34,47 @@ interface MarkAsShippedModalProps {
   isOpen: boolean;
   onClose: () => void;
   loading: boolean;
+  order: Order;
+  user: Profile | null | undefined;
 }
 
 export const MarkAsShippedModal: React.FC<MarkAsShippedModalProps> = ({
   isOpen,
   onClose,
-  loading
+  loading,
+  order,
+  user
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const form = useForm<ShippingFormValues>({
     resolver: zodResolver(shippingSchema),
     defaultValues: {
       shipping_name: '',
-      shipping_ID: '',
+      shipping_id: '',
       shipping_date: new Date()
     }
   });
 
   const onSubmit: SubmitHandler<ShippingFormValues> = async (data) => {
-    console.log(data);
+    if (!user) return toast.error('Please refresh and try again');
+    const response = await orderService.markAsShipped(
+      {
+        user_id: user.id,
+        shipping_date: toEpoch(data.shipping_date),
+        shipping_id: data.shipping_id,
+        shipping_name: data.shipping_name
+      },
+      {},
+      {
+        order_id: order.id
+      }
+    );
+    if (response.error) {
+      return toast.error('Something went wrong. Please refresh and try again');
+    } else if (response.data) {
+      toast.success('Order marked as shipped');
+      onClose();
+    }
   };
 
   useEffect(() => {
@@ -81,7 +108,7 @@ export const MarkAsShippedModal: React.FC<MarkAsShippedModalProps> = ({
           />
           <FormField
             control={form.control}
-            name='shipping_ID'
+            name='shipping_id'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Shipping ID</FormLabel>
@@ -104,6 +131,8 @@ export const MarkAsShippedModal: React.FC<MarkAsShippedModalProps> = ({
                 <FormLabel>Shipping Date</FormLabel>
                 <FormControl>
                   <DatePicker
+                    mode='single'
+                    captionLayout='dropdown-years'
                     date={field.value}
                     onDateChange={field.onChange}
                     disabled={loading}

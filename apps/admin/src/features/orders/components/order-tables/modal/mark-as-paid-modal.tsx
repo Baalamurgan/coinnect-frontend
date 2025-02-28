@@ -64,7 +64,7 @@ export const MarkAsPaidModal: React.FC<MarkAsPaidModalProps> = ({
     if (response.error) {
       return toast.error('Something went wrong. Please refresh and try again');
     } else if (response.data) {
-      toast.success('Order confirmed');
+      toast.success('Order marked as paid');
       onClose();
     }
   };

@@ -1,5 +1,8 @@
 'use client';
 
+import { Profile } from '@/services/auth/types';
+import { orderService } from '@/services/order/services';
+import { Order } from '@/services/order/types';
 import { Button } from '@/src/components/ui/button';
 import {
   Form,
@@ -14,10 +17,11 @@ import { Textarea } from '@/src/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 const cancelOrderSchema = z.object({
-  cancel_reason: z.string().min(1, 'Cancellation reason is required')
+  cancellation_reason: z.string().min(1, 'Cancellation reason is required')
 });
 
 type CancelOrderFormValues = z.infer<typeof cancelOrderSchema>;
@@ -26,21 +30,43 @@ interface CancelOrderModalProps {
   isOpen: boolean;
   onClose: () => void;
   loading: boolean;
+  order: Order;
+  user: Profile | null | undefined;
 }
 
 export const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
   isOpen,
   onClose,
-  loading
+  loading,
+  order,
+  user
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const form = useForm<CancelOrderFormValues>({
     resolver: zodResolver(cancelOrderSchema),
-    defaultValues: { cancel_reason: '' }
+    defaultValues: { cancellation_reason: '' }
   });
 
   const onSubmit: SubmitHandler<CancelOrderFormValues> = async (data) => {
-    console.log(data);
+    if (!user) return toast.error('Please refresh and try again');
+    if (data.cancellation_reason.trim() === '')
+      return toast.error('Cancellation reason required.');
+    const response = await orderService.cancel(
+      {
+        user_id: user.id,
+        cancellation_reason: data.cancellation_reason
+      },
+      {},
+      {
+        order_id: order.id
+      }
+    );
+    if (response.error) {
+      toast.error('Something went wrong. Please try again');
+    } else if (response.data) {
+      toast.success('Order cancelled');
+      onClose();
+    }
   };
 
   useEffect(() => {
@@ -57,7 +83,7 @@ export const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
-            name='cancel_reason'
+            name='cancellation_reason'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Cancellation Reason</FormLabel>

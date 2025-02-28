@@ -13,26 +13,27 @@ export const STATUS_OPTIONS = [
   {
     value: 'booked',
     label: 'Booked',
-    color: 'green'
+    color: 'blue'
   },
   {
     value: 'paid',
     label: 'Paid',
-    color: 'blue'
+    color: 'green'
   },
   {
     value: 'shipped',
     label: 'Shipped',
-    color: 'blue'
+    color: 'orange'
   },
   {
     value: 'delivered',
     label: 'Delivered',
-    color: 'green'
+    color: 'teal'
   },
   {
     value: 'cancelled',
-    label: 'Cancelled'
+    label: 'Cancelled',
+    color: 'red'
   }
 ];
 
