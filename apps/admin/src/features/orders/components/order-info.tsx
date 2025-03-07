@@ -18,7 +18,7 @@ const OrderInfo = ({
     <div className='rounded-lg xl:col-span-2'>
       <table className='w-full'>
         <thead>
-          <tr className='border-b text-gray-200'>
+          <tr className='border-b text-gray-400'>
             <th className='pb-2 text-left'>PRODUCT</th>
             <th className='px-5'>PRICE</th>
             <th className='px-5'>QUANTITY</th>
@@ -87,7 +87,7 @@ const OrderInfo = ({
           ))}
           <tr className='border-b'>
             <td className='flex items-center gap-4 py-4'>
-              <p className='text-lg'>Total</p>
+              <p className='text-xl'>Total</p>
             </td>
             <td></td>
             <td></td>
@@ -98,17 +98,23 @@ const OrderInfo = ({
             </td>
           </tr>
           {order.billable_amount_paid > 0 && (
-            <tr>
-              <td>Amount Paid</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
+            <tr className='border-b'>
+              <td className='flex items-center gap-4 py-4'>
                 <div className='flex items-center gap-x-1'>
-                  <p>{displayPrice({ price: order.billable_amount_paid })}</p>
+                  <p className='text-xl'>Amount Paid</p>
                   {order.status !== 'pending' && (
                     <CheckCircleIcon className='h-6 w-6 text-green-500' />
                   )}
+                </div>
+              </td>
+              <td></td>
+              <td></td>
+              <td className='text-center text-lg'>
+                <div className='group relative flex h-full items-center justify-center'>
+                  <p>{displayPrice({ price: order.billable_amount_paid })}</p>
+                  <div className='absolute -right-2'>
+                    <CheckCircleIcon className='h-4 w-4 text-green-500' />
+                  </div>
                 </div>
               </td>
             </tr>

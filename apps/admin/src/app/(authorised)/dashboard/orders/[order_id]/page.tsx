@@ -129,7 +129,7 @@ const OrderPage = () => {
               </Tag>
             </div>
           </div>
-          <div className='my-3'>
+          <div className='mt-3 pb-10'>
             <OrderInfo
               order={order}
               removeItemFromOrderHandler={removeItemFromOrderHandler}
