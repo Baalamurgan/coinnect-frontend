@@ -13,8 +13,8 @@ export default function OrderTableAction() {
     isAnyFilterActive,
     resetFilters,
     setPage,
-    nameQuery,
-    setNameQuery,
+    usernameQuery,
+    setUsernameQuery,
     emailQuery,
     setEmailQuery,
     statusFilter,
@@ -23,9 +23,9 @@ export default function OrderTableAction() {
   return (
     <div className='flex flex-wrap items-center gap-4'>
       <DataTableSearch
-        searchKey='name'
-        searchQuery={nameQuery}
-        setSearchQuery={setNameQuery}
+        searchKey='username'
+        searchQuery={usernameQuery}
+        setSearchQuery={setUsernameQuery}
         setPage={setPage}
       />
       <DataTableSearch

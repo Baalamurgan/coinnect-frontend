@@ -115,6 +115,19 @@ const markAsDelivered = createFetcher<
   method: 'PATCH'
 });
 
+const removeItem = createFetcher<
+  string,
+  unknown,
+  {
+    order_id: string;
+    order_item_id: string;
+  }
+>({
+  url: (p: { order_id: string; order_item_id: string }) =>
+    ROUTES.ORDER.ITEM.REMOVE(p),
+  method: 'DELETE'
+});
+
 export const orderService = {
   getAll,
   getById,
@@ -124,7 +137,8 @@ export const orderService = {
   restore,
   markAsPaid,
   markAsShipped,
-  markAsDelivered
+  markAsDelivered,
+  removeItem
 };
 
 // import { createFetcher, ROUTES } from '@/services/api';

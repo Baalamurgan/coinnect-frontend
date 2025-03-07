@@ -32,6 +32,7 @@ export const searchParams = {
   limit: parseAsInteger.withDefault(10),
   q: parseAsString,
   name: parseAsString,
+  username: parseAsString,
   email: parseAsString,
   gender: parseAsString,
   status: parseAsArrayOf(parseAsString),

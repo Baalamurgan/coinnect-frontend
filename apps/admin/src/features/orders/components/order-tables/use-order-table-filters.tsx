@@ -38,8 +38,8 @@ export const STATUS_OPTIONS = [
 ];
 
 export function useOrderTableFilters() {
-  const [nameQuery, setNameQuery] = useQueryState(
-    'name',
+  const [usernameQuery, setUsernameQuery] = useQueryState(
+    'username',
     searchParams.q
       .withOptions({ shallow: false, throttleMs: 1000 })
       .withDefault('')
@@ -63,19 +63,19 @@ export function useOrderTableFilters() {
   );
 
   const resetFilters = useCallback(() => {
-    setNameQuery(null);
+    setUsernameQuery(null);
     setEmailQuery(null);
     setPage(1);
     setStatusFilter(null);
-  }, [setNameQuery, setEmailQuery, setPage, setStatusFilter]);
+  }, [setUsernameQuery, setEmailQuery, setPage, setStatusFilter]);
 
   const isAnyFilterActive = useMemo(() => {
-    return !!nameQuery || !!emailQuery || !!statusFilter;
-  }, [nameQuery, emailQuery]);
+    return !!usernameQuery || !!emailQuery || !!statusFilter;
+  }, [usernameQuery, emailQuery]);
 
   return {
-    nameQuery,
-    setNameQuery,
+    usernameQuery,
+    setUsernameQuery,
     statusFilter,
     setStatusFilter,
     emailQuery,

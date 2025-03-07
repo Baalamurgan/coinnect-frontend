@@ -9,6 +9,7 @@ import { sentencize } from '@/src/lib/utils';
 import Tag from '@/src/components/ui/tag';
 import { STATUS_OPTIONS } from './use-order-table-filters';
 import { isOrderRecent } from '@/src/lib/order';
+import { useRouter } from 'next/navigation';
 
 export const columns: ColumnDef<Order>[] = [
   // {
@@ -35,8 +36,12 @@ export const columns: ColumnDef<Order>[] = [
     accessorKey: 'id',
     header: 'ID',
     cell: ({ row }) => {
+      const { push } = useRouter();
       return (
-        <div className='flex items-center gap-x-2'>
+        <div
+          className='flex cursor-pointer items-center gap-x-2 hover:text-blue-400 hover:underline'
+          onClick={() => push(`/dashboard/orders/${row.getValue('id')}`)}
+        >
           <p>{row.getValue('id')}</p>
           {isOrderRecent(row.getValue('updated_at')) && (
             <div className='h-3 w-3 animate-pulse rounded-full bg-[#e3753e]' />
