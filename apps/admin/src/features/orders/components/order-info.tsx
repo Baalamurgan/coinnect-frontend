@@ -2,6 +2,7 @@ import { Order } from '@/services/order/types';
 import displayPrice from '@/src/lib/price';
 import { CheckCircleIcon, TrashIcon } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const OrderInfo = ({
@@ -14,6 +15,8 @@ const OrderInfo = ({
     order_item_id: string;
   }) => void;
 }) => {
+  const { push } = useRouter();
+
   return (
     <div className='rounded-lg xl:col-span-2'>
       <table className='w-full'>
@@ -29,17 +32,20 @@ const OrderInfo = ({
         <tbody>
           {order.order_items.map((item) => (
             <tr key={item.id} className='border-b'>
-              <td className='flex items-center gap-4 py-4'>
+              <td
+                className='group flex w-fit cursor-pointer items-center gap-4 py-4'
+                onClick={() => push(`/dashboard/products/${item.item_id}`)}
+              >
                 {item.metadata?.image_url ? (
                   <Image
                     src={item.metadata.image_url}
                     alt={item.item_id}
                     width={100}
                     height={50}
-                    className='rounded-lg'
+                    className='rounded-lg group-hover:scale-105'
                   />
                 ) : null}
-                <div>
+                <div className='group-hover:underline'>
                   <p className='text-base'>{item.metadata?.name}</p>
                 </div>
               </td>
