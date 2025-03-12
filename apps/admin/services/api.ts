@@ -139,6 +139,7 @@ export const ROUTES = {
     GETALL: apiRoute(`/order`),
     GETBYID: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}`),
     DELETE: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}`),
+    EDIT: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/edit`),
     ITEM: {
       ADD: apiRoute(`/order/item/add`),
       REMOVE: (p: { order_id: string; order_item_id: string }) =>

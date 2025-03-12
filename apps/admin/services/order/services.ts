@@ -18,6 +18,23 @@ const getById = createFetcher<
   method: 'GET'
 });
 
+const edit = createFetcher<
+  string,
+  {
+    order_items: {
+      order_item_id: string;
+      quantity: number;
+      price_per_item: number;
+    }[];
+  },
+  {
+    order_id: string;
+  }
+>({
+  url: ({ order_id }) => ROUTES.ORDER.EDIT({ order_id }),
+  method: 'PATCH'
+});
+
 const deleteOrder = createFetcher<
   string,
   {},
@@ -39,7 +56,7 @@ const confirm = createFetcher<
   }
 >({
   url: ({ order_id }) => ROUTES.ORDER.CONFIRM({ order_id }),
-  method: 'PUT'
+  method: 'PATCH'
 });
 
 const cancel = createFetcher<
@@ -131,6 +148,7 @@ const removeItem = createFetcher<
 export const orderService = {
   getAll,
   getById,
+  edit,
   delete: deleteOrder,
   confirm,
   cancel,

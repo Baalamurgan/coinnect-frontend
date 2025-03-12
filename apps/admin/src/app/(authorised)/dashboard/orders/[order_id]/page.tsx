@@ -6,7 +6,7 @@ import { Order } from '@/services/order/types';
 import PageContainer from '@/src/components/layout/page-container';
 import Loader from '@/src/components/Loader';
 import Tag from '@/src/components/ui/tag';
-import OrderInfo from '@/src/features/orders/components/order-info';
+import OrderInfo from '@/src/features/orders/components/edit-order-tables/order-info';
 import { STATUS_OPTIONS } from '@/src/features/orders/components/order-tables/use-order-table-filters';
 import UserInfo from '@/src/features/orders/components/user-info';
 import displayPrice from '@/src/lib/price';

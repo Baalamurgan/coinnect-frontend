@@ -16,6 +16,7 @@ import {
 import { Input } from '@/src/components/ui/input';
 import { Modal } from '@/src/components/ui/modal';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -55,6 +56,7 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
   user,
   setUser
 }) => {
+  const { push } = useRouter();
   const [isMounted, setIsMounted] = useState(false);
 
   const defaultValues = {
@@ -262,6 +264,18 @@ export const ConfirmOrderModal: React.FC<ConfirmOrderModalProps> = ({
           </div>
         </form>
       </Form>
+      <div className='mt-4 text-center'>
+        <p className='text-sm text-muted-foreground'>
+          Need to update item prices or quantities?
+        </p>
+        <Button
+          variant='secondary'
+          className='mt-2 w-full'
+          onClick={() => push(`/dashboard/orders/${order.id}`)}
+        >
+          Modify Order Before Payment
+        </Button>
+      </div>
     </Modal>
   );
 };

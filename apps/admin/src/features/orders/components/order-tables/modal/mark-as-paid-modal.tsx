@@ -43,7 +43,7 @@ export const MarkAsPaidModal: React.FC<MarkAsPaidModalProps> = ({
   user
 }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const router = useRouter();
+  const { push } = useRouter();
   const form = useForm<MarkAsPaidFormValues>({
     resolver: zodResolver(markAsPaidSchema),
     defaultValues: { amountPaid: order.billable_amount }
@@ -116,7 +116,7 @@ export const MarkAsPaidModal: React.FC<MarkAsPaidModalProps> = ({
         <Button
           variant='secondary'
           className='mt-2 w-full'
-          onClick={() => router.push('/update-order')}
+          onClick={() => push(`/dashboard/orders/${order.id}`)}
         >
           Modify Order Before Payment
         </Button>
