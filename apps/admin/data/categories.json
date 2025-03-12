@@ -27,7 +27,7 @@
         "price": 300,
         "gst": 5,
         "details": null,
-        "slug": "1-rupee-2023-75th-year-of-independence-kolkata-3’0-clock-rotation-error-steel",
+        "slug": "1-rupee-2023-75th-year-of-independence-kolkata-3-0-clock-rotation-error-steel",
         "created_at": 1740193440,
         "updated_at": 1740193440
       }
@@ -54,7 +54,7 @@
         "price": 400,
         "gst": 5,
         "details": null,
-        "slug": "1/2-pice-1910-kolkata-bronze-(ghost-error)",
+        "slug": "1-2-pice-1910-kolkata-bronze-(ghost-error)",
         "created_at": 1740193354,
         "updated_at": 1740193354
       }
@@ -104,13 +104,13 @@
         "sku": "RIC10R13M.1",
         "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/02/IMG_20231222_184441-1.jpg",
         "stock": 5,
-        "sold": 0,
+        "sold": 20,
         "price": 150,
         "gst": 5,
         "details": null,
         "slug": "10-rupees-2015-dr.s.radhakrishnan-mumbai-lion-variety-nickel-bronze",
         "created_at": 1740193644,
-        "updated_at": 1740193644
+        "updated_at": 1741765591
       }
     ],
     "created_at": 1740193257,
@@ -656,7 +656,7 @@
         "price": 3500,
         "gst": 5,
         "details": null,
-        "slug": "10-paise-1974-planned-families-–-food-for-all-hyderabad-aluminium",
+        "slug": "10-paise-1974-planned-families---food-for-all-hyderabad-aluminium",
         "created_at": 1740192153,
         "updated_at": 1740192153
       },
@@ -673,7 +673,7 @@
         "price": 150,
         "gst": 5,
         "details": null,
-        "slug": "10-paise-1974-planned-families-–-food-for-all-mumbai-aluminium",
+        "slug": "10-paise-1974-planned-families---food-for-all-mumbai-aluminium",
         "created_at": 1740192214,
         "updated_at": 1740192214
       }
@@ -785,23 +785,6 @@
     "parent_category_id": "d572151a-9616-4c84-91c2-a1c3d044c844",
     "items": [
       {
-        "id": "5c00362b-8dc9-4ca0-a9df-a725c1fa5a8c",
-        "category_id": "6fabbf0b-c81a-4022-972f-fd60296357ee",
-        "name": "5 Paise 1976 Food & Work For All Hyderabad Aluminium",
-        "description": "5 Paise 1976 Food & Work For All Hyderabad Aluminium",
-        "year": 1976,
-        "sku": "RIC5P1H",
-        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/06/IMG20250129213458_merged.jpg",
-        "stock": 1,
-        "sold": 4,
-        "price": 75,
-        "gst": 5,
-        "details": null,
-        "slug": "5-paise-1976-food-&-work-for-all-hyderabad-aluminium",
-        "created_at": 1740191601,
-        "updated_at": 1740191601
-      },
-      {
         "id": "3f84d7c6-be08-4fdf-93be-baa78ebc4af4",
         "category_id": "6fabbf0b-c81a-4022-972f-fd60296357ee",
         "name": "5 Paise 1976 Food & Work For All Kolkata Aluminium",
@@ -809,7 +792,7 @@
         "year": 1976,
         "sku": "RIC5P1K.1",
         "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/01/IMG20250129213525_merged.jpg",
-        "stock": 1,
+        "stock": 5,
         "sold": 4,
         "price": 100,
         "gst": 5,
@@ -819,6 +802,23 @@
         "updated_at": 1740191673
       },
       {
+        "id": "5c00362b-8dc9-4ca0-a9df-a725c1fa5a8c",
+        "category_id": "6fabbf0b-c81a-4022-972f-fd60296357ee",
+        "name": "5 Paise 1976 Food & Work For All Hyderabad Aluminium",
+        "description": "5 Paise 1976 Food & Work For All Hyderabad Aluminium",
+        "year": 1976,
+        "sku": "RIC5P1H",
+        "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2020/06/IMG20250129213458_merged.jpg",
+        "stock": 16,
+        "sold": 27,
+        "price": 75,
+        "gst": 5,
+        "details": null,
+        "slug": "5-paise-1976-food-&-work-for-all-hyderabad-aluminium",
+        "created_at": 1740191601,
+        "updated_at": 1741781551
+      },
+      {
         "id": "9ed054c2-2965-47d1-a89d-9811df88cb21",
         "category_id": "6fabbf0b-c81a-4022-972f-fd60296357ee",
         "name": "5 Paise 1976 Food & Work For All Mumbai Aluminium",
@@ -826,14 +826,14 @@
         "year": 1976,
         "sku": "RIC5P1M",
         "image_url": "https://indiancoinsandstamps.com/wp-content/uploads/2022/03/IMG20250129213303_merged.jpg",
-        "stock": 1,
-        "sold": 4,
+        "stock": 0,
+        "sold": 5,
         "price": 30,
         "gst": 5,
         "details": null,
         "slug": "5-paise-1976-food-&-work-for-all-mumbai-aluminium",
         "created_at": 1740191708,
-        "updated_at": 1740191708
+        "updated_at": 1741781551
       }
     ],
     "created_at": 1740191493,
