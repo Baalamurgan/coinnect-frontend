@@ -122,7 +122,7 @@ export default function UserAuthLoginForm() {
           <span className='bg-background px-2 text-muted-foreground'>Or</span>
         </div>
       </div>
-      <Link href='/'>
+      <Link href='/signup'>
         <Button
           disabled={loading}
           className='ml-auto w-full'
