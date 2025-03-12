@@ -1,6 +1,6 @@
-import { Logo } from '@/components/logo';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Logo } from '@/src/components/logo';
+import { buttonVariants } from '@/src/components/ui/button';
+import { cn } from '@/src/lib/utils';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import UserAuthSignupForm from './user-auth-signup-form';

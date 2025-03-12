@@ -1,14 +1,14 @@
-import { ifSpreadObject } from '@/lib/ifSpread';
+import { ifSpreadObject } from '@/src/lib/ifSpread';
 import axios, { AxiosRequestConfig } from 'axios';
-import { envs } from 'config/env';
+import { envs } from '@/config/env';
 import { PHASE_PRODUCTION_BUILD } from 'next/constants';
 
 export const API_HOST = envs.NEXT_PUBLIC_API;
 
-const userAgentHeaders = () => ({
-  'user-agent':
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-});
+// const userAgentHeaders = () => ({
+//   'user-agent':
+//     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+// });
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -39,7 +39,7 @@ export interface ErrorResponse {
   status: 400 | 409 | 500 | 502;
   response?: {
     data: {
-      err: string;
+      message: string;
       status: 'fail';
     };
     status: number;
@@ -134,9 +134,36 @@ export const ROUTES = {
     UPDATE: (p: { item_id: string }) => apiRoute(`/item/${p.item_id}`),
     DELETE: (p: { item_id: string }) => apiRoute(`/item/${p.item_id}`)
   },
+  ORDER: {
+    CREATE: apiRoute(`/order`),
+    GETALL: apiRoute(`/order`),
+    GETBYID: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}`),
+    DELETE: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}`),
+    EDIT: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/edit`),
+    ITEM: {
+      ADD: apiRoute(`/order/item/add`),
+      REMOVE: (p: { order_id: string; order_item_id: string }) =>
+        apiRoute(`/order/item/${p.order_id}/${p.order_item_id}`)
+    },
+    CONFIRM: (p: { order_id: string }) =>
+      apiRoute(`/order/${p.order_id}/confirm`),
+    CANCEL: (p: { order_id: string }) =>
+      apiRoute(`/order/${p.order_id}/cancel`),
+    RESTORE: (p: { order_id: string }) =>
+      apiRoute(`/order/${p.order_id}/restore`),
+    PAY: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/pay`),
+    SHIP: (p: { order_id: string }) => apiRoute(`/order/${p.order_id}/ship`),
+    DELIVER: (p: { order_id: string }) =>
+      apiRoute(`/order/${p.order_id}/deliver`)
+  },
   AUTH: {
     LOGIN: apiRoute('/auth/login'),
     SIGNUP: apiRoute('/auth/signup'),
-    FETCHPROFILE: apiRoute('/auth/profile')
+    PROFILE: {
+      FETCH: apiRoute('/auth/profile'),
+      FETCHBYEMAIL: apiRoute('/auth/profile/email'),
+      UPDATE: (p: { user_id: string }) =>
+        apiRoute(`/auth/profile/update/${p.user_id}`)
+    }
   }
 };

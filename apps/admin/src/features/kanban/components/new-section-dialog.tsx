@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/src/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,8 +8,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
+} from '@/src/components/ui/dialog';
+import { Input } from '@/src/components/ui/input';
 
 import { useTaskStore } from '../utils/store';
 

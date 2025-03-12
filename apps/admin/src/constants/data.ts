@@ -1,4 +1,4 @@
-import { NavItem } from 'types';
+import { NavItem } from '@/types';
 
 export type Product = {
   photo_url: string;
@@ -22,8 +22,16 @@ export const navItems: NavItem[] = [
   //   items: [] // Empty array as there are no child items for Dashboard
   // },
   {
-    title: 'Product',
-    url: '/dashboard/product',
+    title: 'Orders',
+    url: '/dashboard/orders',
+    icon: 'kanban',
+    shortcut: ['k', 'k'],
+    isActive: false,
+    items: [] // No child items
+  },
+  {
+    title: 'Products',
+    url: '/dashboard/products',
     icon: 'product',
     shortcut: ['p', 'p'],
     isActive: false,

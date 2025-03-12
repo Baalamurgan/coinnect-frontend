@@ -1,8 +1,8 @@
 'use client';
 
-import { DataTableFilterBox } from '@/components/ui/table/data-table-filter-box';
-import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-filter';
-import { DataTableSearch } from '@/components/ui/table/data-table-search';
+import { DataTableFilterBox } from '@/src/components/ui/table/data-table-filter-box';
+import { DataTableResetFilter } from '@/src/components/ui/table/data-table-reset-filter';
+import { DataTableSearch } from '@/src/components/ui/table/data-table-search';
 import {
   CATEGORY_OPTIONS,
   useProductTableFilters

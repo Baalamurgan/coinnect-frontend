@@ -6,8 +6,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator
-} from '@/components/ui/breadcrumb';
-import { useBreadcrumbs } from '@/hooks/use-breadcrumbs';
+} from '@/src/components/ui/breadcrumb';
+import { useBreadcrumbs } from '@/src/hooks/use-breadcrumbs';
 import { Slash } from 'lucide-react';
 import { Fragment } from 'react';
 

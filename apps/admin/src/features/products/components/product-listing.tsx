@@ -1,8 +1,8 @@
-import { DataTable as ProductTable } from '@/components/ui/table/data-table';
-import { searchParamsCache } from '@/lib/searchparams';
-import { itemService } from 'services/item/services';
-import { toast } from 'sonner';
-import { Item } from 'types/api';
+import { itemService } from '@/services/item/services';
+import { Item } from '@/services/item/types';
+import NotFound from '@/src/app/not-found';
+import { DataTable as ProductTable } from '@/src/components/ui/table/data-table';
+import { searchParamsCache } from '@/src/lib/searchparams';
 import { columns } from './product-tables/columns';
 
 type ProductListingPage = {};
@@ -21,14 +21,15 @@ export default async function ProductListingPage({}: ProductListingPage) {
     ...(category_ids && { category_ids: category_ids.join(',') })
   };
 
-  const itemResponse = await itemService.fetchAllItems(
+  const itemResponse = await itemService.getAll(
     {},
     {
       params: filters
     }
   );
   if (itemResponse.error) {
-    toast.error('Error fetching items');
+    // toast.error('Error fetching items');
+    return <NotFound />;
   }
 
   const data = {

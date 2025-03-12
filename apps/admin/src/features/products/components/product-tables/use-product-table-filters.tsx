@@ -1,14 +1,15 @@
 'use client';
 
-import { searchParams } from '@/lib/searchparams';
-import { categories } from 'data';
+import { categories } from '@/data';
+import { searchParams } from '@/src/lib/searchparams';
 import { useQueryState } from 'nuqs';
 import { useCallback, useMemo } from 'react';
 
-export const CATEGORY_OPTIONS = categories.map((c) => ({
-  value: c.id,
-  label: c.name
-}));
+export const CATEGORY_OPTIONS =
+  categories?.map((c) => ({
+    value: c.id,
+    label: c.name
+  })) || [];
 
 export function useProductTableFilters() {
   const [searchQuery, setSearchQuery] = useQueryState(

@@ -1,5 +1,5 @@
 'use client';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/src/components/ui/button';
 import {
   Form,
   FormControl,
@@ -7,17 +7,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/src/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAuth } from 'context/AuthContext';
+import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
-import { authService } from 'services/auth/service';
+import { authService } from '@/services/auth/service';
 import { toast } from 'sonner';
 import * as z from 'zod';
+import { Input } from '@/src/components/ui/input';
+import { sentencize } from '@/src/lib/utils';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter a valid email address' }),
@@ -52,10 +53,13 @@ export default function UserAuthLoginForm() {
         },
         {}
       );
-      if (response.error) toast.error('Error logging in');
+      if (response.error)
+        toast.error(
+          sentencize(response?.error.response?.data.message) ||
+            'Error logging in'
+        );
       else if (response.data) {
-        localStorage.setItem('email', data.email);
-        fetchProfile();
+        await fetchProfile(response.data.id);
         push(callbackUrl ?? '/dashboard');
         toast.success(`Logged in ${data.email} successfully`);
       }

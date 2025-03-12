@@ -1,10 +1,10 @@
 {
-  "name": "next-shadcn-dashboard-starter",
+  "name": "coinnect-admin-side",
   "version": "1.0.0",
   "private": true,
   "author": {
-    "name": "Kiran",
-    "url": "https://github.com/Kiranism"
+    "name": "Baalamurgan K A",
+    "url": "https://github.com/baalamurgan"
   },
   "scripts": {
     "dev": "next dev --turbopack",
@@ -91,6 +91,7 @@
     "zustand": "^5.0.2"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.0",
     "@faker-js/faker": "^9.3.0",
     "@types/sort-by": "^1.2.3",
     "@types/uuid": "^10.0.0",

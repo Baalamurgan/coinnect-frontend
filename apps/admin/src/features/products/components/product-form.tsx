@@ -1,8 +1,16 @@
 'use client';
 
-import { FileUploader } from '@/components/file-uploader';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { categories } from '@/data';
+import { itemService } from '@/services/item/services';
+import { Item } from '@/services/item/types';
+import { FileUploader } from '@/src/components/file-uploader';
+import { Button } from '@/src/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle
+} from '@/src/components/ui/card';
 import {
   Form,
   FormControl,
@@ -10,24 +18,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/src/components/ui/form';
+import { Input } from '@/src/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { sentencize } from '@/lib/utils';
+} from '@/src/components/ui/select';
+import { Textarea } from '@/src/components/ui/textarea';
+import { sentencize } from '@/src/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { categories } from 'data';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { itemService } from 'services/item/services';
 import { toast } from 'sonner';
-import { Item } from 'types/api';
 import * as z from 'zod';
 
 const MAX_FILE_SIZE = 5000000;
@@ -39,17 +45,16 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 const formSchema = z.object({
-  image_url: z
-    .any()
-    .refine((files) => files?.length == 1, 'Image is required.')
-    .refine(
-      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `Max file size is 5MB.`
-    )
-    .refine(
-      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      '.jpg, .jpeg, .png and .webp files are accepted.'
-    ),
+  image_url: z.any(),
+  //   .refine((files) => files?.length == 1, 'Image is required.')
+  //   .refine(
+  //     (files) => files?.[0]?.size <= MAX_FILE_SIZE,
+  //     `Max file size is 5MB.`
+  //   )
+  //   .refine(
+  //     (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
+  //     '.jpg, .jpeg, .png and .webp files are accepted.'
+  //   ),
   id: z.string(),
   name: z.string().min(2, {
     message: 'Product name must be at least 2 characters.'
@@ -84,6 +89,7 @@ export default function ProductForm({
   const { push } = useRouter();
   const defaultValues = {
     id: initialData?.id || '',
+    image_url: initialData?.image_url || '',
     name: initialData?.name || '',
     category_id: initialData?.category_id || '',
     price: initialData?.price || 0,
@@ -112,10 +118,10 @@ export default function ProductForm({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (productId === 'new') {
-      const response = await itemService.createItem(
+      const response = await itemService.create(
         {
           ...values,
-          image_url: values.image_url[0].preview,
+          image_url: values.image_url?.[0].preview,
           sold: 0
         },
         {},
@@ -125,18 +131,25 @@ export default function ProductForm({
       );
       if (response.data) {
         toast.success('Created item successfully');
-        push(`/dashboard/product`);
+        push(`/dashboard/products`);
       } else if (response.error) {
         toast.error('Error creating item');
       }
     } else {
-      const response = await itemService.updateItem({
-        ...values,
-        image_url: values.image_url[0].preview
-      });
+      const response = await itemService.update(
+        {
+          ...values,
+          id: productId,
+          image_url: values.image_url || values.image_url?.[0].preview
+        },
+        {},
+        {
+          item_id: productId
+        }
+      );
       if (response.data) {
         toast.success('Updated item successfully');
-        push(`/dashboard/product`);
+        push(`/dashboard/products`);
       } else if (response.error) {
         toast.error('Error updating item');
       }
@@ -156,27 +169,46 @@ export default function ProductForm({
             <FormField
               control={form.control}
               name='image_url'
-              render={({ field }) => (
-                <div className='space-y-6'>
-                  <FormItem className='w-full'>
-                    <FormLabel>Image</FormLabel>
-                    <FormControl>
-                      <FileUploader
-                        value={field.value}
-                        onValueChange={field.onChange}
-                        maxFiles={1}
-                        maxSize={4 * 1024 * 1024}
-                        // disabled={loading}
-                        // progresses={progresses}
-                        // pass the onUpload function here for direct upload
-                        // onUpload={uploadFiles}
-                        // disabled={isUploading}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                </div>
-              )}
+              render={({ field }) => {
+                const value =
+                  // form.getValues('image_url')
+                  //   ? await urlToFile(
+                  //       form.getValues('image_url'),
+                  //       form.getValues('image_url')
+                  //     )
+                  //   :
+                  field.value;
+                return (
+                  <div className='space-y-6'>
+                    <FormItem className='w-full'>
+                      <FormLabel>Image</FormLabel>
+                      <FormControl>
+                        {form.getValues('image_url') ? (
+                          <Image
+                            src={form.getValues('image_url')}
+                            alt={form.getValues('image_url')}
+                            width={500}
+                            height={200}
+                          />
+                        ) : (
+                          <FileUploader
+                            value={value}
+                            onValueChange={field.onChange}
+                            maxFiles={1}
+                            maxSize={4 * 1024 * 1024}
+                            // disabled={loading}
+                            // progresses={progresses}
+                            // pass the onUpload function here for direct upload
+                            // onUpload={uploadFiles}
+                            // disabled={isUploading}
+                          />
+                        )}
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  </div>
+                );
+              }}
             />
 
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>

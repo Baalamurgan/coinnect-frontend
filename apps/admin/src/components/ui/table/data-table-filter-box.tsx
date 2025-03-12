@@ -1,7 +1,7 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Badge } from '@/src/components/ui/badge';
+import { Button } from '@/src/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -10,14 +10,14 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator
-} from '@/components/ui/command';
+} from '@/src/components/ui/command';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger
-} from '@/components/ui/popover';
-import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
+} from '@/src/components/ui/popover';
+import { Separator } from '@/src/components/ui/separator';
+import { cn } from '@/src/lib/utils';
 import { PlusCircledIcon } from '@radix-ui/react-icons';
 import { CheckIcon } from 'lucide-react';
 import { Options } from 'nuqs';

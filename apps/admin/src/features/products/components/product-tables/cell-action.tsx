@@ -1,19 +1,19 @@
 'use client';
-import { AlertModal } from '@/components/modal/alert-modal';
-import { Button } from '@/components/ui/button';
+import { itemService } from '@/services/item/services';
+import { Item } from '@/services/item/types';
+import { AlertModal } from '@/src/components/modal/alert-modal';
+import { Button } from '@/src/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
+} from '@/src/components/ui/dropdown-menu';
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { itemService } from 'services/item/services';
 import { toast } from 'sonner';
-import { Item } from 'types/api';
 
 interface CellActionProps {
   data: Item;
@@ -30,7 +30,7 @@ export const CellAction: React.FC<CellActionProps> = ({
 
   const onConfirm = async () => {
     setLoading(true);
-    const response = await itemService.deleteItem(
+    const response = await itemService.delete(
       {},
       {},
       {
@@ -68,7 +68,7 @@ export const CellAction: React.FC<CellActionProps> = ({
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/product/${data.id}`)}
+            onClick={() => router.push(`/dashboard/products/${data.id}`)}
           >
             <Edit className='mr-2 h-4 w-4' /> Update
           </DropdownMenuItem>
