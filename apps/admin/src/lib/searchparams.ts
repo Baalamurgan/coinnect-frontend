@@ -1,11 +1,10 @@
 import {
+  createParser,
   createSearchParamsCache,
   createSerializer,
   parseAsArrayOf,
   parseAsInteger,
-  parseAsString,
-  createParser,
-  inferParserType
+  parseAsString
 } from 'nuqs/server';
 import { ModalTypes } from '../features/orders/components/order-tables/cell-action';
 

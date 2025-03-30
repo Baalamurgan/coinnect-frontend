@@ -1,15 +1,13 @@
 'use client';
-import { categories } from '@/data';
 import { Order } from '@/services/order/types';
-import { ColumnDef } from '@tanstack/react-table';
-import Image from 'next/image';
-import { CellAction } from './cell-action';
+import Tag from '@/src/components/ui/tag';
+import { isOrderRecent } from '@/src/lib/order';
 import displayPrice from '@/src/lib/price';
 import { sentencize } from '@/src/lib/utils';
-import Tag from '@/src/components/ui/tag';
-import { STATUS_OPTIONS } from './use-order-table-filters';
-import { isOrderRecent } from '@/src/lib/order';
+import { ColumnDef } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
+import { CellAction } from './cell-action';
+import { STATUS_OPTIONS } from './use-order-table-filters';
 
 export const columns: ColumnDef<Order>[] = [
   // {

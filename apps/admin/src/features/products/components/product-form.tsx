@@ -1,8 +1,7 @@
 'use client';
 
-import { categories } from '@/data';
 import { itemService } from '@/services/item/services';
-import { Item } from '@/services/item/types';
+import { Category, Item } from '@/services/item/types';
 import { FileUploader } from '@/src/components/file-uploader';
 import { Button } from '@/src/components/ui/button';
 import {
@@ -78,10 +77,12 @@ const formSchema = z.object({
 });
 
 export default function ProductForm({
+  categories,
   productId,
   initialData,
   pageTitle
 }: {
+  categories: Category[];
   productId: string;
   initialData: Item | null;
   pageTitle: string;

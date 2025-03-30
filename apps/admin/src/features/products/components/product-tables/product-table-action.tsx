@@ -1,14 +1,16 @@
 'use client';
 
+import { Category } from '@/services/item/types';
 import { DataTableFilterBox } from '@/src/components/ui/table/data-table-filter-box';
 import { DataTableResetFilter } from '@/src/components/ui/table/data-table-reset-filter';
 import { DataTableSearch } from '@/src/components/ui/table/data-table-search';
-import {
-  CATEGORY_OPTIONS,
-  useProductTableFilters
-} from './use-product-table-filters';
+import { useProductTableFilters } from './use-product-table-filters';
 
-export default function ProductTableAction() {
+export default function ProductTableAction({
+  categories
+}: {
+  categories: Category[];
+}) {
   const {
     categoryIDsFilter,
     setCategoriesFilter,
@@ -29,7 +31,12 @@ export default function ProductTableAction() {
       <DataTableFilterBox
         filterKey='categories'
         title='Categories'
-        options={CATEGORY_OPTIONS}
+        options={
+          categories?.map((c) => ({
+            value: c.id,
+            label: c.name
+          })) || []
+        }
         setFilterValue={setCategoriesFilter}
         filterValue={categoryIDsFilter}
       />

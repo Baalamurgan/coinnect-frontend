@@ -24,8 +24,8 @@ export const navItems: NavItem[] = [
   {
     title: 'Orders',
     url: '/dashboard/orders',
-    icon: 'kanban',
-    shortcut: ['k', 'k'],
+    icon: 'billing',
+    // shortcut: ['o', 'o'],
     isActive: false,
     items: [] // No child items
   },
@@ -33,7 +33,15 @@ export const navItems: NavItem[] = [
     title: 'Products',
     url: '/dashboard/products',
     icon: 'product',
-    shortcut: ['p', 'p'],
+    // shortcut: ['p', 'p'],
+    isActive: false,
+    items: [] // No child items
+  },
+  {
+    title: 'Categories',
+    url: '/dashboard/categories',
+    icon: 'kanban',
+    // shortcut: ['c', 'c'],
     isActive: false,
     items: [] // No child items
   }

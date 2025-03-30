@@ -1,16 +1,18 @@
+import { categoryService } from '@/services/category/services';
 import PageContainer from '@/src/components/layout/page-container';
 import { buttonVariants } from '@/src/components/ui/button';
 import { Heading } from '@/src/components/ui/heading';
 import { Separator } from '@/src/components/ui/separator';
 import { DataTableSkeleton } from '@/src/components/ui/table/data-table-skeleton';
-import { searchParamsCache, serialize } from '@/src/lib/searchparams';
+import ProductListingPage from '@/src/features/products/components/product-listing';
+import ProductTableAction from '@/src/features/products/components/product-tables/product-table-action';
+import { searchParamsCache } from '@/src/lib/searchparams';
 import { cn } from '@/src/lib/utils';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { SearchParams } from 'nuqs/server';
 import { Suspense } from 'react';
-import ProductListingPage from '@/src/features/products/components/product-listing';
-import ProductTableAction from '@/src/features/products/components/product-tables/product-table-action';
 
 export const metadata = {
   title: 'Dashboard: Products'
@@ -28,6 +30,17 @@ export default async function Page(props: pageProps) {
   // This key is used for invoke suspense if any of the search params changed (used for filters).
   // const key = serialize({ ...searchParams });
 
+  let categories = null;
+
+  const response = await categoryService.getAll();
+  if (response.error) {
+    notFound();
+  } else if (response.data) {
+    categories = response.data.categories;
+  }
+
+  if (!categories) return notFound();
+
   return (
     <PageContainer>
       <div className='space-y-4'>
@@ -41,7 +54,7 @@ export default async function Page(props: pageProps) {
           </Link>
         </div>
         <Separator />
-        <ProductTableAction />
+        <ProductTableAction categories={categories} />
         <Suspense
           // key={key}
           fallback={<DataTableSkeleton columnCount={5} rowCount={10} />}

@@ -1,3 +1,4 @@
+import { categoryService } from '@/services/category/services';
 import { itemService } from '@/services/item/services';
 import { notFound } from 'next/navigation';
 import ProductForm from './product-form';
@@ -28,8 +29,20 @@ export default async function ProductViewPage({
     pageTitle = `Edit Product`;
   }
 
+  let categories = null;
+
+  const response = await categoryService.getAll();
+  if (response.error) {
+    notFound();
+  } else if (response.data) {
+    categories = response.data.categories;
+  }
+
+  if (!categories) return notFound();
+
   return (
     <ProductForm
+      categories={categories}
       productId={productId}
       initialData={product}
       pageTitle={pageTitle}

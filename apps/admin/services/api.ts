@@ -134,6 +134,10 @@ export const ROUTES = {
     UPDATE: (p: { item_id: string }) => apiRoute(`/item/${p.item_id}`),
     DELETE: (p: { item_id: string }) => apiRoute(`/item/${p.item_id}`)
   },
+  CATEGORY: {
+    GETALL: apiRoute(`/category`),
+    CREATE: apiRoute(`/category`)
+  },
   ORDER: {
     CREATE: apiRoute(`/order`),
     GETALL: apiRoute(`/order`),
