@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import SignInViewPage from '@/src/features/auth/components/sigin-view';
 
 export const metadata: Metadata = {
-  title: 'Authentication | Sign In',
+  title: 'Trinetra | Sign In',
   description: 'Sign In page for authentication.'
 };
 

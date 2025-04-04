@@ -45,7 +45,7 @@ import { usePathname } from 'next/navigation';
 import { Icons } from '../icons';
 
 export const company = {
-  name: 'Coinnect',
+  name: 'Trinetra',
   logo: GalleryVerticalEnd,
   plan: 'Admin'
 };
