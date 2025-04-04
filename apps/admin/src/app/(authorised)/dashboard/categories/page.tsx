@@ -16,7 +16,10 @@ export default async function Page() {
     <PageContainer>
       <div className='h-full space-y-4'>
         <div className='flex items-start justify-between'>
-          <Heading title='Categories' description='Manage your categories' />
+          <Heading
+            title='Categories'
+            description='Click a category node to manage it. Use "+" to add a new one.'
+          />
           <Link
             href='/dashboard/categories?is_new_category_modal=true'
             className={cn(buttonVariants(), 'text-xs md:text-sm')}

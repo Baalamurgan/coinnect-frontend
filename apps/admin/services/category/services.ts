@@ -1,6 +1,7 @@
 import { createFetcher, ROUTES } from '../api';
 import { Category } from '../item/types';
 import { WithPagination } from '../types';
+import { UpdateCategoryPayload } from './types';
 
 const create = createFetcher<
   Category,
@@ -24,7 +25,43 @@ const getAll = createFetcher<
   method: 'GET'
 });
 
+const getById = createFetcher<
+  Category,
+  {},
+  {
+    category_id: string;
+  }
+>({
+  url: ({ category_id }) => ROUTES.CATEGORY.GETBYID({ category_id }),
+  method: 'GET'
+});
+
+const update = createFetcher<
+  string,
+  UpdateCategoryPayload,
+  {
+    category_id: string;
+  }
+>({
+  url: ({ category_id }) => ROUTES.CATEGORY.UPDATE({ category_id }),
+  method: 'PUT'
+});
+
+const deleteCategory = createFetcher<
+  string,
+  unknown,
+  {
+    category_id: string;
+  }
+>({
+  url: ({ category_id }) => ROUTES.CATEGORY.DELETE({ category_id }),
+  method: 'DELETE'
+});
+
 export const categoryService = {
   create,
-  getAll
+  getAll,
+  getById,
+  update,
+  delete: deleteCategory
 };

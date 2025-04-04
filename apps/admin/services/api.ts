@@ -136,7 +136,13 @@ export const ROUTES = {
   },
   CATEGORY: {
     GETALL: apiRoute(`/category`),
-    CREATE: apiRoute(`/category`)
+    CREATE: apiRoute(`/category`),
+    GETBYID: (p: { category_id: string }) =>
+      apiRoute(`/category/${p.category_id}`),
+    UPDATE: (p: { category_id: string }) =>
+      apiRoute(`/category/${p.category_id}`),
+    DELETE: (p: { category_id: string }) =>
+      apiRoute(`/category/${p.category_id}`)
   },
   ORDER: {
     CREATE: apiRoute(`/order`),

@@ -5,7 +5,7 @@ import { Category } from '@/services/item/types';
 import Loader from '@/src/components/Loader';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import Tree, { RawNodeDatum } from 'react-d3-tree';
+import Tree from 'react-d3-tree';
 import { NewCategoryModal } from '../modal/new-category-modal';
 
 export type RawNodeDatumWithID = {
@@ -17,7 +17,8 @@ export type RawNodeDatumWithID = {
 export default function CategoryTreeView() {
   const searchParams = useSearchParams();
   const newCategoryModal = searchParams.get('is_new_category_modal');
-  const { back } = useRouter();
+  const category_id = searchParams.get('category_id');
+  const { push, back } = useRouter();
 
   const [categories, setCategories] = useState<Category[] | undefined>();
 
@@ -77,7 +78,12 @@ export default function CategoryTreeView() {
           x: 200,
           y: 250
         }}
-        initialDepth={1}
+        onNodeClick={(e) => {
+          push(
+            // @ts-ignore
+            `/dashboard/categories?is_new_category_modal=true&category_id=${e.data.id}`
+          );
+        }}
       />
       {newCategoryModal === 'true' && (
         <NewCategoryModal
@@ -86,6 +92,7 @@ export default function CategoryTreeView() {
             await fetchCategories();
             back();
           }}
+          category_id={category_id}
           categoryChartData={categoryChartData}
         />
       )}

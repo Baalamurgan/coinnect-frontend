@@ -125,3 +125,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.rd3t-label {
+  cursor: text;
+}
