@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createFetcher, ROUTES } from '../api';
 import { Category } from '../item/types';
 import { WithPagination } from '../types';
@@ -58,10 +59,13 @@ const deleteCategory = createFetcher<
   method: 'DELETE'
 });
 
+const sync = () => axios.post('/api/admin/revalidate-categories');
+
 export const categoryService = {
   create,
   getAll,
   getById,
   update,
-  delete: deleteCategory
+  delete: deleteCategory,
+  sync
 };
