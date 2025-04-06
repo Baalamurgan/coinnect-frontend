@@ -1,9 +1,11 @@
+import { categoryService } from '@/services/category/services';
 import { itemService } from '@/services/item/services';
 import { Item } from '@/services/item/types';
 import NotFound from '@/src/app/not-found';
 import { DataTable as ProductTable } from '@/src/components/ui/table/data-table';
 import { searchParamsCache } from '@/src/lib/searchparams';
-import { columns } from './product-tables/columns';
+import { notFound } from 'next/navigation';
+import { getColumns } from './product-tables/columns';
 
 type ProductListingPage = {};
 
@@ -32,6 +34,17 @@ export default async function ProductListingPage({}: ProductListingPage) {
     return <NotFound />;
   }
 
+  let categories = null;
+
+  const response = await categoryService.getAll();
+  if (response.error) {
+    notFound();
+  } else if (response.data) {
+    categories = response.data.categories;
+  }
+
+  if (!categories) return notFound();
+
   const data = {
     success: true,
     time: new Date().getTime(),
@@ -44,7 +57,7 @@ export default async function ProductListingPage({}: ProductListingPage) {
 
   return (
     <ProductTable<Item, {}>
-      columns={columns}
+      columns={getColumns(categories)}
       data={data.products}
       totalItems={data.total_products}
       columnVisibility={{

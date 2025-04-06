@@ -1,11 +1,10 @@
 'use client';
-import { categories } from '@/data';
-import { Item } from '@/services/item/types';
 import { ColumnDef } from '@tanstack/react-table';
 import Image from 'next/image';
+import { Category, Item } from '@/services/item/types';
 import { CellAction } from './cell-action';
 
-export const columns: ColumnDef<Item>[] = [
+export const getColumns = (categories: Category[]): ColumnDef<Item>[] => [
   {
     accessorKey: 'image_url',
     header: 'IMAGE',
@@ -66,16 +65,6 @@ export const columns: ColumnDef<Item>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => (
-      <CellAction
-        data={row.original}
-        refreshTable={() =>
-          // getAllItems({
-          //   page: 1
-          // })
-          {}
-        }
-      />
-    )
+    cell: ({ row }) => <CellAction data={row.original} />
   }
 ];

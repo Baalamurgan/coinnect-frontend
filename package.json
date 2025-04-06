@@ -6,7 +6,6 @@
     "dev": "turbo run dev",
     "dev:admin": "cd apps/admin && next dev",
     "dev:user": "cd apps/user && next dev",
-    "prebuild": "cd apps/admin && node prebuild",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
