@@ -1,7 +1,7 @@
 export async function POST() {
   try {
     await fetch(
-      `${process.env.NEXT_PUBLIC_USER_SIDE}/api/revalidate?secret=${process.env.REVALIDATE_SECRET}`,
+      `${process.env.NEXT_PUBLIC_USER_SIDE}/api/revalidate/categories?secret=${process.env.REVALIDATE_SECRET}`,
       {
         method: 'POST'
       }
