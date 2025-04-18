@@ -12,7 +12,7 @@ import { NewCategoryModal } from '../modal/new-category-modal';
 export type TreeData = {
   id: string;
   name: string;
-  parentCount: number;
+  parentCount?: number;
   children?: TreeData[];
 };
 
