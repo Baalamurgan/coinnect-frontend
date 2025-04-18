@@ -139,22 +139,25 @@ export const NewCategoryModal: React.FC<NewCategoryModalProps> = ({
   interface CategorySummary {
     id: string;
     name: string;
+    parentCount: number;
     subCategoryCount: number;
   }
 
   const extractCategorySummary = (
     category: TreeData,
-    result: CategorySummary[] = []
+    result: CategorySummary[] = [],
+    parentCount: number = 0
   ): CategorySummary[] => {
     result.push({
       id: category.id,
       name: category.name,
+      parentCount,
       subCategoryCount: category.children?.length || 0
     });
 
     if (!category.children) return result;
     for (const child of category.children) {
-      extractCategorySummary(child, result);
+      extractCategorySummary(child, result, parentCount + 1);
     }
 
     return result;
@@ -163,6 +166,7 @@ export const NewCategoryModal: React.FC<NewCategoryModalProps> = ({
   const categoriesChildrenMap = extractCategorySummary({
     name: 'No parent category',
     id: 'No parent category',
+    parentCount: 0,
     children: categoryChartData.children
   });
 
@@ -267,9 +271,18 @@ export const NewCategoryModal: React.FC<NewCategoryModalProps> = ({
                     </FormControl>
                     <SelectContent className='max-h-[300px]'>
                       {categoriesChildrenMap
-                        .filter((c) => c.subCategoryCount !== 0)
+                        // .filter((c) => c.subCategoryCount !== 0)
                         .map((i) => (
-                          <SelectItem value={i.id} key={i.id}>
+                          <SelectItem
+                            value={i.id}
+                            key={i.id}
+                            style={{
+                              paddingLeft: `${20 * i.parentCount}px`
+                            }}
+                          >
+                            {[...Array(i.parentCount)].map((_, idx) => (
+                              <span>{'-'}</span>
+                            ))}{' '}
                             {sentencize(i.name)}
                           </SelectItem>
                         ))}

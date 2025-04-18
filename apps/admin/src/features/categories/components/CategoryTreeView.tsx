@@ -12,6 +12,7 @@ import { NewCategoryModal } from '../modal/new-category-modal';
 export type TreeData = {
   id: string;
   name: string;
+  parentCount: number;
   children?: TreeData[];
 };
 
@@ -25,17 +26,21 @@ const CategoryTreeView = () => {
 
   const [categories, setCategories] = useState<Category[] | undefined>();
 
-  const getSubCategories = (category: Category): TreeData => {
+  const getSubCategories = (
+    category: Category,
+    parent?: Category
+  ): TreeData => {
     const subCategory = categories?.filter(
       (c) => c.parent_category_id && c.parent_category_id === category.id
     );
     return {
       id: category.id,
       name: category.name,
+      parentCount: 0,
       children:
         !subCategory || subCategory.length === 0
           ? []
-          : subCategory.map((childC) => getSubCategories(childC))
+          : subCategory.map((childC) => getSubCategories(childC, category))
     };
   };
 
@@ -44,6 +49,7 @@ const CategoryTreeView = () => {
     return {
       name: 'Categories',
       id: '1',
+      parentCount: 0,
       children: categories
         .filter((c) => !c.parent_category_id)
         .map((c) => getSubCategories(c))
