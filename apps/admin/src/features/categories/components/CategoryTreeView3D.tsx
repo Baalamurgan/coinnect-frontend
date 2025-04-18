@@ -3,29 +3,26 @@
 import { categoryService } from '@/services/category/services';
 import { Category } from '@/services/item/types';
 import Loader from '@/src/components/Loader';
-import clsx from 'clsx';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Tree, TreeApi } from 'react-arborist';
+import Tree from 'react-d3-tree';
 import { NewCategoryModal } from '../modal/new-category-modal';
 
-export type TreeData = {
+export type RawNodeDatumWithID = {
   id: string;
   name: string;
-  children?: TreeData[];
+  attributes?: Record<string, string | number | boolean>;
+  children?: RawNodeDatumWithID[];
 };
-
-const CategoryTreeView = () => {
+export default function CategoryTreeView() {
   const searchParams = useSearchParams();
   const newCategoryModal = searchParams.get('is_new_category_modal');
   const category_id = searchParams.get('category_id');
-  const isDeleteCategory = searchParams.get('is_delete_category');
-
   const { push, back } = useRouter();
 
   const [categories, setCategories] = useState<Category[] | undefined>();
 
-  const getSubCategories = (category: Category): TreeData => {
+  const getSubCategories = (category: Category): RawNodeDatumWithID => {
     const subCategory = categories?.filter(
       (c) => c.parent_category_id && c.parent_category_id === category.id
     );
@@ -39,11 +36,11 @@ const CategoryTreeView = () => {
     };
   };
 
-  const categoryChartData: TreeData | null = useMemo(() => {
+  const categoryChartData: RawNodeDatumWithID | null = useMemo(() => {
     if (!categories) return null;
     return {
       name: 'Categories',
-      id: '1',
+      id: '',
       children: categories
         .filter((c) => !c.parent_category_id)
         .map((c) => getSubCategories(c))
@@ -63,44 +60,30 @@ const CategoryTreeView = () => {
     fetchCategories();
   }, []);
 
-  const [tree, setTree] = useState<TreeApi<TreeData> | null | undefined>(null);
-  const [active, setActive] = useState<TreeData | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [count, setCount] = useState(0);
-  const [followsFocus, setFollowsFocus] = useState(false);
-
-  useEffect(() => {
-    setCount(tree?.visibleNodes.length ?? 0);
-  }, [tree, searchTerm]);
-
   if (!categories || !categoryChartData) return <Loader />;
 
   return (
-    <div>
+    <div id='treeWrapper' className='h-full w-full'>
       <Tree
-        data={[categoryChartData]}
-        ref={(t) => setTree(t)}
-        width={'100%'}
-        indent={40}
-        disableMultiSelection
-        rowClassName={clsx(
-          'cursor-pointer !w-fit hover:bg-blue-800 hover:pr-10 hover:rounded-md hover:border hover:border-white'
-        )}
-        onSelect={(e) => {
-          e[0]?.id &&
-            push(
-              `/dashboard/categories?is_new_category_modal=true&category_id=${e[0].id}`
-            );
+        data={categoryChartData}
+        svgClassName='bg-white'
+        translate={{
+          x: 600,
+          y: 100
         }}
-        disableDrag
-        disableEdit
-        disableDrop
-        padding={15}
-        rowHeight={30}
-        searchTerm={searchTerm}
-        selectionFollowsFocus={followsFocus}
-        selection={active?.id}
-        onActivate={(node) => setActive(node.data)}
+        hasInteractiveNodes
+        enableLegacyTransitions
+        orientation='vertical'
+        nodeSize={{
+          x: 200,
+          y: 250
+        }}
+        onNodeClick={(e) => {
+          push(
+            // @ts-ignore
+            `/dashboard/categories?is_new_category_modal=true&category_id=${e.data.id}`
+          );
+        }}
       />
       {newCategoryModal === 'true' && (
         <NewCategoryModal
@@ -110,12 +93,9 @@ const CategoryTreeView = () => {
             back();
           }}
           category_id={category_id}
-          isDeleteCategory={isDeleteCategory}
           categoryChartData={categoryChartData}
         />
       )}
     </div>
   );
-};
-
-export default CategoryTreeView;
+}

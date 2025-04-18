@@ -29,7 +29,7 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
-import { RawNodeDatumWithID } from '../components/CategoryTreeView';
+import { TreeData } from '../components/CategoryTreeView';
 
 const newCategorySchema = z.object({
   name: z.string().min(1, 'Category name is required'),
@@ -43,14 +43,16 @@ interface NewCategoryModalProps {
   isOpen: boolean;
   onClose: () => void;
   category_id: string | null;
-  categoryChartData: RawNodeDatumWithID;
+  categoryChartData: TreeData;
+  isDeleteCategory?: string | null;
 }
 
 export const NewCategoryModal: React.FC<NewCategoryModalProps> = ({
   isOpen,
   onClose,
   category_id,
-  categoryChartData
+  categoryChartData,
+  isDeleteCategory
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [loading, setIsLoading] = useState(false);
@@ -141,7 +143,7 @@ export const NewCategoryModal: React.FC<NewCategoryModalProps> = ({
   }
 
   const extractCategorySummary = (
-    category: RawNodeDatumWithID,
+    category: TreeData,
     result: CategorySummary[] = []
   ): CategorySummary[] => {
     result.push({
@@ -190,6 +192,11 @@ export const NewCategoryModal: React.FC<NewCategoryModalProps> = ({
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (isDeleteCategory === 'true') setIsDeleteConfirmationModalOpen(true);
+    else setIsDeleteConfirmationModalOpen(false);
+  }, [isDeleteCategory]);
 
   if (!isMounted) {
     return null;

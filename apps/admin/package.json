@@ -72,6 +72,7 @@
     "postcss": "8.4.49",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "react": "19.0.0",
+    "react-arborist": "^3.4.3",
     "react-d3-tree": "^3.6.6",
     "react-day-picker": "^9.4.3",
     "react-dom": "19.0.0",
